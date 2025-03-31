@@ -86,4 +86,11 @@ class FacebookAPiCollector:
                 post_id (str) : Facebook Post ID
                 limit (int): Number of comments to retrieve
             """
+            endponit = f"{self.base_url}/{post_id}/comments"
+            params = {
+               "access_token": self.access_token,
+               "limit": limit,
+               "fields": "id,message,created_time,like_count,user"
+               
+            }
 
