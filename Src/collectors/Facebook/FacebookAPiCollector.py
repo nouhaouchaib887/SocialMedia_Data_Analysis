@@ -41,8 +41,30 @@ class FacebookAPiCollector:
             print(f"Error while detecting version: {e}")
             return self.default_api_version
 
-        def get_page_posts(self, limit =10, since =None, until = None):
-            """
+
+    def get_page_insights(self,limit = 5):
+        """
+            Fetch basic page insights in a specific period
+
+            args:
+                limit (init, optional): Number of Days to Fetch insights for. Defaults to 5
+        """
+        endpoint = f"{self.base_url}/{self.page_id}/insights"
+        params = {
+            "access_token": self.access_token,
+           "metric": "page_fans,page_views_total,page_engaged_users",
+            "period": "day",
+          "limit": limit
+        }
+
+        response = self.session.get(endpoint, params = params)
+        response.raise_for_status()
+
+        return response.json().get("data", [])
+    
+    
+    def get_page_posts(self, limit =10, since =None, until = None):
+        """
             Fetch recent posts from facebook page
 
             args:
@@ -53,10 +75,10 @@ class FacebookAPiCollector:
 
             Returns:
                 list: Collection of posts
-            """
-            endpoint = f"{self.base_url}/{self.page_id}/posts"
+        """
+        endpoint = f"{self.base_url}/{self.page_id}/posts"
 
-            params = {
+        params = {
                 "access_token": self.access_token,
                 "limit": limit,
                 "fields" :(
@@ -70,27 +92,32 @@ class FacebookAPiCollector:
                     "insights.metric(post_impressions)"
                     )
             }
-            if since :
-                params["since"] = since
-            if until:
-                parems["until"] = until
+        if since :
+            params["since"] = since
+        if until:
+            params["until"] = until
 
-            response = self.session.get(endpoint ,params = params)
-            response.raise_for_status()
-            return response.json().get("data",[])
-        def get_posts_comments(self,post_id, limit=25):
-            """
+        response = self.session.get(endpoint ,params = params)
+        response.raise_for_status()
+        return response.json().get("data",[])
+    
+    def get_posts_comments(self,post_id, limit=25):
+        """
             Fetch comments for a specific post
 
             args:
                 post_id (str) : Facebook Post ID
                 limit (int): Number of comments to retrieve
-            """
-            endponit = f"{self.base_url}/{post_id}/comments"
-            params = {
+        """
+        endpoint = f"{self.base_url}/{post_id}/comments"
+        params = {
                "access_token": self.access_token,
                "limit": limit,
                "fields": "id,message,created_time,like_count,user"
                
             }
+        response = self.session.get(endpoint, params=params)
+        response.raise_for_status()
+        
+        return response.json().get("data", [])
 
