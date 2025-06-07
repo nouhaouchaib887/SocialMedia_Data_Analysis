@@ -1,5 +1,5 @@
-from Src.collectors.Trustpilot.TrustpilotCollector import TrustpilotCollector
-from Src.Kafka.BaseKafkaProducer import BaseKafkaProducer
+from collectors.Trustpilot.TrustpilotCollector import TrustpilotCollector
+from Kafka.BaseKafkaProducer import BaseKafkaProducer
 import time
 from datetime import datetime
 from confluent_kafka import Producer
@@ -9,7 +9,7 @@ class TrustpilotKafkaProducer:
     Trustpilot reviews and publish them to Kafka.
     """
     
-    def __init__(self, kafka_config, brand_name, topics=None, delay_range=(1, 3)):
+    def __init__(self, kafka_config, brand_name, topic=None, delay_range=(1, 3)):
         """
         Initialize the TrustpilotKafkaProducer.
         
@@ -20,14 +20,14 @@ class TrustpilotKafkaProducer:
             delay_range (tuple): Range of seconds to delay between requests (min, max)
         """
         # Default topics if not provided
-        self.topics = topics or {
-            'reviews': f'content.trustpilot.reviews.{brand_name}',
-            'statistics': f'content.trustpilot.stats.{brand_name}'
+        self.topic= topic or {
+            'reviews': f'trustpilot.content.reviews',
+            'statistics':'trustpilot.statistics'
         }
         
         # Initialize collector and producer
         self.collector = TrustpilotCollector(brand_name, delay_range=delay_range)
-        self.producer = BaseKafkaProducer(kafka_config, self.topics['reviews'])
+        self.producer = BaseKafkaProducer(kafka_config, self.topic['reviews'])
         self.logger = self.producer.logger
         
         self.logger.info(f"Initialized TrustpilotKafkaProducer for brand: {brand_name}")
@@ -52,7 +52,7 @@ class TrustpilotKafkaProducer:
         # Publish to Kafka
         key = f"{self.collector.brand_name}_stats"
         self.producer.produce_message(
-            self.topics['statistics'], 
+            self.topic['statistics'], 
             key, 
             statistics,
             headers=[

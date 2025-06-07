@@ -1,0 +1,680 @@
+{
+  "product_categories": [
+    {
+      "id": "forfaits_mobiles",
+      "name": "Forfaits Mobiles", 
+      "keywords": ["forfait", "mobile", "téléphone", "abonnement", "smartphone", "appels", "internet mobile", "data", "4G", "5G"],
+      "subcategories": [
+        {
+          "id": "forfaits_yo",
+          "name": "Forfaits Yo", 
+          "keywords": ["jeunes", "étudiant", "ado", "adolescent", "économique", "social media", "réseaux sociaux"],
+          "products": [
+            {
+              "id": "yo_49",
+              "name": "Yo 49 DH",
+              "keywords": ["petit forfait", "économique", "budget", "entrée de gamme", "49 dirhams"]
+            },
+            {
+              "id": "yo_99",
+              "name": "Yo 99 DH",
+              "keywords": ["forfait moyen", "intermédiaire", "milieu de gamme", "99 dirhams"]
+            },
+            {
+              "id": "yo_199",
+              "name": "Yo 199 DH",
+              "keywords": ["grand forfait", "premium", "haut de gamme", "199 dirhams", "illimité"]
+            }
+          ]
+        },
+        {
+          "id": "forfaits_yoxo",
+          "name": "Forfaits Yoxo", 
+          "keywords": ["digital", "personnalisable", "flexible", "app", "application mobile", "sur mesure"],
+          "products": [
+            {
+              "id": "yoxo_50",
+              "name": "Yoxo 50 DH",
+              "keywords": ["petit forfait", "économique", "budget", "entrée de gamme", "50 dirhams"]
+            },
+            {
+              "id": "yoxo_100",
+              "name": "Yoxo 100 DH",
+              "keywords": ["forfait moyen", "intermédiaire", "milieu de gamme", "100 dirhams"]
+            },
+            {
+              "id": "yoxo_200",
+              "name": "Yoxo 200 DH",
+              "keywords": ["grand forfait", "premium", "haut de gamme", "200 dirhams"]
+            },
+            {
+              "id": "yoxo_250",
+              "name": "Yoxo 250 DH",
+              "keywords": ["forfait premium", "illimité", "haut de gamme", "250 dirhams", "data illimitée"]
+            }
+          ]
+        },
+        {
+          "id": "pass_et_options",
+          "name": "Pass et Options",
+          "keywords": ["pass", "options", "compléments", "additionnels", "à la demande", "temporaire"],
+          "products": [
+            {
+              "id": "pass_roaming",
+              "name": "Pass Roaming",
+              "keywords": ["voyage", "international", "étranger", "roaming", "itinérance", "vacances"]
+            },
+            {
+              "id": "esim",
+              "name": "eSIM",
+              "keywords": ["carte sim virtuelle", "dématérialisée", "sans carte", "numérique", "digital", "multi-sim"]
+            },
+            {
+              "id": "pass_internet",
+              "name": "Pass Internet",
+              "keywords": ["data", "supplément", "gigabytes", "navigation", "surf", "web", "temporaire"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "offres_prepayees",
+      "name": "Offres Prépayées", 
+      "keywords": ["prépayé", "sans engagement", "recharge", "crédit", "liberté", "sans facture", "pay as you go"],
+      "products": [
+        {
+          "id": "offre_marhaba",
+          "name": "Offre Marhaba",
+          "keywords": ["bienvenue", "diaspora", "marocain résident à l'étranger", "MRE", "international", "retour au pays"]
+        }
+      ]
+    },
+    {
+      "id": "internet_maison",
+      "name": "Internet à la Maison", 
+      "keywords": ["internet fixe", "box", "connexion domicile", "wifi", "haut débit", "routeur", "connexion domestique"],
+      "subcategories": [
+        {
+          "id": "fibre_orange",
+          "name": "Fibre d'Orange", 
+          "keywords": ["fibre optique", "très haut débit", "ftth", "optique", "rapide", "stable"],
+          "products": [
+            {
+              "id": "fibre_20mbps",
+              "name": "Fibre d'Orange 20 Mbps",
+              "keywords": ["249","20 mégabits", "entrée de gamme", "économique", "basique", "petit débit"]
+            },
+            {
+              "id": "fibre_50mbps",
+              "name": "Fibre d'Orange 50 Mbps",
+              "keywords": ["299","50 mégabits", "débit moyen", "intermédiaire", "milieu de gamme"]
+            },
+            {
+              "id": "fibre_100mbps",
+              "name": "Fibre d'Orange 100 Mbps",
+              "keywords": ["349","100 mégabits", "haut débit", "premium", "rapide", "streaming"]
+            },
+            {
+              "id": "fibre_200mbps",
+              "name": "Fibre d'Orange 200 Mbps",
+              "keywords": ["449","200 mégabits", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+            },
+            {
+              "id": "fibre_500mbps",
+              "name": "Fibre d'Orange 500 Mbps",
+              "keywords": ["749","500 mégabits", "ultra haut débit", "streaming 4K", "téléchargement rapide", "professionnel"]
+            },
+            {
+              "id": "fibre_1000mbps",
+              "name": "Fibre d'Orange 1000 Mbps",
+              "keywords": ["949","1 gigabit", "1000 mégabits", "ultra haut débit", "entreprise", "usage intensif", "fibre premium"]
+            }
+          ]
+        },
+        {
+          "id": "adsl_ultra",
+          "name": "ADSL ULTRA",
+          "keywords": ["adsl", "ligne téléphonique", "copper", "cuivre", "ligne fixe", "vdsl"]
+        },
+        {
+          "id": "dar_box_4g",
+          "name": "Dar Box 4G+", 
+          "keywords": ["box 4G", "internet mobile fixe", "sans fil", "rural", "zones blanches", "alternative fibre"],
+          "products": [
+            {
+              "id": "dar_box_199",
+              "name": "Dar Box 4G+ 199",
+              "keywords": ["199 dirhams", "box standard", "usage modéré", "famille", "4G fixe"]
+            },
+            {
+              "id": "dar_box_249",
+              "name": "Dar Box 4G+ 249",
+              "keywords": ["249 dirhams", "box premium", "usage intensif", "data importante", "4G+ avancé"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "divertissement",
+      "name": "Divertissement", 
+      "keywords": ["loisirs", "entertainment", "média", "streaming", "contenu", "amusement", "digital", "plateforme"],
+      "subcategories": [
+        {
+          "id": "gaming",
+          "name": "Gaming", 
+          "keywords": ["jeux vidéo", "jeux en ligne", "gamer", "esport", "console", "mobile gaming"],
+          "products": [
+            {
+              "id": "gameloft",
+              "name": "Gameloft",
+              "keywords": ["jeux mobiles", "application", "arcade", "casual gaming", "développeur"]
+            },
+            {
+              "id": "playweez",
+              "name": "Playweez",
+              "keywords": ["plateforme gaming", "cloud gaming", "jeux en streaming", "catalogue jeux"]
+            },
+            {
+              "id": "freefire",
+              "name": "Freefire",
+              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+            }
+          ]
+        },
+        {
+          "id": "musique",
+          "name": "Musique", 
+          "keywords": ["streaming audio", "playlist", "album", "artiste", "chanson", "podcasts"],
+          "products": [
+            {
+              "id": "spotify",
+              "name": "Spotify",
+              "keywords": ["streaming musical", "playlist", "audio", "podcasts", "abonnement musique"]
+            },
+            {
+              "id": "digster",
+              "name": "Digster",
+              "keywords": ["playlist curated", "découverte musicale", "compilation", "thématique"]
+            },
+            {
+              "id": "zikplay",
+              "name": "Zikplay",
+              "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
+            }
+          ]
+        },
+        {
+          "id": "films_series",
+          "name": "Films & Séries", 
+          "keywords": ["streaming vidéo", "VOD", "cinéma", "télévision", "séries TV", "films en ligne"],
+          "products": [
+            {
+              "id": "playvod",
+              "name": "Playvod",
+              "keywords": ["vidéo à la demande", "films", "séries", "catalogue", "streaming"]
+            },
+            {
+              "id": "shahid",
+              "name": "Shahid",
+              "keywords": ["contenu arabe", "séries orientales", "MBC", "productions arabes", "moyen-orient"]
+            },
+            {
+              "id": "shofha",
+              "name": "Shofha",
+              "keywords": ["films marocains", "cinéma arabe", "productions locales", "maghreb", "divertissement local"]
+            },
+            {
+              "id": "viu",
+              "name": "Viu",
+              "keywords": ["séries asiatiques", "k-drama", "contenu coréen", "entertainment asiatique"]
+            }
+          ]
+        },
+        {
+          "id": "sport",
+          "name": "Sport", 
+          "keywords": ["football", "compétition", "match", "direct", "diffusion sportive", "championnat"],
+          "products": [
+            {
+              "id": "laliga_xtra",
+              "name": "LaLiga Xtra",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+              "id": "clicnscores",
+              "name": "ClicNscores",
+              "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+            },
+            {
+              "id": "eBotola",
+              "name": "eBotola",
+              "keywords": ["eBotola 25","équipe", "compétition", "live"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orange_money",
+      "name": "Orange Money", 
+      "keywords": ["Orange Money","paiement mobile", "transfert d'argent", "portefeuille électronique", "e-wallet", "service financier", "mobile banking"],
+      "products": [
+        {
+          "id": "paiement_facture",
+          "name": "Paiement de facture",
+          "keywords": ["Paiement de facture","factures", "eau", "électricité", "téléphone", "services", "paiement digital"]
+        },
+        {
+          "id": "envoi_argent",
+          "name": "Envoi d'argent",
+          "keywords": ["Envoi d'argent","transfert", "virement", "cash to cash", "international", "national", "remittance"]
+        }
+      ]
+    },
+    {
+      "id": "smartphones",
+      "name": "Smartphones", 
+      "keywords": ["Smartphones","téléphone", "mobile", "appareil", "device", "portable", "android", "ios", "cellulaire"],
+      "products": [
+        {
+          "id": "samsung",
+          "name": "Samsung",
+          "keywords": ["Samsung","galaxy", "android", "coréen", "flagship", "pliable", "note", "s series"]
+        },
+        {
+          "id": "xiaomi",
+          "name": "Xiaomi",
+          "keywords": ["Xiaomi","mi", "redmi", "poco", "chinois", "rapport qualité-prix", "budget"]
+        },
+        {
+          "id": "huawei",
+          "name": "Huawei",
+          "keywords": ["Huawei","p series", "mate", "honor", "chinois", "photographie", "harmony os"]
+        },
+        {
+          "id": "autres_marques",
+          "name": "Autres marques",
+          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+        }
+      ]
+    },
+    {
+      "id": "recharges",
+      "name": "Recharges", 
+      "keywords": ["*","star","etoile","crédit", "solde", "prépayé", "recharger", "carte", "coupon", "code"],
+      "subcategories": [
+        {
+          "id": "recharges_dirhams",
+          "name": "Recharges Dirhams Multiples", 
+          "keywords": ["recharge classique", "dirhams", "crédit standard", "solde principal", "recharge normale"],
+          "products": [
+            {
+              "id": "recharge_x10",
+              "name": "X10",
+              "keywords": ["10 dirhams", "petite recharge", "dépannage", "minimum"]
+            },
+            {
+              "id": "recharge_x15",
+              "name": "X15",
+              "keywords": ["15 dirhams", "recharge moyenne", "standard", "classique"]
+            },
+            {
+              "id": "recharge_x25",
+              "name": "X25",
+              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_appels",
+          "name": "Recharges Appels", 
+          "keywords": ["minutes", "appels", "voix", "communication", "bonus vocal"],
+          "products": [
+            {
+              "id": "recharge_etoile1",
+              "name": "*1",
+              "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+            },
+            {
+              "id": "recharge_etoile22",
+              "name": "*22",
+              "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_internet",
+          "name": "Recharges Internet", 
+          "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+          "products": [
+            {
+              "id": "recharge_etoile3",
+              "name": "*3",
+              "keywords": ["*3","forfait data", "internet mobile", "navigation", "petit volume"]
+            },
+            {
+              "id": "recharge_etoile6",
+              "name": "*6",
+              "keywords": ["*6","forfait data", "internet mobile", "navigation", "volume moyen"]
+            },
+            {
+              "id": "recharge_etoile7",
+              "name": "*7",
+              "keywords": ["*7","forfait data", "internet mobile", "navigation", "grand volume"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_tout_en_un",
+          "name": "Recharges Tout-en-un", 
+          "keywords": ["combo", "mixte", "appels+internet", "bundle", "pack", "tout inclus"],
+          "products": [
+            {
+              "id": "recharge_etoile2",
+              "name": "*2",
+              "keywords": ["forfait combiné", "minutes+data", "combo", "pack complet", "tout en un"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_internationales",
+          "name": "Recharges Internationales", 
+          "keywords": ["*4","international", "étranger", "appels internationaux", "longue distance", "cross-border"],
+          "products": [
+            {
+              "id": "recharge_etoile4",
+              "name": "*4",
+              "keywords": ["appels internationaux", "minutes international", "étranger", "international"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_illimitees",
+          "name": "Recharges Illimitées vers Orange", 
+          "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+          "products": [
+            {
+              "id": "recharge_etoile8",
+              "name": "*8",
+              "keywords": ["illimité orange", "on-net", "appels illimités", "réseau orange"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  
+  "outage_types": [
+    {
+      "id": "reseau_mobile",
+      "name": "Problèmes de réseau mobile", 
+      "keywords": ["réseau", "signal", "couverture", "antenne", "4G", "5G", "connexion mobile", "panne"],
+      "subcategories": [
+        {
+          "id": "couverture_insuffisante",
+          "name": "Couverture insuffisante",
+          "keywords": ["zone blanche", "signal faible", "mauvaise réception", "hors réseau", "rural"]
+        },
+        {
+          "id": "congestion_reseau",
+          "name": "Congestion réseau",
+          "keywords": ["réseau surchargé", "lenteur", "saturation", "heures de pointe", "forte affluence"]
+        },
+        {
+          "id": "coupure_totale",
+          "name": "Coupure totale",
+          "keywords": ["panne générale", "réseau down", "absence totale", "incident majeur", "blackout"]
+        }
+      ]
+    },
+    {
+      "id": "internet_fixe",
+      "name": "Problèmes d'Internet fixe",
+      "keywords": ["box", "modem", "connexion fixe", "wifi", "adsl", "fibre", "panne internet"],
+      "subcategories": [
+        {
+          "id": "panne_fibre",
+          "name": "Panne fibre optique",
+          "keywords": ["fibre coupée", "incident fibre", "câble optique", "ftth", "travaux fibre"]
+        },
+        {
+          "id": "panne_adsl",
+          "name": "Panne ADSL",
+          "keywords": ["adsl down", "cuivre", "ligne téléphonique", "panne dslam", "problème central"]
+        },
+        {
+          "id": "probleme_darbox",
+          "name": "Problème Dar Box",
+          "keywords": ["box 4G", "routeur 4G", "box mobile", "équipement défectueux", "router"]
+        },
+        {
+          "id": "debit_reduit",
+          "name": "Débit réduit",
+          "keywords": ["lenteur", "vitesse diminuée", "throttling", "ralentissement", "vitesse insuffisante"]
+        }
+      ]
+    },
+    {
+      "id": "service_client",
+      "name": "Problèmes de service client",
+      "keywords": ["assistance", "support", "relation client", "SAV", "conseil", "aide"],
+      "subcategories": [
+        {
+          "id": "temps_attente",
+          "name": "Temps d'attente excessif",
+          "keywords": ["attente longue", "délai", "file d'attente", "réponse lente", "support saturé"]
+        },
+        {
+          "id": "probleme_application",
+          "name": "Problème avec l'application client",
+          "keywords": ["app bug", "dysfonctionnement application", "erreur technique", "crash", "MyOrange"]
+        }
+      ]
+    },
+    {
+      "id": "facturation",
+      "name": "Problèmes de facturation",
+      "keywords": ["facture", "paiement", "débit", "comptabilité", "solde", "relevé"],
+      "subcategories": [
+        {
+          "id": "surfacturation",
+          "name": "Surfacturation",
+          "keywords": ["surfacturé", "montant incorrect", "erreur facturation", "trop facturé", "contentieux"]
+        },
+        {
+          "id": "paiement_rejete",
+          "name": "Paiement rejeté",
+          "keywords": ["échec paiement", "transaction refusée", "erreur carte", "rejet bancaire", "erreur prélèvement"]
+        }
+      ]
+    },
+    {
+      "id": "orange_money_issues",
+      "name": "Problèmes Orange Money",
+      "keywords": ["wallet", "paiement mobile", "transfert", "portefeuille électronique", "mobile banking"],
+      "subcategories": [
+        {
+          "id": "transaction_bloquee",
+          "name": "Transaction bloquée",
+          "keywords": ["blocage", "transaction en attente", "paiement suspendu", "échec transfert", "erreur envoi"]
+        },
+        {
+          "id": "compte_inaccessible",
+          "name": "Compte inaccessible",
+          "keywords": ["accès impossible", "connexion impossible", "compte bloqué", "erreur authentification", "identifiants"]
+        }
+      ]
+    },
+    {
+      "id": "service_tv",
+      "name": "Problèmes de service TV",
+      "keywords": ["télévision", "chaînes", "IPTV", "streaming TV", "décodeur", "box TV"],
+      "subcategories": [
+        {
+          "id": "chaines_indisponibles",
+          "name": "Chaînes indisponibles",
+          "keywords": ["chaînes manquantes", "canal absent", "émission inaccessible", "contenu bloqué", "bouquet incomplet"]
+        },
+        {
+          "id": "qualite_image",
+          "name": "Problème de qualité d'image",
+          "keywords": ["pixels", "flou", "saccades", "pixelisation", "artefacts", "mauvaise qualité"]
+        }
+      ]
+    }
+  ],
+  
+  "initiatives": [
+    {
+      "id": "orange_koora_talents", 
+      "name": "Orange Koora Talents",
+      "keywords": ["brahim diaz","Orange Koora Talents"]
+    }, 
+       
+    {
+      "id": "orange_digital_center",
+      "name": "Orange Digital Center",
+      "keywords": ["numérique", "formation", "coding", "tech", "innovation", "digital", "éducation"],
+      "events": [
+        {
+          "id": "odc_formations",
+          "name": "Formations numériques",
+          "keywords": ["cours", "apprentissage", "compétences", "digital skills", "certification", "formation continue"]
+        },
+        {
+          "id": "odc_fablab",
+          "name": "FabLab",
+          "keywords": ["laboratoire fabrication", "prototypage", "maker", "impression 3D", "création", "innovation"]
+        },
+        {
+          "id": "odc_conference",
+          "name": "Conférences tech",
+          "keywords": ["conférence", "webinar", "présentation", "expert", "intervenants", "événement tech"]
+        }
+      ]
+    },
+    {
+      "id": "orange_solidarite",
+      "name": "Orange Solidarité",
+      "keywords": ["RSE", "responsabilité sociale", "aide", "communauté", "soutien", "solidarité"],
+      "events": [
+        {
+          "id": "ecoles_numeriques",
+          "name": "Écoles Numériques",
+          "keywords": ["éducation", "école connectée", "tablettes", "apprentissage numérique", "e-learning", "inclusion"]
+        },
+        {
+          "id": "action_environnement",
+          "name": "Actions Environnementales",
+          "keywords": ["environnement", "développement durable", "écologie", "green", "plantation", "recyclage"]
+        },
+        {
+          "id": "inclusion_numerique",
+          "name": "Inclusion Numérique",
+          "keywords": ["fracture numérique", "digital divide", "accès", "formation", "seniors", "personnes défavorisées"]
+        }
+      ]
+    },
+    {
+      "id": "orange_startup",
+      "name": "Orange Startup",
+      "keywords": ["entrepreneur", "startup", "innovation", "incubateur", "tech", "business", "accélérateur"],
+      "events": [
+        {
+          "id": "prix_entrepreneuriat",
+          "name": "Prix Entrepreneuriat Social",
+          "keywords": ["concours", "impact social", "social business", "start-up", "innovation sociale", "récompense"]
+        },
+        {
+          "id": "accelerateur",
+          "name": "Programme Accélérateur",
+          "keywords": ["incubation", "développement startup", "mentorat", "coaching", "scale-up", "croissance"]
+        },
+        {
+          "id": "financement_projets",
+          "name": "Financement de Projets",
+          "keywords": ["investissement", "capital", "seed", "subvention", "funding", "levée de fonds"]
+        }
+      ]
+    }
+  ],
+  
+  "common_topics": [
+    {
+      "id": "assistance_technique",
+      "name": "Assistance technique",
+      "keywords": ["support", "dépannage", "aide", "problème technique", "assistance", "SAV", "solution"],
+      "subtopics": [
+        "configuration appareil",
+        "réinitialisation mot de passe",
+        "installation applications",
+        "mise à jour logicielle"
+      ]
+    },
+    {
+      "id": "demande_information",
+      "name": "Demandes d'information",
+      "keywords": ["renseignement", "info", "question", "détail", "précision", "clarification", "demande"],
+      "subtopics": [
+        "tarifs",
+        "disponibilité services",
+        "comparaison offres",
+        "éligibilité"
+      ]
+    },
+    {
+      "id": "reclamation",
+      "name": "Réclamations",
+      "keywords": ["plainte", "mécontentement", "problème", "litige", "insatisfaction", "contentieux", "désaccord"],
+      "subtopics": [
+        "service non fourni",
+        "engagement non respecté",
+        "qualité insuffisante",
+        "délai excessif"
+      ]
+    },
+    {
+      "id": "procedure_administrative",
+      "name": "Procédures administratives",
+      "keywords": ["démarche", "formalité", "paperasse", "administration", "processus", "documentation"],
+      "subtopics": [
+        "changement coordonnées",
+        "résiliation",
+        "souscription",
+        "portabilité numéro"
+      ]
+    },
+    {
+      "id": "actualite_orange",
+      "name": "Actualités Orange",
+      "keywords": ["news", "nouvelles", "information", "communiqué", "presse", "annonce", "événement"],
+      "subtopics": [
+        "nouveau produit",
+        "changement direction",
+        "résultat financier",
+        "expansion géographique"
+      ]
+    },
+    {
+      "id": "emploi_carriere",
+      "name": "Emploi et carrière",
+      "keywords": ["job", "recrutement", "travail", "embauche", "poste", "opportunité", "carrière"],
+      "subtopics": [
+        "offre d'emploi",
+        "stage",
+        "alternance",
+        "recrutement spécialisé"
+      ]
+    },
+    {
+      "id": "reseau_boutique",
+      "name": "Réseau et boutiques",
+      "keywords": ["magasin", "point de vente", "agence", "shop", "store", "physique", "emplacement"],
+      "subtopics": [
+        "horaire boutique"
+      ]
+    }
+  ]
+}
