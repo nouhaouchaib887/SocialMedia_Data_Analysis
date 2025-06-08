@@ -1,0 +1,62 @@
+[
+  {
+    "platform": "facebook",
+    "profile_id": "100064944541507",
+    "profile_name": "inwi",
+    "page_name": "inwi.ma",
+    "url": "https://web.facebook.com/inwi.ma",
+    "creation_date": "February 10, 2010",
+    "biography": "Avec inwi, vous avez une raison de sourire ! \nBienvenue dans votre espace, inwi est là pour vous accompagner. M3akoum koul youm !",
+    "metrics": {
+      "likes": 3154384,
+      "followers": 3462031
+    },
+    "is_business_account": null,
+    "scraped_at": "2025-06-07T23:01:21.272325"
+  },
+  {
+    "platform": "facebook",
+    "profile_id": "100050531557552",
+    "profile_name": "Maroc Telecom | Rabat",
+    "page_name": "maroctelecom",
+    "url": "https://web.facebook.com/maroctelecom",
+    "creation_date": "June 15, 2011",
+    "biography": "Maroc Telecom, votre opérateur global de téléphonie fixe, mobile et internet.",
+    "metrics": {
+      "likes": 4255195,
+      "followers": 4313603
+    },
+    "is_business_account": null,
+    "scraped_at": "2025-06-07T23:01:21.272335"
+  },
+  {
+    "platform": "facebook",
+    "profile_id": "100069357321773",
+    "profile_name": "Yoxo",
+    "page_name": "yoxobyOrange",
+    "url": "https://web.facebook.com/yoxobyOrange",
+    "creation_date": "May 6, 2021",
+    "biography": "Yoxo, forfait 100% digital, 100% Skhawa bach mati7ch en panne !\nChkoun Hna! Yoxo\nMachi Yoxo? « Koun Kanti Yoxo manwaslouch m3ak lhadchi😊😂 »",
+    "metrics": {
+      "likes": 23757,
+      "followers": 31909
+    },
+    "is_business_account": null,
+    "scraped_at": "2025-06-07T23:01:21.272338"
+  },
+  {
+    "platform": "facebook",
+    "profile_id": "100064662374992",
+    "profile_name": "Orange",
+    "page_name": "orangemaroc",
+    "url": "https://web.facebook.com/orangemaroc",
+    "creation_date": "February 19, 2010",
+    "biography": null,
+    "metrics": {
+      "likes": 30328197,
+      "followers": 30500134
+    },
+    "is_business_account": null,
+    "scraped_at": "2025-06-07T23:01:21.272340"
+  }
+]

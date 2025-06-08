@@ -1,0 +1,62 @@
+[
+  {
+    "platform": "instagram",
+    "profile_id": "550396973",
+    "profile_name": "inwi",
+    "user_name": "inwi_maroc",
+    "url": "https://www.instagram.com/inwi_maroc",
+    "biography": "#inwi_M3ak pour vivre votre vie Max Débit ⚡️",
+    "metrics": {
+      "likes": null,
+      "followers": 353558,
+      "following": 0,
+      "posts": 0
+    },
+    "is_private": false,
+    "is_verified": true,
+    "is_business_account": true,
+    "profile_pic_url": "https://instagram.fprn10-1.fna.fbcdn.net/v/t51.2885-19/358412016_304928488632548_706680658749342210_n.jpg?stp=dst-jpg_e0_s150x150_tt6&_nc_ht=instagram.fprn10-1.fna.fbcdn.net&_nc_cat=1&_nc_oc=Q6cZ2QHb2fL1DT6uG4AT_EZiq54EXVfJlPTmMFPtdZjnGBOvID-oCcUJ0PIV4-3AwJe8xTE&_nc_ohc=X08ayUYAruMQ7kNvwG2kztb&_nc_gid=CutWh0BsLMq0FN2bqlac5g&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfMAd3rVn5ulROw7Xokv0UGDhtwjAlDEHuU43OAUju7DIg&oe=684A74C6&_nc_sid=8b3546",
+    "external_url": "https://inwi.ma/",
+    "scraped_at": "2025-06-07T22:17:15.997149"
+  },
+  {
+    "platform": "instagram",
+    "profile_id": "11667780585",
+    "profile_name": "Orange Maroc",
+    "user_name": "orangemaroc",
+    "url": "https://www.instagram.com/orangemaroc",
+    "biography": "Nous nous engageons de manière responsable vis-à-vis de nos salariés, de nos clients et de la société. #Engage2025\n📥: Sponsoring@orange.ma",
+    "metrics": {
+      "likes": null,
+      "followers": 165842,
+      "following": 0,
+      "posts": 0
+    },
+    "is_private": false,
+    "is_verified": false,
+    "is_business_account": false,
+    "profile_pic_url": "https://scontent-ord5-2.cdninstagram.com/v/t51.2885-19/449720127_1920800045029596_3495247604548582387_n.jpg?stp=dst-jpg_e0_s150x150_tt6&_nc_ht=scontent-ord5-2.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2QHtrU5cWz3oa6pOpKjZnhS0Ed6UPO-A2zc0pFCmV98B5KdUSLbuN1KakseZb3z38Lw&_nc_ohc=_qAZ4DKVVLQQ7kNvwHMkDdp&_nc_gid=pxrH3giEEZe5_wBTHXwe_w&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfPlwn2FqAYhJPG-iUuBH_3hiWBopfPLLU5WQIJAoNUCpA&oe=684A6B5E&_nc_sid=8b3546",
+    "external_url": "https://www.orange.ma/",
+    "scraped_at": "2025-06-07T22:17:15.997583"
+  },
+  {
+    "platform": "instagram",
+    "profile_id": "144129461",
+    "profile_name": "Maroc Telecom",
+    "user_name": "maroctelecom",
+    "url": "https://www.instagram.com/maroctelecom",
+    "biography": "Votre opérateur global de téléphonie fixe, mobile et Internet.",
+    "metrics": {
+      "likes": null,
+      "followers": 158356,
+      "following": 0,
+      "posts": 0
+    },
+    "is_private": false,
+    "is_verified": true,
+    "is_business_account": true,
+    "profile_pic_url": "https://scontent-atl3-2.cdninstagram.com/v/t51.2885-19/25014552_272342319958558_2406150647561846784_n.jpg?stp=dst-jpg_e0_s150x150_tt6&_nc_ht=scontent-atl3-2.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2QFh2T5mmGUapy6vKk80I51Fwk1IMnonqSoMP7aueFWC8exgr8001Owe2j2eah73b6U&_nc_ohc=9xHfRjFOyfoQ7kNvwFEw3mm&_nc_gid=Snu_HVJl81h8YF26sz3tfA&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfP4NdXgRcPVSbdNgxP_VXIdU67-8sB61jsaem0y1-tVQg&oe=684A9715&_nc_sid=8b3546",
+    "external_url": "http://www.iam.ma/",
+    "scraped_at": "2025-06-07T22:17:15.997599"
+  }
+]
