@@ -281,7 +281,7 @@ class TiktokProducer:
             self.logger.info(f"📊 Processing {len(posts)} posts...")
             
             for i, post in enumerate(posts, 1):
-                if i >=48:
+                if i >=44:
                     self.logger.info(f"\n--- Processing Post {i}/{len(posts)} ---")
                 
                     # Collect comments for this post first
@@ -397,11 +397,11 @@ def main():
     # Initialize producer
     producer = TiktokProducer(
         kafka_config=kafka_config,
-        apify_token="apify_api_FCMPuqYJx7piuo4ylX4dO7HLu3UM0C1lRN4k",
+        apify_token="apify_api_YrPT59TKw8olQkGrrCIpP8pgf6lbNs2KWpnv",
         brand_name="orangemaroc",
         profile_name="orangemaroc",
-        topic="tiktok-data" , # Single topic for posts with comments
-        max_posts=100,
+        topic="mon_topic" , # Single topic for posts with comments
+        max_posts=50,
         max_comments_per_post=500,
         days_back=100
     )
