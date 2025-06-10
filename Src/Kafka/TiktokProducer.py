@@ -281,7 +281,7 @@ class TiktokProducer:
             self.logger.info(f"📊 Processing {len(posts)} posts...")
             
             for i, post in enumerate(posts, 1):
-                if i >=44:
+                if i >=0:
                     self.logger.info(f"\n--- Processing Post {i}/{len(posts)} ---")
                 
                     # Collect comments for this post first
