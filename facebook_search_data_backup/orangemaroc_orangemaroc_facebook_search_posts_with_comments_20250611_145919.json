@@ -1,0 +1,204 @@
+{
+  "metadata": {
+    "brand_name": "orangemaroc",
+    "search_query": "#orangemaroc",
+    "page_name": null,
+    "collection_time": "20250611_145919",
+    "data_type": "facebook_search_posts_with_comments",
+    "total_records": 2,
+    "post_time_range": "30d"
+  },
+  "data": [
+    {
+      "post_id": "1016896073931089",
+      "source_id": "100068321164227",
+      "created_time": "2025-06-11T12:22:18+00:00",
+      "updated_time": null,
+      "permalink": "https://www.facebook.com/azziddine.masghar/videos/4115352505377187/",
+      "page_id": "100068321164227",
+      "page_name": "Statistics & إحصائيات",
+      "message": "الدول العربية الأكثر إنتاجا للبرتقال ( بالطن ) من 1980 إلى 2023",
+      "media_type": "STATUS",
+      "media_url": "https://www.facebook.com/azziddine.masghar/videos/4115352505377187/",
+      "thumbnail_url": null,
+      "can_share": true,
+      "shares": 26,
+      "can_comment": true,
+      "comments_count": 58,
+      "can_like": true,
+      "like_count": 402,
+      "hashtags": [],
+      "mentions": [],
+      "caption": "الدول العربية الأكثر إنتاجا للبرتقال ( بالطن ) من 1980 إلى 2023",
+      "description": "",
+      "platform": "facebook",
+      "brand_name": "orangemaroc",
+      "comments": [
+        {
+          "comment_id": "1789548164995108",
+          "comment_url": "https://www.facebook.com/azziddine.masghar/videos/4115352505377187/?comment_id=1789548164995108",
+          "user_id": "pfbid0QPK3xgQttjnJ7DWzvVHBzXwxatAqonopaW1i6tz5PhFjUSXRTHtm8xPWTKtmJfajl",
+          "user_name": "Manal Abdel Azim",
+          "user_url": "https://www.facebook.com/manoula.abdelazim",
+          "created_time": "2025-06-11T12:31:39.000Z",
+          "message": "ربنا يزيد مصر من فضله",
+          "like_count": 9,
+          "reply_count": 1,
+          "hashtags": [],
+          "mentions": [],
+          "platform": "facebook",
+          "brand_name": "orangemaroc",
+          "comment_metadata": {
+            "parent_post_id": "1016896073931089",
+            "comment_engagement_score": 10,
+            "comment_length": 21,
+            "has_hashtags": false,
+            "has_mentions": false
+          }
+        },
+        {
+          "comment_id": "1963936954140410",
+          "comment_url": "https://www.facebook.com/azziddine.masghar/videos/4115352505377187/?comment_id=1963936954140410",
+          "user_id": "pfbid0BQXWHh2PdyfjtShDqXphyhYTn9J13Db1Bjna8dvCSWEsqhk8TYzeJjWGGqBKNuCDl",
+          "user_name": "Amr Farahat Elganainy",
+          "user_url": "https://www.facebook.com/amoorfarahat",
+          "created_time": "2025-06-11T12:31:01.000Z",
+          "message": "كل فيديوهات الاحصاء والمقارنات بين الدول العربيه والافريقيه فى كل المنتجات ترى مصر رقم واحد فى كل شىء \nربنا يحميكى يابلادى",
+          "like_count": 10,
+          "reply_count": 3,
+          "hashtags": [],
+          "mentions": [],
+          "platform": "facebook",
+          "brand_name": "orangemaroc",
+          "comment_metadata": {
+            "parent_post_id": "1016896073931089",
+            "comment_engagement_score": 13,
+            "comment_length": 122,
+            "has_hashtags": false,
+            "has_mentions": false
+          }
+        }
+      ],
+      "kafka_metadata": {
+        "topic": "facebook-search-data",
+        "produced_at": "2025-06-11T13:59:19.341088",
+        "producer_timestamp": 1749650359341,
+        "message_type": "facebook_search_post_with_comments",
+        "version": "1.0"
+      },
+      "collection_metadata": {
+        "collector_brand": "orangemaroc",
+        "search_query": "#orangemaroc",
+        "page_name": null,
+        "collection_params": {
+          "max_posts": 2,
+          "max_comments_per_post": 2,
+          "post_time_range": "30d"
+        }
+      },
+      "statistics": {
+        "total_comments": 2,
+        "total_hashtags": 0,
+        "total_mentions": 0,
+        "engagement_score": 486
+      }
+    },
+    {
+      "post_id": "122197942052270813",
+      "source_id": "61558124406784",
+      "created_time": "2025-06-11T12:35:59+00:00",
+      "updated_time": null,
+      "permalink": "https://www.facebook.com/reel/1751325566268069/",
+      "page_id": "61558124406784",
+      "page_name": "Prétty Anjuman's Drawing Dreams",
+      "message": "কত গুলো কমলা 🍊 #reelschallenge #OrangePlants",
+      "media_type": "STATUS",
+      "media_url": null,
+      "thumbnail_url": null,
+      "can_share": true,
+      "shares": 0,
+      "can_comment": true,
+      "comments_count": 10,
+      "can_like": true,
+      "like_count": 6,
+      "hashtags": [
+        "reelschallenge",
+        "OrangePlants"
+      ],
+      "mentions": [],
+      "caption": "কত গুলো কমলা 🍊 #reelschallenge #OrangePlants",
+      "description": "",
+      "platform": "facebook",
+      "brand_name": "orangemaroc",
+      "comments": [
+        {
+          "comment_id": "1742877896655022",
+          "comment_url": "https://www.facebook.com/reel/1751325566268069/?comment_id=1742877896655022",
+          "user_id": "61560404442831",
+          "user_name": "চিরকুট ʚíɞ ",
+          "user_url": "https://www.facebook.com/people/%E0%A6%9A%E0%A6%BF%E0%A6%B0%E0%A6%95%E0%A7%81%E0%A6%9F-%CA%9A%C3%AD%C9%9E/61560404442831/",
+          "created_time": "2025-06-11T13:41:13.000Z",
+          "message": "Big fan new post bk please",
+          "like_count": 1,
+          "reply_count": 0,
+          "hashtags": [],
+          "mentions": [],
+          "platform": "facebook",
+          "brand_name": "orangemaroc",
+          "comment_metadata": {
+            "parent_post_id": "122197942052270813",
+            "comment_engagement_score": 1,
+            "comment_length": 26,
+            "has_hashtags": false,
+            "has_mentions": false
+          }
+        },
+        {
+          "comment_id": "1216806583075018",
+          "comment_url": "https://www.facebook.com/reel/1751325566268069/?comment_id=1216806583075018",
+          "user_id": "61560404442831",
+          "user_name": "চিরকুট ʚíɞ ",
+          "user_url": "https://www.facebook.com/people/%E0%A6%9A%E0%A6%BF%E0%A6%B0%E0%A6%95%E0%A7%81%E0%A6%9F-%CA%9A%C3%AD%C9%9E/61560404442831/",
+          "created_time": "2025-06-11T13:41:03.000Z",
+          "message": "Beautiful",
+          "like_count": 1,
+          "reply_count": 0,
+          "hashtags": [],
+          "mentions": [],
+          "platform": "facebook",
+          "brand_name": "orangemaroc",
+          "comment_metadata": {
+            "parent_post_id": "122197942052270813",
+            "comment_engagement_score": 1,
+            "comment_length": 9,
+            "has_hashtags": false,
+            "has_mentions": false
+          }
+        }
+      ],
+      "kafka_metadata": {
+        "topic": "facebook-search-data",
+        "produced_at": "2025-06-11T13:59:19.341142",
+        "producer_timestamp": 1749650359341,
+        "message_type": "facebook_search_post_with_comments",
+        "version": "1.0"
+      },
+      "collection_metadata": {
+        "collector_brand": "orangemaroc",
+        "search_query": "#orangemaroc",
+        "page_name": null,
+        "collection_params": {
+          "max_posts": 2,
+          "max_comments_per_post": 2,
+          "post_time_range": "30d"
+        }
+      },
+      "statistics": {
+        "total_comments": 2,
+        "total_hashtags": 2,
+        "total_mentions": 0,
+        "engagement_score": 16
+      }
+    }
+  ]
+}

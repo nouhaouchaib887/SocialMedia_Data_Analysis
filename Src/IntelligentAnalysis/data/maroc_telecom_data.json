@@ -1,0 +1,744 @@
+{"product_categories": [
+    {
+      "id": "forfaits_mobiles",
+      "name": "Forfaits Mobiles", 
+      "keywords": ["forfait", "abonnement", "tarif mensuel fixe"],
+      "subcategories": [
+        {
+          "id": "forfait_mobile",
+          "name": "Forfait Mobile", 
+          "keywords": ["forfait", "abonnement", "tarif mensuel fixe","à partir de 165 dirhams"],
+          "products": [
+            {
+              "id": "forfait_mobile_165",
+              "name": "Forfait Mobile 165 DH",
+              "keywords": ["petit forfait", "économique", "budget", "entrée de gamme", "165 dirhams"]
+            },
+            {
+                "id": "forfait_mobile_220",
+                "name": "Forfait Mobile 220 DH",
+                "keywords": ["220 dirhams"]
+              },
+              {
+                "id": "forfait_mobile_249",
+                "name": "Forfait Mobile 249 DH",
+                "keywords": ["249 dirhams"]
+              },
+              {
+                "id": "forfait_mobile_349",
+                "name": "Forfait Mobile 349 DH",
+                "keywords": ["349 dirhams"]
+              }
+          ]
+        },
+        {
+          "id": "forfait_liberte",
+          "name": "Forfait Liberté", 
+          "keywords": ["forfait liberté","économique","inférieur à 119 dirhams"],
+          "products": [
+            {
+              "id": "forfait_liberte_59",
+              "name": "Forfait Liberté 59 DH",
+              "keywords": ["petit forfait", "économique", "budget", "entrée de gamme", "59 dirhams"]
+            },
+            {
+              "id": "forfait_liberte_99",
+              "name": "Forfait Liberté 99 DH",
+              "keywords": ["forfait moyen", "intermédiaire", "milieu de gamme", "99 dirhams"]
+            },
+            {
+              "id": "forfait_liberte_119",
+              "name": "Forfait Liberté 119 DH",
+              "keywords": ["grand forfait", "premium", "haut de gamme", "119 dirhams"]
+            }
+          ]
+        },
+        {
+          "id": "forfait_illimite_mobile",
+          "name": "Forfait illimité Mobile",
+          "keywords": ["appels illimités","forfait illimité vers le national"],
+          "products": [
+            {
+              "id": "forfait_illimite_mobile_259",
+              "name": "Forfait illimité Mobile 259 DH",
+              "keywords": ["259 dirhams"]
+            },
+            {
+              "id": "forfait_illimite_mobile_439",
+              "name": "Forfait illimité Mobile 439 DH",
+              "keywords": ["439 dirhams"]
+            },
+            {
+                "id": "forfait_illimite_mobile_649",
+              "name": "Forfait illimité Mobile 649 DH",
+                "keywords": ["649 dirhams"]
+              }
+          ]
+        },
+        {
+            "id": "forfait_internet",
+            "name": "Forfait Internet 4G+",
+            "keywords": ["forfait internet","data"],
+            "products": [
+              {
+                "id": "forfait_internet_59",
+                "name": "Forfait Internet 59 DH",
+                "keywords": ["59 dirhams"]
+              },
+              {
+                "id": "forfait_internet_99",
+                "name": "Forfait Internet 99 DH",
+                "keywords": ["99 dirhams"]
+              }
+            ]
+          }
+      ]
+    },
+    {
+      "id": "internet_maison",
+      "name": "Internet à la Maison", 
+      "keywords": ["internet fixe", "box", "connexion domicile", "wifi", "haut débit", "routeur", "connexion domestique"],
+      "subcategories": [
+        {
+          "id": "fibre_optique",
+          "name": "Fibre optique", 
+          "keywords": ["fibre optique", "très haut débit", "ftth", "optique", "rapide", "stable"],
+          "products": [
+            {
+              "id": "fibre_100mbps",
+              "name": "Fibre d'Orange 100 Mbps",
+              "keywords": ["400 dirhams","1000 mégabits", "entrée de gamme", "économique", "basique", "petit débit"]
+            },
+            {
+              "id": "fibre_200mbps",
+              "name": "Fibre d'Orange 200 Mbps",
+              "keywords": ["500 dirhams","200 mégabits", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+            },
+            {
+              "id": "fibre_1000mbps",
+              "name": "Fibre d'Orange 1000 Mbps",
+              "keywords": ["1000 dirhams","1 gigabit", "1000 mégabits", "ultra haut débit", "entreprise", "usage intensif", "fibre premium"]
+            }
+          ]
+        },
+        {
+            "id": "fibre_optique_mt_box",
+            "name": "Fibre optique MT Box", 
+            "keywords": ["fibre optique", "très haut débit", "ftth", "optique", "rapide", "stable"],
+            "products": [
+              {
+                "id": "fibre_optique_mt_box_200mbps",
+            "name": "Fibre optique MT Box 200 Mbps",
+                "keywords": ["700 dirhmas","200 mégabits", "entrée de gamme", "économique", "basique", "petit débit"]
+              },
+              {
+                "id": "fibre_optique_mt_box_1000mbps",
+            "name": "Fibre optique MT Box 1000 Mbps",
+                "keywords": ["1200 dirhmas","1000 mégabits", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+              }
+            ]
+          },
+        {
+          "id": "adsl_duo",
+          "name": "ADSL Duo",
+          "keywords": ["adsl", "ligne téléphonique", "copper", "cuivre", "ligne fixe", "vdsl"],
+          "products": [
+              {
+                "id": "adsl_duo_199",
+            "name": "ADSL Duo 199 DH",
+                "keywords": ["199 dirhams","4 mégabits /s ", "entrée de gamme", "économique", "basique", "petit débit"]
+              },
+              {
+                "id": "adsl_duo_249",
+            "name": "ADSL Duo 249 DH",
+                "keywords": ["249 dirhmas","20 mégabits/s", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+              },
+              {
+                "id": "adsl_duo_299",
+            "name": "ADSL Duo 299 DH",
+                "keywords": ["299 dirhmas","20 mégabits/s", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+              }
+            ]
+        },
+        {
+            "id": "mt_box_adsl",
+            "name": "MT Box ADSL",
+            "keywords": ["adsl", "ligne téléphonique", "copper", "cuivre", "ligne fixe", "vdsl"],
+            "products": [
+                {
+                  "id": "mt_box_adsl_299",
+            "name": "MT Box ADSL 299 DH",
+                  "keywords": ["299 dirhams","4 mégabits/s", "entrée de gamme", "économique", "basique", "petit débit"]
+                },
+                {
+                  "id": "mt_box_adsl_349",
+            "name": "MT Box ADSL 349 DH",
+                  "keywords": ["349 dirhams","8 mégabits/s", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+                },
+                {
+                  "id": "mt_box_adsl_389",
+            "name": "MT Box ADSL 389 DH",
+                  "keywords": ["389 dirhams","12 mégabits/s", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+                }
+              ]
+          },
+          {
+            "id": "offres_adsl",
+            "name": "Offres ADSL",
+            "keywords": ["adsl", "ligne téléphonique", "copper", "cuivre", "ligne fixe", "vdsl"],
+            "products": [
+                {
+                    "id": "offres_adsl_99",
+                    "name": "Offres ADSL 99 DH",
+                  "keywords": ["99 dirhams","4 mégabits/s", "entrée de gamme", "économique", "basique", "petit débit"]
+                },
+                {
+                    "id": "offres_adsl_149",
+                    "name": "Offres ADSL 149 DH",
+                  "keywords": ["149 dirhams","8 mégabits/s", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+                },
+                {
+                    "id": "offres_adsl_199",
+                    "name": "Offres ADSL 199 DH",
+                  "keywords": ["199 dirhams","12 mégabits/s", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+                }
+                ,
+                {
+                    "id": "offres_adsl_399",
+                    "name": "Offres ADSL 399 DH",
+                  "keywords": ["399 dirhams","20 mégabits/s", "très haut débit", "pro", "gamer", "multiple utilisateurs"]
+                }
+              ]
+          },
+      {
+        "id": "vsat",
+        "name": "VSAT", 
+        "keywords": ["vsat","internet partout","sat"],
+        "products": [
+          {
+              "id": "vsat_249",
+        "name": "VSAT 249 DH",
+            "keywords": ["249 dirhams", "débit 10 méga"]
+          },
+          {
+              "id": "vsat_659",
+        "name": "VSAT 659 DH",
+            "keywords": ["659 dirhams", "débit 10 méga"]
+          },
+          
+          {
+             "id": "vsat_1199",
+        "name": "VSAT 1199 DH",
+            "keywords": ["1199 dirhams", "débit 20 méga"]
+          },
+          
+          {
+             "id": "vsat_1740",
+        "name": "VSAT 1740 DH",
+            "keywords": ["1740 dirhams", "débit 20 méga"]
+          }
+      
+        ]
+      }
+      ]
+    },
+    {
+      "id": "divertissement",
+      "name": "Divertissement", 
+      "keywords": ["loisirs", "entertainment", "média", "streaming", "contenu", "amusement", "digital", "plateforme"],
+      "subcategories": [
+        {
+          "id": "gaming",
+          "name": "Gaming", 
+          "keywords": ["jeux vidéo", "jeux en ligne", "gamer", "esport", "console", "mobile gaming"],
+          "products": [
+            {
+              "id": "mt_foot",
+              "name": "MT Foot",
+              "keywords": ["MT Foot",""]
+            },
+            {
+              "id": "gameloft",
+              "name": "Gameloft",
+              "keywords": ["jeux mobiles", "application", "arcade", "casual gaming", "développeur"]
+            },
+            {
+              "id": "play_zone",
+              "name": "PLAYZONE",
+              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+            },
+            {
+              "id": "apps_club",
+              "name": "APPS CLUB",
+              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+            }
+            ,
+            {
+              "id": "garena_free_fire",
+              "name": "Garena Free Fire",
+              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+            }
+          ]
+        },
+        {
+          "id": "video_musique",
+          "name": "Vidéo & Musique", 
+          "keywords": ["streaming audio", "playlist", "album", "artiste", "chanson", "podcasts"],
+          "products": [
+          
+            {
+              "id": "anghami",
+              "name": "Anghami ",
+              "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
+            },
+            {
+                "id": "a_ghany",
+                "name": "A-GHANY",
+                "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
+              }
+           
+          ]
+        },
+        
+        {
+          "id": "sport",
+          "name": "Sport", 
+          "keywords": ["football", "compétition", "match", "direct", "diffusion sportive", "championnat"],
+          "products": [
+            {
+              "id": "strazplay_sport",
+              "name": "Strazplay Sport",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            }
+          ]
+        },
+        {
+          "id": "pratique",
+           "name": "Pratique", 
+          "keywords": ["football", "compétition", "match", "direct", "diffusion sportive", "championnat"],
+          "products": [
+            {
+              "id": "kidjo",
+              "name": "Kidjo",
+              "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+            },
+            {
+                "id": "maktabati",
+                "name": "MAKTABATI",
+                "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+              },
+            {
+              "id": "busuu",
+              "name": "Busuu",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            }
+            ,
+            {
+              "id": "manhaj",
+              "name": "Manhaj",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+                "id": "facebook_text_only",
+                "name": "FACEBOOK TEXT ONLY",
+                "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              }
+          ]
+          
+        },
+        {
+            "id": "films_series",
+          "name": "Films & Séries", 
+          "keywords": ["streaming vidéo", "VOD", "cinéma", "télévision", "séries TV", "films en ligne"],
+            "products": [
+                {
+                    "id": "shahid",
+                    "name": "Shahid",
+                    "keywords": ["playlist curated", "découverte musicale", "compilation", "thématique"]
+                  },
+                  {
+                    "id": "vuz",
+                    "name": "Vuz",
+                    "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
+                  }
+              ,
+              {
+                "id": "playvod",
+                "name": "PlayVOD",
+                "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              },
+              {
+                  "id": "osn_plus",
+                  "name": "OSN Plus",
+                  "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+                }
+                
+            ]
+            
+          }
+      ]
+    },
+    {
+      "id": "smartphones",
+      "name": "Smartphones", 
+      "keywords": ["Smartphones","téléphone", "mobile", "appareil", "device", "portable", "android", "ios", "cellulaire"],
+      "products": [
+        {
+          "id": "samsung",
+          "name": "Samsung",
+          "keywords": ["Samsung","galaxy", "android", "coréen", "flagship", "pliable", "note", "s series"]
+        },
+        {
+            "id": "nokia",
+            "name": "Nokia",
+            "keywords": ["Samsung","galaxy", "android", "coréen", "flagship", "pliable", "note", "s series"]
+          },
+        {
+          "id": "xiaomi",
+          "name": "Xiaomi",
+          "keywords": ["Xiaomi","mi", "redmi", "poco", "chinois", "rapport qualité-prix", "budget"]
+        },
+        {
+          "id": "apple",
+          "name": "Apple",
+          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+        }
+        ,
+        {
+          "id": "autre_marques",
+          "name": "Autres Marques",
+          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+        }
+      ]
+    },
+    {
+      "id": "recharges",
+      "name": "Recharges", 
+      "keywords": ["*","star","etoile","crédit", "solde", "prépayé", "recharger", "carte", "coupon", "code"],
+      "subcategories": [
+        {
+          "id": "recharges_dirhams",
+          "name": "Recharges Dirhams Multiples", 
+          "keywords": ["recharge classique", "dirhams", "crédit standard", "solde principal", "recharge normale"],
+          "products": [
+            
+            {
+              "id": "recharge_30",
+              "name": "Recharge 30 DH",
+              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+            }
+            ,
+            {
+              "id": "recharge_50",
+              "name": "Recharge 50 DH",
+              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+            }
+            ,
+            {
+              "id": "recharge_100",
+              "name": "Recharge 100 DH",
+              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+            }
+            ,
+            {
+              "id": "recharge_200",
+              "name": "Recharge 200 DH",
+              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_appels",
+          "name": "Recharges Appels *22", 
+          "keywords": ["minutes", "appels", "voix", "communication", "bonus vocal"],
+          "products": [
+            {
+              "id": "recharge_5",
+              "name": "Recharge 5 DH",
+              "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+            },
+            {
+              "id": "recharge_10",
+              "name": "Recharge 10 DH",
+              "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+            }
+          
+
+          ]
+        },
+        {
+          "id": "recharges_internet",
+          "name": "Recharges Internet *3", 
+          "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+          "products": [
+            {
+                "id": "recharge_5",
+                "name": "recharge 5 DH",
+                "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+              },
+              {
+                "id": "recharge_10",
+                "name": "recharge 10 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              },
+              {
+                "id": "recharge_20",
+                "name": "recharge 20 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              },
+              {
+                "id": "recharge_25",
+                "name": "recharge 25 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              },
+              {
+                "id": "recharge_30",
+                "name": "recharge 30 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              },
+              {
+                "id": "recharge_50",
+                "name": "recharge 50 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              }
+              ,
+              {
+                "id": "recharge_100",
+                "name": "recharge 100 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              }
+              ,
+              {
+                "id": "recharge_200",
+                "name": "recharge 200 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              },
+              {
+                "id": "recharge_300",
+                "name": "recharge 300 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              }
+              ,
+              {
+                "id": "recharge_500",
+                "name": "recharge 500 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              }
+              ,
+              {
+                "id": "recharge_1000",
+                "name": "recharge 1000 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              }
+        
+          ]
+        },
+       
+       
+        {
+          "id": "recharge_resaux_sociaux",
+          "name": "Recharge Réseaux Sociaux", 
+          "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+          "products": [
+            {
+                "id": "recharge_5",
+                "name": "recharge 5 DH",
+                "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+              },
+              {
+                "id": "recharge_10",
+                "name": "recharge 10 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              },
+              {
+                "id": "recharge_20",
+                "name": "recharge 20 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              },
+              {
+                "id": "recharge_30",
+                "name": "recharge 30 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              }
+              ,
+              {
+                "id": "recharge_50",
+                "name": "recharge 50 DH",
+                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              }
+            
+            
+          ]
+        },
+          {
+            "id": "recharge_roaming_etoile_7",
+            "name": "Recharge Roaming *7", 
+            "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+            "products": [
+              {
+                  "id": "recharge_100",
+                  "name": "recharge 100 DH",
+                  "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                },
+                {
+                  "id": "recharge_200",
+                  "name": "recharge 200 DH",
+                  "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                },
+                  {
+                    "id": "recharge_300",
+                    "name": "recharge 300 DH",
+                    "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                  }
+                ]
+            },
+            {
+                "id": "recharge_roaming_etoile_77",
+                "name": "Recharge Roaming *77", 
+                "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+                "products": [
+                  {
+                      "id": "recharge_300",
+                      "name": "recharge 300 DH",
+                      "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                    },
+                    {
+                      "id": "recharge_665",
+                      "name": "recharge 665 DH",
+                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                    },
+                      {
+                        "id": "recharge_1200",
+                        "name": "recharge 1200 DH",
+                        "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      }
+                    ]
+                },
+                {
+                    "id": "recharge_roaming_etoile_78",
+                    "name": "Recharge Roaming *78", 
+                    "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+                    "products": [
+                        {
+                            "id": "recharge_50",
+                            "name": "recharge 50 DH",
+                            "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                          },
+                      {
+                          "id": "recharge_100",
+                          "name": "recharge 100 DH",
+                          "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                        },
+                        {
+                          "id": "recharge_200",
+                          "name": "recharge 200 DH",
+                          "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                        },
+                          {
+                            "id": "recharge_300",
+                            "name": "recharge 300 DH",
+                            "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                          }
+                        ]
+                    },
+                    {
+                        "id": "recharge_roaming_etoile_8",
+                        "name": "Recharge Roaming *8", 
+                        "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+                        "products": [
+                
+                          {
+                              "id": "recharge_100",
+                              "name": "recharge 100 DH",
+                              "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                            },
+                            {
+                              "id": "recharge_200",
+                              "name": "recharge 200 DH",
+                              "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                            },
+                              {
+                                "id": "recharge_300",
+                                "name": "recharge 300 DH",
+                                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                              },
+                              {
+                                "id": "recharge_665",
+                                "name": "recharge 665 DH",
+                                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                              },
+                                {
+                                  "id": "recharge_1200",
+                                  "name": "recharge 1200 DH",
+                                  "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                                }
+                            ]
+                        },
+                    
+            {
+                "id": "recharge_appels_nationals_internationals",
+                "name": "Recharge Appels *4", 
+                "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+                "products": [
+                  
+                    {
+                      "id": "recharge_20",
+                      "name": "recharge 20 DH",
+                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                    },
+        
+                    {
+                      "id": "recharge_50",
+                      "name": "recharge 50 DH",
+                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                    }
+                    ,
+                    {
+                      "id": "recharge_100",
+                      "name": "recharge 100 DH",
+                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                    }
+                ]
+            },
+            {
+                "id": "recharge_tout_en_un",
+                "name": "Recharge Appels *5", 
+                "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+                "products": [
+                  
+                    {
+                        "id": "recharge_5",
+                        "name": "recharge 5 DH",
+                        "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      },
+          
+                      {
+                        "id": "recharge_10",
+                        "name": "recharge 10 DH",
+                        "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      },
+                    {
+                      "id": "recharge_20",
+                      "name": "recharge 20 DH",
+                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                    },
+        
+                    {
+                      "id": "recharge_50",
+                      "name": "recharge 50 DH",
+                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                    }
+                    ,
+                    {
+                      "id": "recharge_100",
+                      "name": "recharge 100 DH",
+                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                    }
+                ]
+            }
+
+        
+      ]
+    }
+  ]
+}

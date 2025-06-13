@@ -21,6 +21,11 @@
               "keywords": ["forfait moyen", "intermédiaire", "milieu de gamme", "99 dirhams"]
             },
             {
+              "id": "yo_149",
+              "name": "Yo 149 DH",
+              "keywords": ["forfait moyen", "premium", "haut de gamme", "149 dirhams", "illimité"]
+            },
+            {
               "id": "yo_199",
               "name": "Yo 199 DH",
               "keywords": ["grand forfait", "premium", "haut de gamme", "199 dirhams", "illimité"]
@@ -48,6 +53,7 @@
               "keywords": ["grand forfait", "premium", "haut de gamme", "200 dirhams"]
             },
             {
+  
               "id": "yoxo_250",
               "name": "Yoxo 250 DH",
               "keywords": ["forfait premium", "illimité", "haut de gamme", "250 dirhams", "data illimitée"]
@@ -70,8 +76,8 @@
               "keywords": ["carte sim virtuelle", "dématérialisée", "sans carte", "numérique", "digital", "multi-sim"]
             },
             {
-              "id": "pass_internet",
-              "name": "Pass Internet",
+              "id": "pass_international",
+              "name": "Pass International",
               "keywords": ["data", "supplément", "gigabytes", "navigation", "surf", "web", "temporaire"]
             }
           ]
@@ -87,7 +93,13 @@
           "id": "offre_marhaba",
           "name": "Offre Marhaba",
           "keywords": ["bienvenue", "diaspora", "marocain résident à l'étranger", "MRE", "international", "retour au pays"]
+        },
+        {
+          "id": "carte_prepayee",
+          "name": "Carte Prépayée",
+          "keywords": ["bienvenue", "diaspora", "marocain résident à l'étranger", "MRE", "international", "retour au pays"]
         }
+
       ]
     },
     {
@@ -151,7 +163,24 @@
               "id": "dar_box_249",
               "name": "Dar Box 4G+ 249",
               "keywords": ["249 dirhams", "box premium", "usage intensif", "data importante", "4G+ avancé"]
+            },
+            {
+              "id": "dar_box_rechargeable",
+              "name": "Pack Dar Box rechargeable ",
+              "keywords": ["399 dirhams", "box premium", "usage intensif", "data importante", "4G+ avancé"]
+            },
+            {
+              "id": "WIFI_D'jib_rechargeable_250",
+              "name": "Pack Dar Box rechargeable 250 DH ",
+              "keywords": ["250 dirhams", "box premium", "usage intensif", "data importante", "4G+ avancé"]
             }
+            ,
+            {
+              "id": "WIFI_D'jib_rechargeable_350",
+              "name": "Pack Dar Box rechargeable 350 DH",
+              "keywords": ["250 dirhams", "box premium", "usage intensif", "data importante", "4G+ avancé"]
+            }
+          
           ]
         }
       ]
@@ -167,6 +196,11 @@
           "keywords": ["jeux vidéo", "jeux en ligne", "gamer", "esport", "console", "mobile gaming"],
           "products": [
             {
+              "id": "PUBG",
+              "name": "PUBG",
+              "keywords": ["jeux mobiles", "application", "arcade", "casual gaming", "développeur"]
+            },
+            {
               "id": "gameloft",
               "name": "Gameloft",
               "keywords": ["jeux mobiles", "application", "arcade", "casual gaming", "développeur"]
@@ -179,6 +213,17 @@
             {
               "id": "freefire",
               "name": "Freefire",
+              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+            },
+            {
+              "id": "arena",
+              "name": "Arena",
+              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+            }
+            ,
+            {
+              "id": "age_of_ashes",
+              "name": "Age of Ashes",
               "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
             }
           ]
@@ -202,6 +247,11 @@
               "id": "zikplay",
               "name": "Zikplay",
               "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
+            },
+            {
+              "id": "tonalite",
+              "name": "Tonalité",
+              "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
             }
           ]
         },
@@ -212,7 +262,7 @@
           "products": [
             {
               "id": "playvod",
-              "name": "Playvod",
+              "name": "Playvod+",
               "keywords": ["vidéo à la demande", "films", "séries", "catalogue", "streaming"]
             },
             {
@@ -246,11 +296,75 @@
               "id": "clicnscores",
               "name": "ClicNscores",
               "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+            }
+          ]
+        },
+        {
+          "id": "store",
+          "name": "Store",
+          "keywords": ["football", "compétition", "match", "direct", "diffusion sportive", "championnat"],
+          "products": [
+            {
+              "id": "huawei",
+              "name": "HUWAEI",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
             },
             {
-              "id": "eBotola",
-              "name": "eBotola",
-              "keywords": ["eBotola 25","équipe", "compétition", "live"]
+              "id": "karti",
+              "name": "Karti",
+              "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+            }
+          ]
+        },
+        {
+          "id": "life_style_e_learning",
+           "name": "Life Style & E-Learning", 
+          "keywords": ["football", "compétition", "match", "direct", "diffusion sportive", "championnat"],
+          "products": [
+            {
+              "id": "manhaj",
+              "name": "Manhaj",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+              "id": "kidjo",
+              "name": "Kidjo",
+              "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+            },
+            {
+              "id": "youscribe",
+              "name": "YouScribe",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+              "id": "busuu",
+              "name": "Busuu",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+              "id": "esaal",
+              "name": "Esaal",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+              "id": "oukla",
+              "name": "OUKLA",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+              "id": "fitness24",
+              "name": "Fitness24",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+              "id": "mini_me_games",
+              "name": "Mini Me Games",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+            },
+            {
+              "id": "deeny",
+              "name": "Deeny",
+              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
             }
           ]
         }
@@ -294,8 +408,30 @@
           "keywords": ["Huawei","p series", "mate", "honor", "chinois", "photographie", "harmony os"]
         },
         {
-          "id": "autres_marques",
-          "name": "Autres marques",
+          "id": "apple",
+          "name": "Apple",
+          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+        },
+        {
+          "id": "oppo",
+          "name": "Oppo",
+          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+        },
+        {
+          "id": "orange",
+          "name": "Orange",
+          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+        }
+        ,
+        {
+          "id": "tcl",
+          "name": "TCL",
+          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+        }
+        ,
+        {
+          "id": "autre_marques",
+          "name": "Autres Marques",
           "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
         }
       ]
