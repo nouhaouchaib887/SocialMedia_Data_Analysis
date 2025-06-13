@@ -245,7 +245,7 @@
     {
       "id": "divertissement",
       "name": "Divertissement", 
-      "keywords": ["loisirs", "entertainment", "média", "streaming", "contenu", "amusement", "digital", "plateforme"],
+      "keywords": ["loisirs", "entertainment", "service","média", "streaming", "contenu", "amusement", "digital", "plateforme"],
       "subcategories": [
         {
           "id": "gaming",
@@ -260,41 +260,41 @@
             {
               "id": "gameloft",
               "name": "Gameloft",
-              "keywords": ["jeux mobiles", "application", "arcade", "casual gaming", "développeur"]
+              "keywords": ["gameloft","Jeux Gameloft","game7","game30"]
             },
             {
               "id": "play_zone",
               "name": "PLAYZONE",
-              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+              "keywords": ["playzone", " 1900 jeux ", " rubrique e-sports"]
             },
             {
               "id": "apps_club",
               "name": "APPS CLUB",
-              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+              "keywords": ["apps club", "jeux premium", "plus de 1200 jeux"]
             }
             ,
             {
               "id": "garena_free_fire",
               "name": "Garena Free Fire",
-              "keywords": ["battle royale", "jeu d'action", "multijoueur", "esport", "mobile game"]
+              "keywords": ["Garena Free Fire", "pass diamants"]
             }
           ]
         },
         {
-          "id": "video_musique",
-          "name": "Vidéo & Musique", 
+          "id": "musique",
+          "name": "Musique", 
           "keywords": ["streaming audio", "playlist", "album", "artiste", "chanson", "podcasts"],
           "products": [
           
             {
               "id": "anghami",
               "name": "Anghami ",
-              "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
+              "keywords": ["anghami", "afrique nord", "catalogue oriental", "arabe"]
             },
             {
                 "id": "a_ghany",
                 "name": "A-GHANY",
-                "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
+                "keywords": ["a-ghany", "personnalisez votre tonalité"]
               }
            
           ]
@@ -308,7 +308,7 @@
             {
               "id": "strazplay_sport",
               "name": "Strazplay Sport",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["Strazplay Sport","événements sportifs en ligne"]
             }
           ]
         },

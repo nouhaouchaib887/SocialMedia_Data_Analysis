@@ -29,12 +29,12 @@
             {
               "id": "forfait_flexi_49",
               "name": "Forfait FLEXI 49 DH",
-              "keywords": ["petit forfait", "11 GO d'internet","1h d'appels","économique", "budget", "entrée de gamme", "49 dirhams"]
+              "keywords": ["49 dirhams","petit forfait", "11 GO d'internet","1h d'appels","économique", "budget", "entrée de gamme"]
             },
             {
               "id": "forfait_99",
               "name": "Forfait 99 DH",
-              "keywords": ["forfait moyen", "intermédiaire", "milieu de gamme", "99 dirhams" ,"18 ou 25 GO d'internet","1h ou 5h d'appels"]
+              "keywords": ["99 dirhams","forfait moyen", "intermédiaire", "milieu de gamme" ,"18 ou 25 GO d'internet","1h ou 5h d'appels"]
             },
             
             {
@@ -147,7 +147,7 @@
               {
                 "id": "forfait_100+",
                 "name": "Forfait 100+ DH",
-                "keywords": ["Supérieur à 100 DH"]
+                "keywords": ["à partir de 100 DH"]
               }
             ]
           }
@@ -508,7 +508,7 @@
         {
           "id": "recharges_internet",
           "name": "Recharges Internet", 
-          "keywords": ["data", "internet", "*3","étoile 3","mégabytes", "gigabytes", "surf", "navigation", "web"],
+          "keywords": ["data", "internet", "*3","étoile 3","mégabytes", "gigabytes", "navigation", "web"],
           "products": [
             {
                 "id": "recharge_5",
@@ -817,7 +817,7 @@
                 {
                     "id": "recharge_internet_appels_illimites",
                     "name": "Recharge Internet et Appels Illimiés", 
-                    "keywords": ["drecharge internet et appels illimités","*33","etoile 33"],
+                    "keywords": ["recharge internet et appels illimités","*33","etoile 33"],
                     "products": [
                       {
                           "id": "recharge_300",
