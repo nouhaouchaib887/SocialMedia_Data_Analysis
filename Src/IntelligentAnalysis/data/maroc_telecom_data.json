@@ -91,6 +91,50 @@
                 "keywords": ["99 dirhams"]
               }
             ]
+          },
+          {
+            "id": "forfait_injoy",
+            "name": "Forfait iNJOY",
+            "keywords": ["nouvel opérateur","100% digital","personnalisable"],
+            "products": [
+              {
+                "id": "orfait_injoy_59",
+                "name": "Forfait iNJOY 59 DH",
+                "keywords": ["59 dirhams","max internet"]
+              },
+              {
+                "id": "orfait_injoy_70",
+                "name": "Forfait iNJOY 70 DH",
+                "keywords": ["70 dirhams","forfait équilibré"]
+              },
+              {
+                "id": "forfait_internet_99",
+                "name": "Forfait iNJOY 99 DH",
+                "keywords": ["99 dirhams","max internet"]
+              },
+              {
+                "id": "forfait_internet_120",
+                "name": "Forfait iNJOY 120 DH",
+                "keywords": ["120 dirhams","forfait equilibré"]
+              },
+              {
+                "id": "forfait_internet_149",
+                "name": "Forfait iNJOY 149 DH",
+                "keywords": ["149 dirhams","max internet"]
+              }
+              ,
+              {
+                "id": "forfait_internet_180",
+                "name": "Forfait iNJOY 180 DH",
+                "keywords": ["180 dirhams","forfait equilibré"]
+              }
+              ,
+              {
+                "id": "forfait_internet_199",
+                "name": "Forfait iNJOY 199 DH",
+                "keywords": ["199 dirhams","forfait equilibré"]
+              }
+            ]
           }
       ]
     },
@@ -315,33 +359,33 @@
         {
           "id": "pratique",
            "name": "Pratique", 
-          "keywords": ["football", "compétition", "match", "direct", "diffusion sportive", "championnat"],
+          "keywords": ["contenu en ligne","e-learning","apprenstissage en ligne","actualités"],
           "products": [
             {
               "id": "kidjo",
               "name": "Kidjo",
-              "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+              "keywords": ["Kidjo","enfants", "contenus éducatifs pour enfants"]
             },
             {
                 "id": "maktabati",
                 "name": "MAKTABATI",
-                "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+                "keywords": ["MAKTABATI","bibliothèque en ligne pour enfants"]
               },
             {
               "id": "busuu",
               "name": "Busuu",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["Bussuu","apprentissage de langues"]
             }
             ,
             {
               "id": "manhaj",
               "name": "Manhaj",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["Manhaj","apprentissage des sciences"]
             },
             {
                 "id": "facebook_text_only",
                 "name": "FACEBOOK TEXT ONLY",
-                "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+                "keywords": ["FACEBOOK TEXT ONLY","facebook en mode texte"]
               }
           ]
           
@@ -354,23 +398,23 @@
                 {
                     "id": "shahid",
                     "name": "Shahid",
-                    "keywords": ["playlist curated", "découverte musicale", "compilation", "thématique"]
+                    "keywords": ["shahid", "shahid mobile", "shahid VIP"]
                   },
                   {
                     "id": "vuz",
                     "name": "Vuz",
-                    "keywords": ["musique locale", "artistes marocains", "catalogue oriental", "arabe", "maghreb"]
+                    "keywords": ["Vuz", "VUZ 360°"]
                   }
               ,
               {
                 "id": "playvod",
                 "name": "PlayVOD",
-                "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+                "keywords": ["playvod","films, séries, dessins animés et documentaires"]
               },
               {
                   "id": "osn_plus",
                   "name": "OSN Plus",
-                  "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+                  "keywords": ["osn plus","séries, films, documentaires, contenus en arabe et pour enfants"]
                 }
                 
             ]
@@ -391,7 +435,7 @@
         {
             "id": "nokia",
             "name": "Nokia",
-            "keywords": ["Samsung","galaxy", "android", "coréen", "flagship", "pliable", "note", "s series"]
+            "keywords": ["Nokia", "robuste", "durable", "classique", "finlandais", "feature phone", "5G", "Android One", "HMD Global"]
           },
         {
           "id": "xiaomi",
@@ -401,66 +445,66 @@
         {
           "id": "apple",
           "name": "Apple",
-          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+          "keywords": ["Apple", "iPhone", "iOS", "Mac", "AirPods", "Apple Watch", "haut de gamme", "écosystème", "design", "sécurité", "innovation", "américain"]
         }
         ,
         {
           "id": "autre_marques",
           "name": "Autres Marques",
-          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+          "keywords": ["autre marque","oppo", "vivo", "realme", "oneplus", "apple","motorola", "marques diverses"]
         }
       ]
     },
     {
       "id": "recharges",
       "name": "Recharges", 
-      "keywords": ["*","star","etoile","crédit", "solde", "prépayé", "recharger", "carte", "coupon", "code"],
+      "keywords": ["solde", "*","star","etoile","crédit",  "prépayé", "recharger", "carte", "coupon", "code"],
       "subcategories": [
         {
           "id": "recharges_dirhams",
           "name": "Recharges Dirhams Multiples", 
-          "keywords": ["recharge classique", "dirhams", "crédit standard", "solde principal", "recharge normale"],
+          "keywords": ["recharge multiple","recharge x 22","recharge classique", "dirhams", "crédit standard", "solde principal", "recharge normale"],
           "products": [
             
             {
               "id": "recharge_30",
               "name": "Recharge 30 DH",
-              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+              "keywords": ["30 dirhams", "minimum"]
             }
             ,
             {
               "id": "recharge_50",
               "name": "Recharge 50 DH",
-              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+              "keywords": ["50 dirhams", "recharge moyenne"]
             }
             ,
             {
               "id": "recharge_100",
               "name": "Recharge 100 DH",
-              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+              "keywords": ["100 dirhams", "recharge moyenne"]
             }
             ,
             {
               "id": "recharge_200",
               "name": "Recharge 200 DH",
-              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+              "keywords": ["200 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
             }
           ]
         },
         {
-          "id": "recharges_appels",
-          "name": "Recharges Appels *22", 
-          "keywords": ["minutes", "appels", "voix", "communication", "bonus vocal"],
+          "id": "recharge_appels",
+          "name": "Recharge Appels *22", 
+          "keywords": ["recharge appel vers le national","*22","etoile 22","minutes", "appels", "voix", "communication", "bonus vocal"],
           "products": [
             {
               "id": "recharge_5",
               "name": "Recharge 5 DH",
-              "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+              "keywords": ["5 dirhams"]
             },
             {
               "id": "recharge_10",
               "name": "Recharge 10 DH",
-              "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              "keywords": ["10 dirhams"]
             }
           
 
@@ -469,66 +513,66 @@
         {
           "id": "recharges_internet",
           "name": "Recharges Internet *3", 
-          "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+          "keywords": ["*3","etoile 3","data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
           "products": [
             {
                 "id": "recharge_5",
                 "name": "recharge 5 DH",
-                "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                "keywords": ["5 dirhams"]
               },
               {
                 "id": "recharge_10",
                 "name": "recharge 10 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["10 dirhams"]
               },
               {
                 "id": "recharge_20",
                 "name": "recharge 20 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["20 dirhams"]
               },
               {
                 "id": "recharge_25",
                 "name": "recharge 25 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["25 dirhams"]
               },
               {
                 "id": "recharge_30",
                 "name": "recharge 30 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["30 dirhams"]
               },
               {
                 "id": "recharge_50",
                 "name": "recharge 50 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["50 dirhams"]
               }
               ,
               {
                 "id": "recharge_100",
                 "name": "recharge 100 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["100 dirhams"]
               }
               ,
               {
                 "id": "recharge_200",
                 "name": "recharge 200 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["200 dirhams"]
               },
               {
                 "id": "recharge_300",
                 "name": "recharge 300 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["300 dirhams"]
               }
               ,
               {
                 "id": "recharge_500",
                 "name": "recharge 500 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["500 dirhams"]
               }
               ,
               {
                 "id": "recharge_1000",
                 "name": "recharge 1000 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["1000 dirhams"]
               }
         
           ]
@@ -538,33 +582,33 @@
         {
           "id": "recharge_resaux_sociaux",
           "name": "Recharge Réseaux Sociaux", 
-          "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+          "keywords": ["*6","etoile 6","réseaux sociaux", "data social media"],
           "products": [
             {
                 "id": "recharge_5",
                 "name": "recharge 5 DH",
-                "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                "keywords": ["5 dirhams"]
               },
               {
                 "id": "recharge_10",
                 "name": "recharge 10 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["10 dirhams"]
               },
               {
                 "id": "recharge_20",
                 "name": "recharge 20 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["20 dirhams"]
               },
               {
                 "id": "recharge_30",
                 "name": "recharge 30 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["30 dirhams"]
               }
               ,
               {
                 "id": "recharge_50",
                 "name": "recharge 50 DH",
-                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                "keywords": ["50 dirhams"]
               }
             
             
@@ -573,104 +617,104 @@
           {
             "id": "recharge_roaming_etoile_7",
             "name": "Recharge Roaming *7", 
-            "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+            "keywords": ["*7","etoile 7", "roaming","offre complet","appels, sms et internet"],
             "products": [
               {
                   "id": "recharge_100",
                   "name": "recharge 100 DH",
-                  "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                  "keywords": ["100 dirhams"]
                 },
                 {
                   "id": "recharge_200",
                   "name": "recharge 200 DH",
-                  "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                  "keywords": ["200 dirhams"]
                 },
                   {
                     "id": "recharge_300",
                     "name": "recharge 300 DH",
-                    "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                    "keywords": ["300 dirhams"]
                   }
                 ]
             },
             {
                 "id": "recharge_roaming_etoile_77",
                 "name": "Recharge Roaming *77", 
-                "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+                "keywords": ["*77","etoile 77", "roaming en afrique","appels sms et internet"],
                 "products": [
                   {
                       "id": "recharge_300",
                       "name": "recharge 300 DH",
-                      "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                      "keywords": ["300 dirhams"]
                     },
                     {
                       "id": "recharge_665",
                       "name": "recharge 665 DH",
-                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      "keywords": ["665 dirhams"]
                     },
                       {
                         "id": "recharge_1200",
                         "name": "recharge 1200 DH",
-                        "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                        "keywords": ["1200 dirhams"]
                       }
                     ]
                 },
                 {
                     "id": "recharge_roaming_etoile_78",
                     "name": "Recharge Roaming *78", 
-                    "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+                    "keywords": ["*78","etoile 78", "roaming internet"],
                     "products": [
                         {
                             "id": "recharge_50",
                             "name": "recharge 50 DH",
-                            "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                            "keywords": ["50 dirhams"]
                           },
                       {
                           "id": "recharge_100",
                           "name": "recharge 100 DH",
-                          "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                          "keywords": ["100 dirhams"]
                         },
                         {
                           "id": "recharge_200",
                           "name": "recharge 200 DH",
-                          "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                          "keywords": ["200 dirhams"]
                         },
                           {
                             "id": "recharge_300",
                             "name": "recharge 300 DH",
-                            "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                            "keywords": ["300 dirhams"]
                           }
                         ]
                     },
                     {
                         "id": "recharge_roaming_etoile_8",
                         "name": "Recharge Roaming *8", 
-                        "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+                        "keywords": ["*8","etoile 8", "roaming partout"],
                         "products": [
                 
                           {
                               "id": "recharge_100",
                               "name": "recharge 100 DH",
-                              "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+                              "keywords": ["100 dirhams"]
                             },
                             {
                               "id": "recharge_200",
                               "name": "recharge 200 DH",
-                              "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                              "keywords": ["200 dirhams"]
                             },
                               {
                                 "id": "recharge_300",
                                 "name": "recharge 300 DH",
-                                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                                "keywords": ["300 dirhams"]
                               },
                               {
                                 "id": "recharge_665",
                                 "name": "recharge 665 DH",
-                                "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                                "keywords": ["665 dirhams"]
                               },
                                 {
                                   "id": "recharge_1200",
                                   "name": "recharge 1200 DH",
-                                  "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                                  "keywords": ["1200 dirhams"]
                                 }
                             ]
                         },
@@ -678,61 +722,61 @@
             {
                 "id": "recharge_appels_nationals_internationals",
                 "name": "Recharge Appels *4", 
-                "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+                "keywords": ["*4", "etoile 4", "appels nationals et internationals"],
                 "products": [
                   
                     {
                       "id": "recharge_20",
                       "name": "recharge 20 DH",
-                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      "keywords": ["20 dirhams"]
                     },
         
                     {
                       "id": "recharge_50",
                       "name": "recharge 50 DH",
-                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      "keywords": ["50 dirhams"]
                     }
                     ,
                     {
                       "id": "recharge_100",
                       "name": "recharge 100 DH",
-                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      "keywords": ["100 dirhams"]
                     }
                 ]
             },
             {
                 "id": "recharge_tout_en_un",
                 "name": "Recharge Appels *5", 
-                "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+                "keywords": ["*5", "etoile 5", "appels nationals internationals, internet et sms"],
                 "products": [
                   
                     {
                         "id": "recharge_5",
                         "name": "recharge 5 DH",
-                        "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                        "keywords": ["5 dirhams"]
                       },
           
                       {
                         "id": "recharge_10",
                         "name": "recharge 10 DH",
-                        "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                        "keywords": ["10 dirhams"]
                       },
                     {
                       "id": "recharge_20",
                       "name": "recharge 20 DH",
-                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      "keywords": ["20 dirhams"]
                     },
         
                     {
                       "id": "recharge_50",
                       "name": "recharge 50 DH",
-                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      "keywords": ["50 dirhams"]
                     }
                     ,
                     {
                       "id": "recharge_100",
                       "name": "recharge 100 DH",
-                      "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+                      "keywords": ["100 dirhams"]
                     }
                 ]
             }
@@ -740,5 +784,201 @@
         
       ]
     }
-  ]
+  ],
+    
+  "initiatives": [
+    {
+      "id": "mt_sport",
+      "name": "Maroc Telecom Sport",
+      "keywords": ["sponsoring", "football", "athlétisme", "rallye", "championnat"],
+      "events": [
+        {
+          "id": "mt_frmf_partnership",
+          "name": "Partenariat FRMF Football",
+          "keywords": ["sponsoring football", "Botola", "équipes nationales", "soutien clubs"],
+          "description": "Partenaire de la FRMF depuis 2000, investissant 162 M DH entre 2015–19, renouvellement à 33 M DH/an (2015–19) pour Botola, équipes nationales." 
+        },
+        {
+          "id": "mt_athletics_support",
+          "name": "Soutien Athlétisme",
+          "keywords": ["athlétisme", "Fédération royale athlétisme", "détection talents"],
+          "description": "Partenaire de la FRMA depuis 1999, pour développement de l'Institut National d’Athlétisme." 
+        },
+        {
+          "id": "mt_rallye_sponsor",
+          "name": "Sponsoring Rallye du Maroc",
+          "keywords": ["rallye", "sports mécaniques", "événement international"],
+          "description": "Maroc Telecom, sponsor principal du Rallye du Maroc, au niveau national et africain." 
+        }
+      ]
+    },
+    {
+      "id": "mt_education_inclusion",
+      "name": "Inclusion numérique & éducation",
+      "keywords": ["fracture numérique", "rural", "formation", "écoles connectées"],
+      "events": [
+        {
+          "id": "mt_digital_inclusion",
+          "name": "Réduction fracture numérique",
+          "keywords": ["Pacte service universel", "4 414 localités rurales", "couverture réseau"],
+          "description": "Couverture de 4 414 localités rurales en 2010 via le PACTE (service universel)." 
+        },
+        {
+          "id": "mt_mt2e_program",
+          "name": "Programme MT2E (Entreprendre & Emploi)",
+          "keywords": ["jeunes promoteurs", "INDH", "prêts sans intérêts", "100 000 DH max"],
+          "description": "Participation à hauteur de 1 M € au programme MT2E depuis 2005, soutien jeunes entrepreneurs." 
+        }
+      ]
+    },
+    {
+      "id": "mt_rse_env",
+      "name": "RSE & Environnement",
+      "keywords": ["RSE", "recyclage", "énergies renouvelables", "reboisement", "Plages Propres"],
+      "events": [
+        {
+          "id": "mt_recycling",
+          "name": "Recyclage & déchets",
+          "keywords": ["papier recyclé", "emballages biodégradables"],
+          "description": "Utilisation de matériaux recyclables depuis 2002 et abandon plastique dans agences." 
+        },
+        {
+          "id": "mt_solar_sites",
+          "name": "Énergies renouvelables sur sites",
+          "keywords": ["solaire", "650 sites solaires"],
+          "description": "650 sites techniques alimentés en solaire à fin juin 2014." 
+        },
+        {
+          "id": "mt_reforestation_maamora",
+          "name": "Reboisement Maâmora",
+          "keywords": ["reforestation", "forêt de Maâmora"],
+          "description": "Reboisement de la forêt de Maâmora en 1999." 
+        },
+        {
+          "id": "mt_plages_propres",
+          "name": "Programme Plages Propres",
+          "keywords": ["plages propres", "Fondation Mohammed VI", "Pavillon Bleu"],
+          "description": "Soutien au programme 'Plages Propres' via la Fondation Mohammed VI." 
+        },
+        {
+          "id": "mt_compensation_carbone",
+          "name": "Compensation carbone & écoles rurales",
+          "keywords": ["compensation CO₂", "fondation environnement", "écoles rurales"],
+          "description": "Financement de projets de compensation carbone, notamment pour alimenter écoles rurales en énergie solaire." 
+        }
+      ]
+    }
+  ],
+  "common_topics": [
+      {
+        "id": "cadeaux_promotions",
+        "name": "Cadeaux & Promotions",
+        "keywords": ["Fidelio Jawal", "cadeaux","peomotions"],
+        "subtopics": [
+          {
+            "id": "cadeau_dimanche",
+            "name": "Cadeau de dimanche",
+            "keywords": ["cadeau", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
+          }
+        ]
+      },
+      {
+        "id": "annonce_urgente",
+        "name": "Annonces Urgentes",
+        "subtopics": [
+          {
+            "id": "incident_panne",
+            "name": "Incidents & Pannes",
+            "keywords": ["incident", "panne", "problème réseau", "connexion interrompue", "service indisponible"]
+          },
+          {
+            "id": "intervention_maintenance",
+            "name": "Maintenance Réseau",
+            "keywords": ["travaux", "maintenance", "intervention", "mise à jour", "amélioration réseau"]
+          },
+          {
+            "id": "securite_fraude",
+            "name": "Sécurité & Fraudes",
+            "keywords": ["fraude", "arnaque", "sécurité", "vigilance", "message suspect"]
+          }
+        ]
+      },
+      {
+        "id": "engagement_client",
+        "name": "Engagement Client",
+        "subtopics": [
+          {
+            "id": "felicitations_voeux",
+            "name": "Félicitations & Vœux",
+            "keywords": ["aïd", "moubarak", "félicitations", "ramadan", "nouvel an", "voeux IAM","jour international"]
+          },
+          {
+            "id": "competitions",
+            "name": "Compétitions & Jeux",
+            "keywords": ["jeu concours", "gagner", "tirage au sort", "challenge", "participation"]
+          },
+          {
+            "id": "remerciement_clients",
+            "name": "Remerciements Clients",
+            "keywords": ["merci", "clients fidèles", "engagement", "IAM vous remercie", "satisfaction"]
+          }
+        ]
+      },
+      {
+        "id": "CX_digital",
+        "name": "CX & Connectivité Digitale",
+        "subtopics": [
+          {
+            "id": "app_mobile",
+            "name": "Applications mobiles",
+            "keywords": ["app", "mobile", "gestion compte", "espace client"],
+            "products": [
+                {
+              "id": "mon_espace_mt",
+            "name": "Mon Espace MT",
+            "keywords": ["Mon Espace MT","Gestion de ligne", "application officielle"]
+            },
+            {
+            "id": "injoy",
+              "name": "iNJOY",
+              "keywords": ["iNJOY", "forfaits iNJOY"]
+              }
+            ]
+        },
+          {
+            "id": "site_web",
+            "name": "Sites web / Espace client en ligne",
+            "keywords": ["site web", "espace client", "web selfcare"],
+            "products": [{
+                "id": "iam.ma",
+                  "name": "https://www.iam.ma/",
+                  "keywords": ["maroc telecom", "site maroc telecom officiel"]
+                  },
+                  {
+                    "id": "injoy.ma",
+                      "name": "https://www.injoy.ma/",
+                      "keywords": ["maroc telecom", "forfaits injoy"]
+                      }
+                ]
+        
+            }
+        
+        ]
+      },
+      {
+        "id": "actualite_maroc_telecom",
+        "name": "Actualités Maroc Telecom",
+        "keywords": ["news", "nouvelles", "information", "communiqué", "presse", "annonce", "événement"],
+        "subtopics": [
+          "nouveau produit",
+          "changement direction",
+          "résultat financier",
+          "expansion géographique"
+        ]
+      }
+      
+      
+    ]
 }
+
+  

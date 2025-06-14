@@ -8,7 +8,7 @@
         {
           "id": "forfaits_yo",
           "name": "Forfaits Yo", 
-          "keywords": ["jeunes", "étudiant", "ado", "adolescent", "économique", "social media", "réseaux sociaux"],
+          "keywords": ["forfait yo","jeunes", "étudiant", "ado", "adolescent", "économique", "social media", "réseaux sociaux"],
           "products": [
             {
               "id": "yo_49",
@@ -35,7 +35,7 @@
         {
           "id": "forfaits_yoxo",
           "name": "Forfaits Yoxo", 
-          "keywords": ["digital", "personnalisable", "flexible", "app", "application mobile", "sur mesure"],
+          "keywords": ["yoxo","digital", "personnalisable", "flexible", "app", "application mobile", "sur mesure"],
           "products": [
             {
               "id": "yoxo_50",
@@ -319,52 +319,52 @@
         {
           "id": "life_style_e_learning",
            "name": "Life Style & E-Learning", 
-          "keywords": ["football", "compétition", "match", "direct", "diffusion sportive", "championnat"],
+          "keywords": ["contenu educatif", "e-learning"],
           "products": [
             {
               "id": "manhaj",
               "name": "Manhaj",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["Manhaj","apprentissage des sciences"]
             },
             {
               "id": "kidjo",
               "name": "Kidjo",
-              "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
+              "keywords": ["Kidjo","enfants", "contenus éducatifs pour enfants"]
             },
             {
               "id": "youscribe",
               "name": "YouScribe",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["YouScribe","magazines", "livres", "journaux"]
             },
             {
               "id": "busuu",
               "name": "Busuu",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["Bussuu","apprentissage de langues"]
             },
             {
               "id": "esaal",
               "name": "Esaal",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["Esaal"]
             },
             {
               "id": "oukla",
               "name": "OUKLA",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["oukla","cuisine"]
             },
             {
               "id": "fitness24",
               "name": "Fitness24",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["fitness24","sport fitness"]
             },
             {
               "id": "mini_me_games",
               "name": "Mini Me Games",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["mini me games"]
             },
             {
               "id": "deeny",
               "name": "Deeny",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
+              "keywords": ["Deeny"]
             }
           ]
         }
@@ -410,29 +410,29 @@
         {
           "id": "apple",
           "name": "Apple",
-          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+          "keywords": ["Apple", "iPhone", "iOS", "Mac", "AirPods", "Apple Watch", "haut de gamme", "écosystème", "design", "sécurité", "innovation", "américain"]
         },
         {
           "id": "oppo",
           "name": "Oppo",
-          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+          "keywords": ["oppo"]
         },
         {
           "id": "orange",
           "name": "Orange",
-          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+          "keywords": ["orange"]
         }
         ,
         {
           "id": "tcl",
           "name": "TCL",
-          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+          "keywords": ["tcl"]
         }
         ,
         {
           "id": "autre_marques",
           "name": "Autres Marques",
-          "keywords": ["oppo", "vivo", "realme", "oneplus", "apple", "nokia", "motorola", "marques diverses"]
+          "keywords": ["vivo", "realme", "oneplus", "nokia", "motorola", "marques diverses"]
         }
       ]
     },
@@ -444,21 +444,21 @@
         {
           "id": "recharges_dirhams",
           "name": "Recharges Dirhams Multiples", 
-          "keywords": ["recharge classique", "dirhams", "crédit standard", "solde principal", "recharge normale"],
+          "keywords": ["recharge multiple","recharge classique", "dirhams", "crédit standard", "solde principal", "recharge normale"],
           "products": [
             {
-              "id": "recharge_x10",
-              "name": "X10",
+              "id": "recharge_10",
+              "name": "recharge 10 DH",
               "keywords": ["10 dirhams", "petite recharge", "dépannage", "minimum"]
             },
             {
-              "id": "recharge_x15",
-              "name": "X15",
+              "id": "recharge_15",
+              "name": "recharge 15 DH",
               "keywords": ["15 dirhams", "recharge moyenne", "standard", "classique"]
             },
             {
-              "id": "recharge_x25",
-              "name": "X25",
+              "id": "recharge_25",
+              "name": "recharge 25 DH",
               "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
             }
           ]
@@ -470,13 +470,13 @@
           "products": [
             {
               "id": "recharge_etoile1",
-              "name": "*1",
-              "keywords": ["code court", "bonus appels", "recharge rapide", "minutes"]
+              "name": "recharge *1",
+              "keywords": ["*1", "etoile 1"]
             },
             {
               "id": "recharge_etoile22",
-              "name": "*22",
-              "keywords": ["code court", "bonus appels premium", "minutes illimitées", "longue durée"]
+              "name": "recharge *22",
+              "keywords": ["*22", "etoile 22"]
             }
           ]
         },
@@ -487,17 +487,17 @@
           "products": [
             {
               "id": "recharge_etoile3",
-              "name": "*3",
+              "name": "recharge *3",
               "keywords": ["*3","forfait data", "internet mobile", "navigation", "petit volume"]
             },
             {
               "id": "recharge_etoile6",
-              "name": "*6",
+              "name": "recharge *6",
               "keywords": ["*6","forfait data", "internet mobile", "navigation", "volume moyen"]
             },
             {
               "id": "recharge_etoile7",
-              "name": "*7",
+              "name": "recharge *7",
               "keywords": ["*7","forfait data", "internet mobile", "navigation", "grand volume"]
             }
           ]
@@ -509,7 +509,7 @@
           "products": [
             {
               "id": "recharge_etoile2",
-              "name": "*2",
+              "name": "recharge *2",
               "keywords": ["forfait combiné", "minutes+data", "combo", "pack complet", "tout en un"]
             }
           ]
@@ -521,7 +521,7 @@
           "products": [
             {
               "id": "recharge_etoile4",
-              "name": "*4",
+              "name": "recharge *4",
               "keywords": ["appels internationaux", "minutes international", "étranger", "international"]
             }
           ]
@@ -533,7 +533,7 @@
           "products": [
             {
               "id": "recharge_etoile8",
-              "name": "*8",
+              "name": "recharge *8",
               "keywords": ["illimité orange", "on-net", "appels illimités", "réseau orange"]
             }
           ]
@@ -692,8 +692,8 @@
       ]
     },
     {
-      "id": "orange_solidarite",
-      "name": "Orange Solidarité",
+      "id": "khatwat_khayr",
+      "name": "Khatwat Khir",
       "keywords": ["RSE", "responsabilité sociale", "aide", "communauté", "soutien", "solidarité"],
       "events": [
         {
@@ -736,81 +736,141 @@
       ]
     }
   ],
-  
   "common_topics": [
-    {
-      "id": "assistance_technique",
-      "name": "Assistance technique",
-      "keywords": ["support", "dépannage", "aide", "problème technique", "assistance", "SAV", "solution"],
-      "subtopics": [
-        "configuration appareil",
-        "réinitialisation mot de passe",
-        "installation applications",
-        "mise à jour logicielle"
-      ]
-    },
-    {
-      "id": "demande_information",
-      "name": "Demandes d'information",
-      "keywords": ["renseignement", "info", "question", "détail", "précision", "clarification", "demande"],
-      "subtopics": [
-        "tarifs",
-        "disponibilité services",
-        "comparaison offres",
-        "éligibilité"
-      ]
-    },
-    {
-      "id": "reclamation",
-      "name": "Réclamations",
-      "keywords": ["plainte", "mécontentement", "problème", "litige", "insatisfaction", "contentieux", "désaccord"],
-      "subtopics": [
-        "service non fourni",
-        "engagement non respecté",
-        "qualité insuffisante",
-        "délai excessif"
-      ]
-    },
-    {
-      "id": "procedure_administrative",
-      "name": "Procédures administratives",
-      "keywords": ["démarche", "formalité", "paperasse", "administration", "processus", "documentation"],
-      "subtopics": [
-        "changement coordonnées",
-        "résiliation",
-        "souscription",
-        "portabilité numéro"
-      ]
-    },
-    {
-      "id": "actualite_orange",
-      "name": "Actualités Orange",
-      "keywords": ["news", "nouvelles", "information", "communiqué", "presse", "annonce", "événement"],
-      "subtopics": [
-        "nouveau produit",
-        "changement direction",
-        "résultat financier",
-        "expansion géographique"
-      ]
-    },
-    {
-      "id": "emploi_carriere",
-      "name": "Emploi et carrière",
-      "keywords": ["job", "recrutement", "travail", "embauche", "poste", "opportunité", "carrière"],
-      "subtopics": [
-        "offre d'emploi",
-        "stage",
-        "alternance",
-        "recrutement spécialisé"
-      ]
-    },
-    {
-      "id": "reseau_boutique",
-      "name": "Réseau et boutiques",
-      "keywords": ["magasin", "point de vente", "agence", "shop", "store", "physique", "emplacement"],
-      "subtopics": [
-        "horaire boutique"
-      ]
-    }
-  ]
+      {
+        "id": "cadeaux_promotions",
+        "name": "Cadeaux & Promotions",
+        "keywords": ["Cadeaux Orange merci", "cadeaux","peomotions"],
+        "subtopics": [
+          {
+            "id": "cadeau_du_vendredi",
+            "name": "Cadeau du vendredi",
+            "keywords": ["cadeau","vendredi", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
+          },
+          {
+            "id": "cadeau_anniversaire",
+            "name": "Cadeau d’anniversaire",
+            "keywords": ["cadeau", "anniversaire "]
+          },
+          {
+            "id": "smartphones",
+            "name": "Smartphones",
+            "keywords": ["réductions sur la gamme de Smartphone","réductions","smartphone"]
+          },
+          {
+            "id": "evenements",
+            "name": "Evènements",
+            "keywords": ["event","accès aux évènements","e-ticket"]
+          },
+          {
+            "id": "cineday",
+            "name": "Cinéday",
+            "keywords": ["cinéma", "ticket cinéma"]
+          }
+          ,
+          {
+            "id": "tombola_voyage",
+            "name": "Tombola voyage",
+            "keywords": ["tombla", "voyage"]
+          }
+        ]
+      },
+      {
+        "id": "annonce_urgente",
+        "name": "Annonces Urgentes",
+        "subtopics": [
+          {
+            "id": "incident_panne",
+            "name": "Incidents & Pannes",
+            "keywords": ["incident", "panne", "problème réseau", "connexion interrompue", "service indisponible"]
+          },
+          {
+            "id": "intervention_maintenance",
+            "name": "Maintenance Réseau",
+            "keywords": ["travaux", "maintenance", "intervention", "mise à jour", "amélioration réseau"]
+          },
+          {
+            "id": "securite_fraude",
+            "name": "Sécurité & Fraudes",
+            "keywords": ["fraude", "arnaque", "sécurité", "vigilance", "message suspect"]
+          }
+        ]
+      },
+      {
+        "id": "engagement_client",
+        "name": "Engagement Client",
+        "subtopics": [
+          {
+            "id": "felicitations_voeux",
+            "name": "Félicitations & Vœux",
+            "keywords": ["aïd", "moubarak", "félicitations", "ramadan", "nouvel an", "voeux IAM","jour international"]
+          },
+          {
+            "id": "competitions",
+            "name": "Compétitions & Jeux",
+            "keywords": ["jeu concours", "gagner", "tirage au sort", "challenge", "participation"]
+          },
+          {
+            "id": "remerciement_clients",
+            "name": "Remerciements Clients",
+            "keywords": ["merci", "clients fidèles", "engagement", "IAM vous remercie", "satisfaction"]
+          }
+        ]
+      },
+      {
+        "id": "CX_digital",
+        "name": "CX & Connectivité Digitale",
+        "keywords" : ["expérience client", "interface digital","apps","sites web"],
+        "subtopics": [
+          {
+            "id": "app_mobile",
+            "name": "Applications mobiles",
+            "keywords": ["app", "mobile", "gestion compte", "espace client"],
+            "products": [
+                {
+              "id": "max_it",
+            "name": "Max it",
+            "keywords": ["Max it", "Gestion de ligne", "super app"]
+            },
+            {
+            "id": "orange_et_moi",
+              "name": "Orange et moi",
+              "keywords": ["Orange et moi", "Gestion de ligne", "super app"]
+              }
+            ]
+        },
+          {
+            "id": "site_web",
+            "name": "Sites web / Espace client en ligne",
+            "keywords": ["site web", "espace client", "web selfcare"],
+            "products": [{
+                "id": "orange.ma",
+                  "name": "https://www.orange.ma/",
+                  "keywords": ["orange", "site orange officiel"]
+                  },
+                  {
+                    "id": "yoxo.ma",
+                      "name": "https://www.yoxo.ma/",
+                      "keywords": ["orange", "site orange officiel"]
+                      }
+                ]
+        
+            }
+        
+        ]
+      },
+      {
+        "id": "actualite_orange",
+        "name": "Actualités Orange",
+        "keywords": ["news", "nouvelles", "information", "communiqué", "presse", "annonce", "événement"],
+        "subtopics": [
+          "nouveau produit",
+          "changement direction",
+          "résultat financier",
+          "expansion géographique"
+        ]
+      }
+    ]
+  
+  
 }

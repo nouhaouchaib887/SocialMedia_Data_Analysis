@@ -563,8 +563,8 @@
           ]
         },
         {
-          "id": "recharges_koulchi",
-          "name": "Recharges Koulchi", 
+          "id": "recharge_koulchi",
+          "name": "Recharge Koulchi", 
           "keywords": ["recharge koulchi","*2","etoile 2", "recharge tout en un"],
           "products": [
             {
@@ -608,8 +608,8 @@
           ]
         },
         {
-          "id": "recharges_internationales",
-          "name": "Recharges Internationales", 
+          "id": "recharge_internationales",
+          "name": "Recharge Internationales", 
           "keywords": ["*4","etoile 4","international", "étranger", "appels internationaux", "longue distance", "cross-border"],
           "products": [
 
@@ -835,5 +835,214 @@
         
       ]
     }
-  ]
-}
+  ],
+  "initiatives": [
+    {
+        "id": "la_botola_pro",
+        "name": "la Botola Pro",
+        "keywords": ["football national","Football Marocain","achraf hakimi","incubateur","open innovation","co-création"]
+        
+      },
+    {
+      "id": "inwi_innov",
+      "name": "inwi Innov",
+      "keywords": ["entrepreneur","startup","innovation","incubateur","open innovation","co-création"],
+      "events": [
+        {
+          "id": "inwi_innov_connect",
+          "name": "inwi Innov Connect",
+          "keywords": ["workshop","collaboration","startups","IA","cybersécurité","PME"]
+        },
+        {
+          "id": "accompagnement_startups_apebi",
+          "name": "Programme PME Tech (APEBI)",
+          "keywords": ["PME","technologie","mentorat","réseau","Digital Morocco 2030"]
+        },
+        {
+          "id": "accelerateur_inwi_innov",
+          "name": "Accélérateur inwi Innov",
+          "keywords": ["incubation","mentor","financement","startups","croissance"]
+        }
+      ]
+    },
+    {
+      "id": "inwi_digital_education",
+      "name": "inwi Digital Éducation",
+      "keywords": ["numérique","formation","inclusion","rural","e‑learning"],
+      "events": [
+        {
+          "id": "classes_connectees_dir_iddik",
+          "name": "Classes Connectées Dir Iddik",
+          "keywords": ["école","rural","salle multimédia","inclusion numérique","RSE"]
+        },
+        {
+          "id": "formation_pme_numérique",
+          "name": "Formation PME Numérique",
+          "keywords": ["transformation digitale","PME","cloud","cybersécurité"]
+        }
+      ]
+    },
+    {
+      "id": "inwi_rse",
+      "name": "inwi RSE",
+      "keywords": ["RSE","communauté","responsabilité","solidarité","environnement"],
+      "events": [
+        {
+          "id": "inclusion_numérique_rural",
+          "name": "Inclusion numérique rural",
+          "keywords": ["fracture numérique","rural","éducation","Dir Iddik"]
+        },
+        {
+          "id": "action_environnement_inwi",
+          "name": "Actions Environnementales",
+          "keywords": ["écologie","green","recyclage","développement durable"]
+        },
+        {
+          "id": "dir_iddik_communautaire",
+          "name": "Dir Iddik Communautaire",
+          "keywords": ["bénévolat","plateforme","solidarité","associatif"]
+        }
+      ]
+    },
+    {
+      "id": "inwi_connectivity",
+      "name": "inwi Connectivité",
+      "keywords": ["connectivité","fibre","5G","cloud","cybersécurité","B2B"],
+      "events": [
+        {
+          "id": "partenariat_fibre_5g",
+          "name": "Partenariat Fibre & 5G",
+          "keywords": ["fibre","5G","réseau","infrastructure","joint‑venture"]
+        },
+        {
+          "id": "partenariat_apb_b2b",
+          "name": "Programme B2B APB",
+          "keywords": ["banques","numérique","PME","cybersécurité","cloud"]
+        }
+      ]
+    }
+  ],
+    "common_topics": [
+      {
+        "id": "cadeaux_promotions",
+        "name": "Cadeaux & Promotions",
+        "keywords": ["My inwi Fidélité", "cadeaux","peomotions"],
+        "subtopics": [
+          {
+            "id": "my_kdo_telco",
+            "name": "My KDO Telco",
+            "keywords": ["cadeau", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
+          },
+          {
+            "id": "my_deals",
+            "name": "My Deals",
+            "keywords": ["jour de réductions",""]
+          },
+          {
+            "id": "my_events",
+            "name": "My Events",
+            "keywords": ["event","accès aux évènements","e-ticket"]
+          },
+          {
+            "id": "my_cine",
+            "name": "My Ciné",
+            "keywords": ["cinéma", "ticket cinéma"]
+          }
+        ]
+      },
+      {
+        "id": "annonce_urgente",
+        "name": "Annonces Urgentes",
+        "subtopics": [
+          {
+            "id": "incident_panne",
+            "name": "Incidents & Pannes",
+            "keywords": ["incident", "panne", "problème réseau", "connexion interrompue", "service indisponible"]
+          },
+          {
+            "id": "intervention_maintenance",
+            "name": "Maintenance Réseau",
+            "keywords": ["travaux", "maintenance", "intervention", "mise à jour", "amélioration réseau"]
+          },
+          {
+            "id": "securite_fraude",
+            "name": "Sécurité & Fraudes",
+            "keywords": ["fraude", "arnaque", "sécurité", "vigilance", "message suspect"]
+          }
+        ]
+      },
+      {
+        "id": "engagement_client",
+        "name": "Engagement Client",
+        "subtopics": [
+          {
+            "id": "felicitations_voeux",
+            "name": "Félicitations & Vœux",
+            "keywords": ["aïd", "moubarak", "félicitations", "ramadan", "nouvel an", "voeux IAM","jour international"]
+          },
+          {
+            "id": "competitions",
+            "name": "Compétitions & Jeux",
+            "keywords": ["jeu concours", "gagner", "tirage au sort", "challenge", "participation"]
+          },
+          {
+            "id": "remerciement_clients",
+            "name": "Remerciements Clients",
+            "keywords": ["merci", "clients fidèles", "engagement", "IAM vous remercie", "satisfaction"]
+          }
+        ]
+      },
+          {
+            "id": "CX_digital",
+            "name": "CX & Connectivité Digitale",
+            "subtopics": [
+              {
+                "id": "app_mobile",
+                "name": "Applications mobiles",
+                "keywords": ["app", "mobile", "gestion compte", "espace client"],
+                "products": [
+                    {
+                  "id": "my_inwi",
+                "name": "My inwi",
+                "keywords": ["My inwi", "Gestion de ligne", "application officielle"]
+                },
+                {
+                "id": "win_by_inwi",
+                  "name": "win by inwi",
+                  "keywords": ["win by inwi", "Gforfaits win"]
+                  }
+                ]
+            },
+              {
+                "id": "site_web",
+                "name": "Sites web / Espace client en ligne",
+                "keywords": ["site web", "espace client", "web selfcare"],
+                "products": [{
+                    "id": "inwi.ma",
+                      "name": "https://www.inwi.ma/",
+                      "keywords": ["inwi", "site inwi maroc officiel"]
+                      },
+                      {
+                        "id": "win.ma",
+                          "name": "https://www.win.ma/",
+                          "keywords": ["inwi", "forfaits win"]
+                          }
+                    ]
+            
+                }
+            
+            ]
+          },
+          {
+            "id": "actualite_inwi",
+            "name": "Actualités Inwi",
+            "keywords": ["news", "nouvelles", "information", "communiqué", "presse", "annonce", "événement"],
+            "subtopics": [
+              "nouveau produit",
+              "changement direction",
+              "résultat financier",
+              "expansion géographique"
+            ]
+          }
+        ]
+      }
