@@ -1,0 +1,3 @@
+api_keys:
+  apify: "your_apify_key"
+  gemini: "your_api_key"

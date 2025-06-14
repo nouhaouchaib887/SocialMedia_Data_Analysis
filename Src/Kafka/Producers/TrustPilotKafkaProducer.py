@@ -1,5 +1,4 @@
 from collectors.Trustpilot.TrustpilotCollector import TrustpilotCollector
-from Kafka.BaseKafkaProducer import BaseKafkaProducer
 import time
 from datetime import datetime
 from confluent_kafka import Producer
