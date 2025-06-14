@@ -1,0 +1,135 @@
+{
+  "themes": [
+    {
+      "id": "informations_interactions",
+      "name": "Informations & Interactions client",
+      "keywords":[
+        "renseignement", "info", "question", "détail", "précision", "clarification", "demande", "administration", "processus"
+      ],
+      "subthemes": [
+        {
+          "id": "demande_information",
+          "name": "Demandes d’information",
+          "keywords": ["renseignement", "info", "question", "détail", "précision", "clarification", "demande"],
+          "subcategories": [
+        { "id": "tarifs_offres", "name": "Tarifs et offres" },
+        { "id": "eligibilite_couverture", "name": "Éligibilité et couverture" },
+        { "id": "disponibilite_services", "name": "Disponibilité des services" },
+        { "id": "comparaison_offres", "name": "Comparaison d’offres" }]
+        },
+        {
+          "id": "procedure_administrative",
+          "name": "Procédures administratives",
+          "keywords": ["démarche", "formalité", "paperasse", "administration", "processus", "documentation"],
+          "subcategories": [
+        { "id": "souscription", "name": "Souscription" },
+        { "id": "resiliation", "name": "Résiliation" },
+        { "id": "portabilite_numero", "name": "Portabilité du numéro" },
+        { "id": "changement_coordonnees", "name": "Changement de coordonnées" }
+      ]
+
+        },
+        {
+          "id": "emploi_carriere",
+          "name": "Emploi et opportunités",
+          "subcategories": [
+        { "id": "offres_emploi", "name": "Offres d’emploi" },
+        { "id": "stage_alternance", "name": "Stage / alternance" },
+        { "id": "recrutement_specialise", "name": "Recrutement spécialisé" }
+      ]
+        }
+      ]
+    },
+    {
+      "id": "reclamations",
+      "name": "Réclamations & Insatisfactions",
+      "keywords" : [ "plainte", "mécontentement", "problème", "litige", "insatisfaction", "contentieux", "désaccord"],
+      "subthemes": [
+        {
+          "id": "reclamations_generales",
+          "name": "Réclamations générales",
+          "keywords": ["plainte", "mécontentement", "problème", "litige", "insatisfaction", "contentieux", "désaccord"],
+          "subcategories": [
+            { "id": "service_non_fourni", "name": "Service non fourni" },
+            { "id": "engagement_non_respecte", "name": "Engagement non respecté" },
+            { "id": "qualite_insuffisante", "name": "Qualité insuffisante" },
+            { "id": "delai_excessif", "name": "Délai excessif" }
+          ]
+        },
+        {
+          "id": "facturation",
+          "name": "Problèmes de facturation",
+          "keywords": ["facture", "paiement", "débit", "comptabilité", "solde", "relevé"],
+          "subcategories": [
+            { "id": "surfacturation", "name": "Surfacturation" },
+            { "id": "paiement_rejete", "name": "Paiement rejeté" },
+            { "id": "erreur_montant", "name": "Erreur de montant" }
+          ]
+        },
+        {
+          "id": "service_client",
+          "name": "Problèmes de service client",
+          "keywords": ["assistance", "support", "relation client", "SAV", "conseil", "aide"],
+          "subcategories": [
+            { "id": "temps_attente", "name": "Temps d’attente" },
+            { "id": "application_defectueuse", "name": "Application défectueuse" },
+            { "id": "support_lent", "name": "Support saturé / lent" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "problemes_techniques",
+      "name": "Problèmes techniques & Dysfonctionnements",
+      "keywords":[ "réseau", "signal", "couverture", "antenne", "4G", "5G", "connexion mobile", "panne"],
+      "subthemes": [
+        {
+          "id": "reseau_mobile",
+          "name": "Réseau mobile",
+          "keywords": ["réseau", "signal", "couverture", "antenne", "4G", "5G", "connexion mobile", "panne"],
+          "subcategories": [
+            { "id": "couverture_insuffisante", "name": "Couverture insuffisante" },
+            { "id": "congestion_reseau", "name": "Congestion du réseau" },
+            { "id": "coupure_totale", "name": "Coupure totale" }
+          ]
+        },
+        {
+          "id": "internet_fixe",
+          "name": "Internet fixe",
+          "keywords": ["box", "modem", "connexion fixe", "wifi", "adsl", "fibre", "panne internet"],
+          "details": ["panne fibre", "panne ADSL", "problème Dar Box", "débit réduit"],
+          "subcategories": [
+            { "id": "panne_fibre", "name": "Panne fibre optique" },
+            { "id": "panne_adsl", "name": "Panne ADSL" },
+            { "id": "probleme_darbox", "name": "Problème avec la Dar Box" },
+            { "id": "debit_reduit", "name": "Débit réduit / lenteur" }
+          ]
+        },
+        {
+          "id": "service",
+          "name": "Service ",
+          "keywords": ["chaînes", "IPTV", "streaming ", "décodeur", "box TV"],
+          "subcategories": [
+            { "id": "indisponibilité", "name": "Indisponibilité de service" },
+            { "id": "qualité", "name": "Problème de qualité " }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canal_boutiques",
+      "name": "Canal & accessibilité",
+      "keywords":[ "magasin", "point de vente", "agence", "shop", "store"],
+      "subthemes": [
+        {
+          "id": "reseau_boutique",
+          "name": "Réseau et boutiques",
+          "keywords": ["magasin", "point de vente", "agence", "shop", "store", "physique", "emplacement"],
+          "subcategories": [
+        { "id": "horaire_boutique", "name": "Horaires de boutique" },
+        { "id": "emplacement_boutique", "name": "Emplacement boutique" }]
+        }
+      ]
+    }
+  ]
+}
