@@ -397,7 +397,7 @@ def main():
     # Initialize producer
     producer = TiktokProducer(
         kafka_config=kafka_config,
-        apify_token="apify_api_YrPT59TKw8olQkGrrCIpP8pgf6lbNs2KWpnv",
+        apify_token="",
         brand_name="orangemaroc",
         profile_name="orangemaroc",
         topic="mon_topic" , # Single topic for posts with comments

@@ -399,7 +399,7 @@ def main():
     # Example :  Search by #brand name
     producer_search= FacebookSearchProducer(
         kafka_config=kafka_config,
-        apify_token="apify_api_ROxzINwaOpN3sv1p8nwxDriasVbn1a4CcGZe",
+        apify_token="",
         brand_name="orangemaroc",
         search_query="#orangemaroc",
         topic="facebook-search-data",

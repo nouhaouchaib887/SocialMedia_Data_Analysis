@@ -8,9 +8,9 @@ from typing import Dict, Any, List, Optional
 
 
 # Configuration de l'API Gemini (Google)
-api_key1 = "AIzaSyCLXlR-Hp0uUpZZxpUG02wlepPyyP80syA"
-api_key2 = "AIzaSyBlGMSaJUwrUB7_8kxM85AbYnvP4DnG13w"
-api_key3 = "AIzaSyCvsk6ToD62KsHy6AeQv8j5x8dzfx830Gs"
+api_key1 = ""
+api_key2 = ""
+api_key3 = ""
 
 
 llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")

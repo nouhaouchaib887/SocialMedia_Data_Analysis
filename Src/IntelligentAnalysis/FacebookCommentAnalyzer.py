@@ -5,9 +5,9 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.output_parsers import ResponseSchema, StructuredOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from typing import Dict, Any, List, Optional
-api_key1 = "AIzaSyCLXlR-Hp0uUpZZxpUG02wlepPyyP80syA"
-api_key2 = "AIzaSyCvsk6ToD62KsHy6AeQv8j5x8dzfx830Gs"
-api_key3 = "AIzaSyCqyi1uclW-a20Yh31e-OvD-_7Rf_7rM_Y"
+api_key1 = ""
+api_key2 = ""
+api_key3 = ""
 llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 class FacebookCommentAnalyzer:
     def __init__(self, data: Dict[str, Any]):

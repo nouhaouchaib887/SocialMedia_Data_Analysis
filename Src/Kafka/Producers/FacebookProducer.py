@@ -404,7 +404,7 @@ def main():
     # Initialize producer
     producer = FacebookProducer(
         kafka_config=kafka_config,
-        apify_token="apify_api_CeGongDrMOn3iRXqeoG67mNr6hNJRa4nn0Yc",
+        apify_token="",
         brand_name="orangemaroc",
         page_name="orangemaroc",
         topic="facebook-data",  # Single topic for posts with comments

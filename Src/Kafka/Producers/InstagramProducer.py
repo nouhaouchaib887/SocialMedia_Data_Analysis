@@ -396,7 +396,7 @@ def main():
     # Initialize producer
     producer = InstagramProducer(
         kafka_config=kafka_config,
-        apify_token="apify_api_ROxzINwaOpN3sv1p8nwxDriasVbn1a4CcGZe",
+        apify_token="",
         brand_name="maroctelecom",
         user_name="maroctelecom",
         topic="instagram-data" , # Single topic for posts with comments

@@ -13,3 +13,5 @@ ENV/
 dist/
 build/
 *.egg
+config/settings.yaml
+
