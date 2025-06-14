@@ -1,4 +1,4 @@
-{"product_categories": [
+{"Offres": [
     {
       "id": "forfaits_mobiles",
       "name": "Forfaits Mobiles", 
@@ -365,56 +365,7 @@
         }
       ]
     },
-    {
-      "id": "inwi_money",
-      "name": "Inwi Money", 
-      "keywords": ["Inwi Money","paiement mobile", "transfert d'argent", "portefeuille électronique", "e-wallet", "service financier", "mobile banking"],
-      "products": [
-        {
-          "id": "paiement_facture",
-          "name": "Paiement de facture",
-          "keywords": ["Paiement de facture","factures", "eau", "électricité", "téléphone", "services", "paiement digital"]
-        },
-        {
-          "id": "envoi_argent",
-          "name": "Envoi d'argent",
-          "keywords": ["Envoi d'argent","transfert", "virement", "cash to cash", "international", "national", "remittance"]
-        }
-      ]
-    },
-    {
-      "id": "smartphones",
-      "name": "Smartphones", 
-      "keywords": ["Smartphones","téléphone", "mobile", "appareil", "device", "portable", "android", "ios", "cellulaire"],
-      "products": [
-        {
-          "id": "samsung",
-          "name": "Samsung",
-          "keywords": ["Samsung","galaxy", "android", "coréen", "flagship", "pliable", "note", "s series"]
-        },
-        {
-            "id": "nokia",
-            "name": "Nokia",
-            "keywords":  ["Nokia", "robuste", "durable", "classique", "finlandais", "feature phone", "5G", "Android One", "HMD Global"]
-          },
-        {
-          "id": "xiaomi",
-          "name": "Xiaomi",
-          "keywords": ["Xiaomi","mi", "redmi", "poco", "chinois", "rapport qualité-prix", "budget"]
-        },
-        {
-          "id": "apple",
-          "name": "Apple",
-          "keywords":  ["Apple", "iPhone", "iOS", "Mac", "AirPods", "Apple Watch", "haut de gamme", "écosystème", "design", "sécurité", "innovation", "américain"]
-        }
-        ,
-        {
-          "id": "autre_marques",
-          "name": "Autres Marques",
-          "keywords": ["oppo", "vivo", "realme", "oneplus", "motorola", "marques diverses"]
-        }
-      ]
-    },
+   
     {
       "id": "recharges",
       "name": "Recharges", 
@@ -834,6 +785,132 @@
 
         
       ]
+    },
+    {
+      "id": "offres_supplementaires",
+      "name": "Offres Supplémentaires",
+      "keywords":["inwi money","smartphones","cadeaux"],
+      "subcategories" :[
+        {
+          "id": "inwi_money",
+          "name": "Inwi Money", 
+          "keywords": ["Inwi Money","paiement mobile", "transfert d'argent", "portefeuille électronique", "e-wallet", "service financier", "mobile banking"],
+          "products": [
+            {
+              "id": "paiement_facture",
+              "name": "Paiement de facture",
+              "keywords": ["Paiement de facture","factures", "eau", "électricité", "téléphone", "services", "paiement digital"]
+            },
+            {
+              "id": "envoi_argent",
+              "name": "Envoi d'argent",
+              "keywords": ["Envoi d'argent","transfert", "virement", "cash to cash", "international", "national", "remittance"]
+            }
+          ]
+        },
+        {
+          "id": "smartphones",
+          "name": "Smartphones", 
+          "keywords": ["Smartphones","téléphone", "mobile", "appareil", "device", "portable", "android", "ios", "cellulaire"],
+          "products": [
+            {
+              "id": "samsung",
+              "name": "Samsung",
+              "keywords": ["Samsung","galaxy", "android", "coréen", "flagship", "pliable", "note", "s series"]
+            },
+            {
+                "id": "nokia",
+                "name": "Nokia",
+                "keywords":  ["Nokia", "robuste", "durable", "classique", "finlandais", "feature phone", "5G", "Android One", "HMD Global"]
+              },
+            {
+              "id": "xiaomi",
+              "name": "Xiaomi",
+              "keywords": ["Xiaomi","mi", "redmi", "poco", "chinois", "rapport qualité-prix", "budget"]
+            },
+            {
+              "id": "apple",
+              "name": "Apple",
+              "keywords":  ["Apple", "iPhone", "iOS", "Mac", "AirPods", "Apple Watch", "haut de gamme", "écosystème", "design", "sécurité", "innovation", "américain"]
+            }
+            ,
+            {
+              "id": "autre_marques",
+              "name": "Autres Marques",
+              "keywords": ["oppo", "vivo", "realme", "oneplus", "motorola", "marques diverses"]
+            }
+          ]
+        },
+        {
+          "id": "cadeaux_promotions",
+          "name": "Cadeaux & Promotions",
+          "keywords": ["My inwi Fidélité", "cadeaux","peomotions"],
+          "subtopics": [
+            {
+              "id": "my_kdo_telco",
+              "name": "My KDO Telco",
+              "keywords": ["cadeau", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
+            },
+            {
+              "id": "my_deals",
+              "name": "My Deals",
+              "keywords": ["jour de réductions",""]
+            },
+            {
+              "id": "my_events",
+              "name": "My Events",
+              "keywords": ["event","accès aux évènements","e-ticket"]
+            },
+            {
+              "id": "my_cine",
+              "name": "My Ciné",
+              "keywords": ["cinéma", "ticket cinéma"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CX_digital",
+      "name": "CX & Connectivité Digitale",
+      "keywords":["interface digital","app","site web","inwi"],
+      "subtopics": [
+        {
+          "id": "app_mobile",
+          "name": "Applications mobiles",
+          "keywords": ["app", "mobile", "gestion compte", "espace client"],
+          "products": [
+              {
+            "id": "my_inwi",
+          "name": "My inwi",
+          "keywords": ["My inwi", "Gestion de ligne", "application officielle"]
+          },
+          {
+          "id": "win_by_inwi",
+            "name": "win by inwi",
+            "keywords": ["win by inwi", "Gforfaits win"]
+            }
+          ]
+      },
+        {
+          "id": "site_web",
+          "name": "Sites web / Espace client en ligne",
+          "keywords": ["site web", "espace client", "web selfcare"],
+          "products": [{
+              "id": "inwi.ma",
+                "name": "https://www.inwi.ma/",
+                "keywords": ["inwi", "site inwi maroc officiel"]
+                },
+                {
+                  "id": "win.ma",
+                    "name": "https://www.win.ma/",
+                    "keywords": ["inwi", "forfaits win"]
+                    }
+              ]
+      
+          }
+      
+      ]
     }
   ],
   "initiatives": [
@@ -924,33 +1001,6 @@
   ],
     "common_topics": [
       {
-        "id": "cadeaux_promotions",
-        "name": "Cadeaux & Promotions",
-        "keywords": ["My inwi Fidélité", "cadeaux","peomotions"],
-        "subtopics": [
-          {
-            "id": "my_kdo_telco",
-            "name": "My KDO Telco",
-            "keywords": ["cadeau", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
-          },
-          {
-            "id": "my_deals",
-            "name": "My Deals",
-            "keywords": ["jour de réductions",""]
-          },
-          {
-            "id": "my_events",
-            "name": "My Events",
-            "keywords": ["event","accès aux évènements","e-ticket"]
-          },
-          {
-            "id": "my_cine",
-            "name": "My Ciné",
-            "keywords": ["cinéma", "ticket cinéma"]
-          }
-        ]
-      },
-      {
         "id": "annonce_urgente",
         "name": "Annonces Urgentes",
         "subtopics": [
@@ -992,47 +1042,6 @@
           }
         ]
       },
-          {
-            "id": "CX_digital",
-            "name": "CX & Connectivité Digitale",
-            "subtopics": [
-              {
-                "id": "app_mobile",
-                "name": "Applications mobiles",
-                "keywords": ["app", "mobile", "gestion compte", "espace client"],
-                "products": [
-                    {
-                  "id": "my_inwi",
-                "name": "My inwi",
-                "keywords": ["My inwi", "Gestion de ligne", "application officielle"]
-                },
-                {
-                "id": "win_by_inwi",
-                  "name": "win by inwi",
-                  "keywords": ["win by inwi", "Gforfaits win"]
-                  }
-                ]
-            },
-              {
-                "id": "site_web",
-                "name": "Sites web / Espace client en ligne",
-                "keywords": ["site web", "espace client", "web selfcare"],
-                "products": [{
-                    "id": "inwi.ma",
-                      "name": "https://www.inwi.ma/",
-                      "keywords": ["inwi", "site inwi maroc officiel"]
-                      },
-                      {
-                        "id": "win.ma",
-                          "name": "https://www.win.ma/",
-                          "keywords": ["inwi", "forfaits win"]
-                          }
-                    ]
-            
-                }
-            
-            ]
-          },
           {
             "id": "actualite_inwi",
             "name": "Actualités Inwi",

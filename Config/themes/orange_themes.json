@@ -1,5 +1,5 @@
 {
-  "product_categories": [
+  "offres": [
     {
       "id": "forfaits_mobiles",
       "name": "Forfaits Mobiles", 
@@ -85,24 +85,6 @@
       ]
     },
     {
-      "id": "offres_prepayees",
-      "name": "Offres Prépayées", 
-      "keywords": ["prépayé", "sans engagement", "recharge", "crédit", "liberté", "sans facture", "pay as you go"],
-      "products": [
-        {
-          "id": "offre_marhaba",
-          "name": "Offre Marhaba",
-          "keywords": ["bienvenue", "diaspora", "marocain résident à l'étranger", "MRE", "international", "retour au pays"]
-        },
-        {
-          "id": "carte_prepayee",
-          "name": "Carte Prépayée",
-          "keywords": ["bienvenue", "diaspora", "marocain résident à l'étranger", "MRE", "international", "retour au pays"]
-        }
-
-      ]
-    },
-    {
       "id": "internet_maison",
       "name": "Internet à la Maison", 
       "keywords": ["internet fixe", "box", "connexion domicile", "wifi", "haut débit", "routeur", "connexion domestique"],
@@ -147,7 +129,14 @@
         {
           "id": "adsl_ultra",
           "name": "ADSL ULTRA",
-          "keywords": ["adsl", "ligne téléphonique", "copper", "cuivre", "ligne fixe", "vdsl"]
+          "keywords": ["adsl", "ligne téléphonique", "copper", "cuivre", "ligne fixe", "vdsl"],
+          "products":[
+            {
+              "id":"adsl_ultra_199",
+              "name": "ADSL ULTRA 199 DH",
+              "keywords":["ADSL ULTRA 199 DH"]
+            }
+          ]
         },
         {
           "id": "dar_box_4g",
@@ -300,23 +289,6 @@
           ]
         },
         {
-          "id": "store",
-          "name": "Store",
-          "keywords": ["football", "compétition", "match", "direct", "diffusion sportive", "championnat"],
-          "products": [
-            {
-              "id": "huawei",
-              "name": "HUWAEI",
-              "keywords": ["LaLiga Xtra","football espagnol", "liga", "barcelone", "real madrid", "championnat"]
-            },
-            {
-              "id": "karti",
-              "name": "Karti",
-              "keywords": ["ClicNscores","résultats sportifs", "statistiques", "live score", "actualité sportive", "scores en direct"]
-            }
-          ]
-        },
-        {
           "id": "life_style_e_learning",
            "name": "Life Style & E-Learning", 
           "keywords": ["contenu educatif", "e-learning"],
@@ -370,6 +342,157 @@
         }
       ]
     },
+    {
+      "id": "recharges",
+      "name": "Recharges", 
+      "keywords": ["*","star","etoile","crédit", "solde", "prépayé", "recharger", "carte", "coupon", "code"],
+      "subcategories": [
+        {
+          "id": "recharges_dirhams",
+          "name": "Recharges Dirhams Multiples", 
+          "keywords": ["recharge multiple","recharge classique", "dirhams", "crédit standard", "solde principal", "recharge normale"],
+          "products": [
+            {
+              "id": "recharge_10",
+              "name": "recharge 10 DH",
+              "keywords": ["10 dirhams", "petite recharge", "dépannage", "minimum"]
+            },
+            {
+              "id": "recharge_15",
+              "name": "recharge 15 DH",
+              "keywords": ["15 dirhams", "recharge moyenne", "standard", "classique"]
+            },
+            {
+              "id": "recharge_25",
+              "name": "recharge 25 DH",
+              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_appels",
+          "name": "Recharges Appels", 
+          "keywords": ["minutes", "appels", "voix", "communication", "bonus vocal","*1","*22"],
+          "products": [
+            {
+              "id": "recharge_etoile1",
+              "name": "recharge *1",
+              "keywords": ["*1", "etoile 1"]
+            },
+            {
+              "id": "recharge_etoile22",
+              "name": "recharge *22",
+              "keywords": ["*22", "etoile 22"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_internet",
+          "name": "Recharges Internet", 
+          "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+          "products": [
+            {
+              "id": "recharge_etoile3",
+              "name": "recharge *3",
+              "keywords": ["*3","forfait data", "internet mobile", "navigation", "petit volume"]
+            },
+            {
+              "id": "recharge_etoile6",
+              "name": "recharge *6",
+              "keywords": ["*6","forfait data", "internet mobile", "navigation", "volume moyen"]
+            },
+            {
+              "id": "recharge_etoile7",
+              "name": "recharge *7",
+              "keywords": ["*7","forfait data", "internet mobile", "navigation", "grand volume"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_tout_en_un",
+          "name": "Recharges Tout-en-un", 
+          "keywords": ["combo", "mixte", "appels+internet", "bundle", "pack", "tout inclus","*2"],
+          "products": [
+            {
+              "id": "recharge_etoile2",
+              "name": "recharge *2",
+              "keywords": ["forfait combiné", "minutes+data", "combo", "pack complet", "tout en un"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_internationales",
+          "name": "Recharges Internationales", 
+          "keywords": ["*4","international", "étranger", "appels internationaux", "longue distance", "cross-border"],
+          "products": [
+            {
+              "id": "recharge_etoile4",
+              "name": "recharge *4",
+              "keywords": ["appels internationaux", "minutes international", "étranger", "international"]
+            }
+          ]
+        },
+        {
+          "id": "recharges_illimitees",
+          "name": "Recharges Illimitées vers Orange", 
+          "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
+          "products": [
+            {
+              "id": "recharge_etoile8",
+              "name": "recharge *8",
+              "keywords": ["illimité orange", "on-net", "appels illimités", "réseau orange"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CX_digital",
+      "name": "CX & Connectivité Digitale",
+      "keywords" : ["expérience client", "interface digital","apps","sites web"],
+      "subtopics": [
+        {
+          "id": "app_mobile",
+          "name": "Applications mobiles",
+          "keywords": ["app", "mobile", "gestion compte", "espace client"],
+          "products": [
+              {
+            "id": "max_it",
+          "name": "Max it",
+          "keywords": ["Max it", "Gestion de ligne", "super app"]
+          },
+          {
+          "id": "orange_et_moi",
+            "name": "Orange et moi",
+            "keywords": ["Orange et moi", "Gestion de ligne", "super app"]
+            }
+          ]
+      },
+        {
+          "id": "site_web",
+          "name": "Sites web / Espace client en ligne",
+          "keywords": ["site web", "espace client", "web selfcare"],
+          "products": [{
+              "id": "orange.ma",
+                "name": "https://www.orange.ma/",
+                "keywords": ["orange", "site orange officiel"]
+                },
+                {
+                  "id": "yoxo.ma",
+                    "name": "https://www.yoxo.ma/",
+                    "keywords": ["orange", "site orange officiel"]
+                    }
+              ]
+      
+          }
+      
+      ]
+    },
+    {
+      "id": "offres_supplementaires",
+      "name": "Offres Supplémentaires",
+      "keywords":["orange money","smartphones","offres prepayés","cadeaux"],
+      "subcategories" :[
     {
       "id": "orange_money",
       "name": "Orange Money", 
@@ -437,230 +560,66 @@
       ]
     },
     {
-      "id": "recharges",
-      "name": "Recharges", 
-      "keywords": ["*","star","etoile","crédit", "solde", "prépayé", "recharger", "carte", "coupon", "code"],
-      "subcategories": [
+      "id": "cadeaux_promotions",
+      "name": "Cadeaux & Promotions",
+      "keywords": ["Cadeaux Orange merci", "cadeaux","peomotions"],
+      "products": [
         {
-          "id": "recharges_dirhams",
-          "name": "Recharges Dirhams Multiples", 
-          "keywords": ["recharge multiple","recharge classique", "dirhams", "crédit standard", "solde principal", "recharge normale"],
-          "products": [
-            {
-              "id": "recharge_10",
-              "name": "recharge 10 DH",
-              "keywords": ["10 dirhams", "petite recharge", "dépannage", "minimum"]
-            },
-            {
-              "id": "recharge_15",
-              "name": "recharge 15 DH",
-              "keywords": ["15 dirhams", "recharge moyenne", "standard", "classique"]
-            },
-            {
-              "id": "recharge_25",
-              "name": "recharge 25 DH",
-              "keywords": ["25 dirhams", "recharge importante", "crédit élevé", "grande valeur"]
-            }
-          ]
+          "id": "cadeau_du_vendredi",
+          "name": "Cadeau du vendredi",
+          "keywords": ["cadeau","vendredi", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
         },
         {
-          "id": "recharges_appels",
-          "name": "Recharges Appels", 
-          "keywords": ["minutes", "appels", "voix", "communication", "bonus vocal"],
-          "products": [
-            {
-              "id": "recharge_etoile1",
-              "name": "recharge *1",
-              "keywords": ["*1", "etoile 1"]
-            },
-            {
-              "id": "recharge_etoile22",
-              "name": "recharge *22",
-              "keywords": ["*22", "etoile 22"]
-            }
-          ]
+          "id": "cadeau_anniversaire",
+          "name": "Cadeau d’anniversaire",
+          "keywords": ["cadeau", "anniversaire "]
         },
         {
-          "id": "recharges_internet",
-          "name": "Recharges Internet", 
-          "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
-          "products": [
-            {
-              "id": "recharge_etoile3",
-              "name": "recharge *3",
-              "keywords": ["*3","forfait data", "internet mobile", "navigation", "petit volume"]
-            },
-            {
-              "id": "recharge_etoile6",
-              "name": "recharge *6",
-              "keywords": ["*6","forfait data", "internet mobile", "navigation", "volume moyen"]
-            },
-            {
-              "id": "recharge_etoile7",
-              "name": "recharge *7",
-              "keywords": ["*7","forfait data", "internet mobile", "navigation", "grand volume"]
-            }
-          ]
+          "id": "smartphones",
+          "name": "Smartphones",
+          "keywords": ["réductions sur la gamme de Smartphone","réductions","smartphone"]
         },
         {
-          "id": "recharges_tout_en_un",
-          "name": "Recharges Tout-en-un", 
-          "keywords": ["combo", "mixte", "appels+internet", "bundle", "pack", "tout inclus"],
-          "products": [
-            {
-              "id": "recharge_etoile2",
-              "name": "recharge *2",
-              "keywords": ["forfait combiné", "minutes+data", "combo", "pack complet", "tout en un"]
-            }
-          ]
+          "id": "evenements",
+          "name": "Evènements",
+          "keywords": ["event","accès aux évènements","e-ticket"]
         },
         {
-          "id": "recharges_internationales",
-          "name": "Recharges Internationales", 
-          "keywords": ["*4","international", "étranger", "appels internationaux", "longue distance", "cross-border"],
-          "products": [
-            {
-              "id": "recharge_etoile4",
-              "name": "recharge *4",
-              "keywords": ["appels internationaux", "minutes international", "étranger", "international"]
-            }
-          ]
-        },
+          "id": "cineday",
+          "name": "Cinéday",
+          "keywords": ["cinéma", "ticket cinéma"]
+        }
+        ,
         {
-          "id": "recharges_illimitees",
-          "name": "Recharges Illimitées vers Orange", 
-          "keywords": ["*8","illimité", "on-net", "intra-réseau", "orange-orange", "sans limite"],
-          "products": [
-            {
-              "id": "recharge_etoile8",
-              "name": "recharge *8",
-              "keywords": ["illimité orange", "on-net", "appels illimités", "réseau orange"]
-            }
-          ]
+          "id": "tombola_voyage",
+          "name": "Tombola voyage",
+          "keywords": ["tombla", "voyage"]
         }
       ]
+    },
+    {
+      "id": "offres_prepayees",
+      "name": "Offres Prépayées", 
+      "keywords": ["prépayé", "sans engagement", "recharge", "crédit", "liberté", "sans facture", "pay as you go"],
+      "products": [
+        {
+          "id": "offre_marhaba",
+          "name": "Offre Marhaba",
+          "keywords": ["bienvenue", "diaspora", "marocain résident à l'étranger", "MRE", "international", "retour au pays"]
+        },
+        {
+          "id": "carte_prepayee",
+          "name": "Carte Prépayée",
+          "keywords": ["bienvenue", "diaspora", "marocain résident à l'étranger", "MRE", "international", "retour au pays"]
+        }
+
+      ]
     }
+    ]
+  }
   ],
   
-  "outage_types": [
-    {
-      "id": "reseau_mobile",
-      "name": "Problèmes de réseau mobile", 
-      "keywords": ["réseau", "signal", "couverture", "antenne", "4G", "5G", "connexion mobile", "panne"],
-      "subcategories": [
-        {
-          "id": "couverture_insuffisante",
-          "name": "Couverture insuffisante",
-          "keywords": ["zone blanche", "signal faible", "mauvaise réception", "hors réseau", "rural"]
-        },
-        {
-          "id": "congestion_reseau",
-          "name": "Congestion réseau",
-          "keywords": ["réseau surchargé", "lenteur", "saturation", "heures de pointe", "forte affluence"]
-        },
-        {
-          "id": "coupure_totale",
-          "name": "Coupure totale",
-          "keywords": ["panne générale", "réseau down", "absence totale", "incident majeur", "blackout"]
-        }
-      ]
-    },
-    {
-      "id": "internet_fixe",
-      "name": "Problèmes d'Internet fixe",
-      "keywords": ["box", "modem", "connexion fixe", "wifi", "adsl", "fibre", "panne internet"],
-      "subcategories": [
-        {
-          "id": "panne_fibre",
-          "name": "Panne fibre optique",
-          "keywords": ["fibre coupée", "incident fibre", "câble optique", "ftth", "travaux fibre"]
-        },
-        {
-          "id": "panne_adsl",
-          "name": "Panne ADSL",
-          "keywords": ["adsl down", "cuivre", "ligne téléphonique", "panne dslam", "problème central"]
-        },
-        {
-          "id": "probleme_darbox",
-          "name": "Problème Dar Box",
-          "keywords": ["box 4G", "routeur 4G", "box mobile", "équipement défectueux", "router"]
-        },
-        {
-          "id": "debit_reduit",
-          "name": "Débit réduit",
-          "keywords": ["lenteur", "vitesse diminuée", "throttling", "ralentissement", "vitesse insuffisante"]
-        }
-      ]
-    },
-    {
-      "id": "service_client",
-      "name": "Problèmes de service client",
-      "keywords": ["assistance", "support", "relation client", "SAV", "conseil", "aide"],
-      "subcategories": [
-        {
-          "id": "temps_attente",
-          "name": "Temps d'attente excessif",
-          "keywords": ["attente longue", "délai", "file d'attente", "réponse lente", "support saturé"]
-        },
-        {
-          "id": "probleme_application",
-          "name": "Problème avec l'application client",
-          "keywords": ["app bug", "dysfonctionnement application", "erreur technique", "crash", "MyOrange"]
-        }
-      ]
-    },
-    {
-      "id": "facturation",
-      "name": "Problèmes de facturation",
-      "keywords": ["facture", "paiement", "débit", "comptabilité", "solde", "relevé"],
-      "subcategories": [
-        {
-          "id": "surfacturation",
-          "name": "Surfacturation",
-          "keywords": ["surfacturé", "montant incorrect", "erreur facturation", "trop facturé", "contentieux"]
-        },
-        {
-          "id": "paiement_rejete",
-          "name": "Paiement rejeté",
-          "keywords": ["échec paiement", "transaction refusée", "erreur carte", "rejet bancaire", "erreur prélèvement"]
-        }
-      ]
-    },
-    {
-      "id": "orange_money_issues",
-      "name": "Problèmes Orange Money",
-      "keywords": ["wallet", "paiement mobile", "transfert", "portefeuille électronique", "mobile banking"],
-      "subcategories": [
-        {
-          "id": "transaction_bloquee",
-          "name": "Transaction bloquée",
-          "keywords": ["blocage", "transaction en attente", "paiement suspendu", "échec transfert", "erreur envoi"]
-        },
-        {
-          "id": "compte_inaccessible",
-          "name": "Compte inaccessible",
-          "keywords": ["accès impossible", "connexion impossible", "compte bloqué", "erreur authentification", "identifiants"]
-        }
-      ]
-    },
-    {
-      "id": "service_tv",
-      "name": "Problèmes de service TV",
-      "keywords": ["télévision", "chaînes", "IPTV", "streaming TV", "décodeur", "box TV"],
-      "subcategories": [
-        {
-          "id": "chaines_indisponibles",
-          "name": "Chaînes indisponibles",
-          "keywords": ["chaînes manquantes", "canal absent", "émission inaccessible", "contenu bloqué", "bouquet incomplet"]
-        },
-        {
-          "id": "qualite_image",
-          "name": "Problème de qualité d'image",
-          "keywords": ["pixels", "flou", "saccades", "pixelisation", "artefacts", "mauvaise qualité"]
-        }
-      ]
-    }
-  ],
+  
   
   "initiatives": [
     {
@@ -736,45 +695,8 @@
       ]
     }
   ],
-  "common_topics": [
-      {
-        "id": "cadeaux_promotions",
-        "name": "Cadeaux & Promotions",
-        "keywords": ["Cadeaux Orange merci", "cadeaux","peomotions"],
-        "subtopics": [
-          {
-            "id": "cadeau_du_vendredi",
-            "name": "Cadeau du vendredi",
-            "keywords": ["cadeau","vendredi", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
-          },
-          {
-            "id": "cadeau_anniversaire",
-            "name": "Cadeau d’anniversaire",
-            "keywords": ["cadeau", "anniversaire "]
-          },
-          {
-            "id": "smartphones",
-            "name": "Smartphones",
-            "keywords": ["réductions sur la gamme de Smartphone","réductions","smartphone"]
-          },
-          {
-            "id": "evenements",
-            "name": "Evènements",
-            "keywords": ["event","accès aux évènements","e-ticket"]
-          },
-          {
-            "id": "cineday",
-            "name": "Cinéday",
-            "keywords": ["cinéma", "ticket cinéma"]
-          }
-          ,
-          {
-            "id": "tombola_voyage",
-            "name": "Tombola voyage",
-            "keywords": ["tombla", "voyage"]
-          }
-        ]
-      },
+  "Communication & Engagement Client": [
+
       {
         "id": "annonce_urgente",
         "name": "Annonces Urgentes",
@@ -815,48 +737,6 @@
             "name": "Remerciements Clients",
             "keywords": ["merci", "clients fidèles", "engagement", "IAM vous remercie", "satisfaction"]
           }
-        ]
-      },
-      {
-        "id": "CX_digital",
-        "name": "CX & Connectivité Digitale",
-        "keywords" : ["expérience client", "interface digital","apps","sites web"],
-        "subtopics": [
-          {
-            "id": "app_mobile",
-            "name": "Applications mobiles",
-            "keywords": ["app", "mobile", "gestion compte", "espace client"],
-            "products": [
-                {
-              "id": "max_it",
-            "name": "Max it",
-            "keywords": ["Max it", "Gestion de ligne", "super app"]
-            },
-            {
-            "id": "orange_et_moi",
-              "name": "Orange et moi",
-              "keywords": ["Orange et moi", "Gestion de ligne", "super app"]
-              }
-            ]
-        },
-          {
-            "id": "site_web",
-            "name": "Sites web / Espace client en ligne",
-            "keywords": ["site web", "espace client", "web selfcare"],
-            "products": [{
-                "id": "orange.ma",
-                  "name": "https://www.orange.ma/",
-                  "keywords": ["orange", "site orange officiel"]
-                  },
-                  {
-                    "id": "yoxo.ma",
-                      "name": "https://www.yoxo.ma/",
-                      "keywords": ["orange", "site orange officiel"]
-                      }
-                ]
-        
-            }
-        
         ]
       },
       {

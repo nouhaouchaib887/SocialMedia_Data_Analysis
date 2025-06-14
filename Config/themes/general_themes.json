@@ -1,0 +1,54 @@
+[
+    {
+      "id": "exp_personnelle",
+      "label": "Expérience personnelle",
+      "keywords": ["mon expérience", "j'ai testé", "avec mon", "dans ma zone", "chez moi"],
+      "priority": 7
+    },
+    {
+      "id": "comparaison_concurrents",
+      "label": "Comparaison concurrents",
+      "keywords": ["vs", "comparaison", "mieux que", "moins cher que", "à la place de"],
+      "priority": 8
+    },
+    {
+      "id": "recommendation",
+      "label": "Recommandation / conseil",
+      "keywords": ["je recommande", "conseil", "astuce", "bon plan", "à éviter"],
+      "priority": 6
+    },
+    {
+      "id": "actualité_rumeur",
+      "label": "Actualités & rumeurs",
+      "keywords": ["à venir", "rumeur", "info", "news", "fuite"],
+      "priority": 5
+    },
+    {
+      "id": "spam_publicité",
+      "label": "Spam & publicité",
+      "keywords": ["promo code", "pub", "gagnez", "offre spéciale", "CLIQUEZ ICI"],
+      "priority": 4
+    },
+    {
+      "id": "attaque_marque",
+      "label": "Appel au boycott / attaque",
+      "keywords": ["boycott orange", "boycott", "arnaque orange", "pas faire confiance", "attaque", "sabotage"],
+      "priority": 9
+    },
+    {
+      "id": "retour_technique",
+      "label": "Retour technique",
+      "keywords": ["panne", "débit", "connexion", "latence", "bug", "erreur", "indisponible", "ralenti"],
+      "priority": 8
+    },
+    {
+      "id": "hack_triche",
+      "label": "Contournement & astuces réseau",
+      "keywords": [
+        "VPN gratuit", "hack_net_maroc", "trick_maroc", "config", "HTTP_CUSTOM",
+        "انترنت_مجاني", "VPN_مجاني", "hacking", "حيلة_النت", "شرح_تطبيق"
+      ],
+      "priority": 9
+    }
+  ]
+  

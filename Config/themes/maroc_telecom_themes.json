@@ -1,4 +1,4 @@
-{"product_categories": [
+{"Offres": [
     {
       "id": "forfaits_mobiles",
       "name": "Forfaits Mobiles", 
@@ -423,39 +423,6 @@
       ]
     },
     {
-      "id": "smartphones",
-      "name": "Smartphones", 
-      "keywords": ["Smartphones","téléphone", "mobile", "appareil", "device", "portable", "android", "ios", "cellulaire"],
-      "products": [
-        {
-          "id": "samsung",
-          "name": "Samsung",
-          "keywords": ["Samsung","galaxy", "android", "coréen", "flagship", "pliable", "note", "s series"]
-        },
-        {
-            "id": "nokia",
-            "name": "Nokia",
-            "keywords": ["Nokia", "robuste", "durable", "classique", "finlandais", "feature phone", "5G", "Android One", "HMD Global"]
-          },
-        {
-          "id": "xiaomi",
-          "name": "Xiaomi",
-          "keywords": ["Xiaomi","mi", "redmi", "poco", "chinois", "rapport qualité-prix", "budget"]
-        },
-        {
-          "id": "apple",
-          "name": "Apple",
-          "keywords": ["Apple", "iPhone", "iOS", "Mac", "AirPods", "Apple Watch", "haut de gamme", "écosystème", "design", "sécurité", "innovation", "américain"]
-        }
-        ,
-        {
-          "id": "autre_marques",
-          "name": "Autres Marques",
-          "keywords": ["autre marque","oppo", "vivo", "realme", "oneplus", "apple","motorola", "marques diverses"]
-        }
-      ]
-    },
-    {
       "id": "recharges",
       "name": "Recharges", 
       "keywords": ["solde", "*","star","etoile","crédit",  "prépayé", "recharger", "carte", "coupon", "code"],
@@ -783,7 +750,102 @@
 
         
       ]
+    },
+    {
+      "id": "CX_digital",
+      "name": "CX & Connectivité Digitale",
+      "subtopics": [
+        {
+          "id": "app_mobile",
+          "name": "Applications mobiles",
+          "keywords": ["app", "mobile", "gestion compte", "espace client"],
+          "products": [
+              {
+            "id": "mon_espace_mt",
+          "name": "Mon Espace MT",
+          "keywords": ["Mon Espace MT","Gestion de ligne", "application officielle"]
+          },
+          {
+          "id": "injoy",
+            "name": "iNJOY",
+            "keywords": ["iNJOY", "forfaits iNJOY"]
+            }
+          ]
+      },
+        {
+          "id": "site_web",
+          "name": "Sites web / Espace client en ligne",
+          "keywords": ["site web", "espace client", "web selfcare"],
+          "products": [{
+              "id": "iam.ma",
+                "name": "https://www.iam.ma/",
+                "keywords": ["maroc telecom", "site maroc telecom officiel"]
+                },
+                {
+                  "id": "injoy.ma",
+                    "name": "https://www.injoy.ma/",
+                    "keywords": ["maroc telecom", "forfaits injoy"]
+                    }
+              ]
+      
+          }
+      
+      ]
+    },
+    {
+      "id": "offres_supplementaires",
+      "name": "Offres Supplémentaires",
+      "keywords":["orange money","smartphones","offres prepayés","cadeaux"],
+      "subcategories" :[
+        {
+          "id": "smartphones",
+          "name": "Smartphones", 
+          "keywords": ["Smartphones","téléphone", "mobile", "appareil", "device", "portable", "android", "ios", "cellulaire"],
+          "products": [
+            {
+              "id": "samsung",
+              "name": "Samsung",
+              "keywords": ["Samsung","galaxy", "android", "coréen", "flagship", "pliable", "note", "s series"]
+            },
+            {
+                "id": "nokia",
+                "name": "Nokia",
+                "keywords": ["Nokia", "robuste", "durable", "classique", "finlandais", "feature phone", "5G", "Android One", "HMD Global"]
+              },
+            {
+              "id": "xiaomi",
+              "name": "Xiaomi",
+              "keywords": ["Xiaomi","mi", "redmi", "poco", "chinois", "rapport qualité-prix", "budget"]
+            },
+            {
+              "id": "apple",
+              "name": "Apple",
+              "keywords": ["Apple", "iPhone", "iOS", "Mac", "AirPods", "Apple Watch", "haut de gamme", "écosystème", "design", "sécurité", "innovation", "américain"]
+            }
+            ,
+            {
+              "id": "autre_marques",
+              "name": "Autres Marques",
+              "keywords": ["autre marque","oppo", "vivo", "realme", "oneplus", "apple","motorola", "marques diverses"]
+            }
+          ]
+        },
+        {
+          "id": "cadeaux_promotions",
+          "name": "Cadeaux & Promotions",
+          "keywords": ["Fidelio Jawal", "cadeaux","peomotions"],
+          "subtopics": [
+            {
+              "id": "cadeau_dimanche",
+              "name": "Cadeau de dimanche",
+              "keywords": ["cadeau", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
+            }
+          ]
+        }
+
+      ]
     }
+
   ],
     
   "initiatives": [
@@ -869,19 +931,8 @@
       ]
     }
   ],
-  "common_topics": [
-      {
-        "id": "cadeaux_promotions",
-        "name": "Cadeaux & Promotions",
-        "keywords": ["Fidelio Jawal", "cadeaux","peomotions"],
-        "subtopics": [
-          {
-            "id": "cadeau_dimanche",
-            "name": "Cadeau de dimanche",
-            "keywords": ["cadeau", "minutes d’appels nationaux et internationaux, d’internet mobile, SMS "]
-          }
-        ]
-      },
+  "Communication & Engagement Client": [
+     
       {
         "id": "annonce_urgente",
         "name": "Annonces Urgentes",
@@ -922,47 +973,6 @@
             "name": "Remerciements Clients",
             "keywords": ["merci", "clients fidèles", "engagement", "IAM vous remercie", "satisfaction"]
           }
-        ]
-      },
-      {
-        "id": "CX_digital",
-        "name": "CX & Connectivité Digitale",
-        "subtopics": [
-          {
-            "id": "app_mobile",
-            "name": "Applications mobiles",
-            "keywords": ["app", "mobile", "gestion compte", "espace client"],
-            "products": [
-                {
-              "id": "mon_espace_mt",
-            "name": "Mon Espace MT",
-            "keywords": ["Mon Espace MT","Gestion de ligne", "application officielle"]
-            },
-            {
-            "id": "injoy",
-              "name": "iNJOY",
-              "keywords": ["iNJOY", "forfaits iNJOY"]
-              }
-            ]
-        },
-          {
-            "id": "site_web",
-            "name": "Sites web / Espace client en ligne",
-            "keywords": ["site web", "espace client", "web selfcare"],
-            "products": [{
-                "id": "iam.ma",
-                  "name": "https://www.iam.ma/",
-                  "keywords": ["maroc telecom", "site maroc telecom officiel"]
-                  },
-                  {
-                    "id": "injoy.ma",
-                      "name": "https://www.injoy.ma/",
-                      "keywords": ["maroc telecom", "forfaits injoy"]
-                      }
-                ]
-        
-            }
-        
         ]
       },
       {
