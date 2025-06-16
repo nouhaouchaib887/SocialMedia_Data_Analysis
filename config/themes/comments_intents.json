@@ -1,0 +1,56 @@
+{ "comment_intents" : [
+    {
+    "offre": [
+      "Question",
+      "Plainte",
+      "Compliment",
+      "Suggestion",
+      "Comparaison",
+      "DemandeTechnique",
+      "ExpressionInteret",
+      "PartageExperience"
+    ],
+    "initiative": [
+      "Félicitations",
+      "Motivation",
+      "DemandeDeDetails",
+      "Critique",
+      "PartageRessources",
+      "FeedbackGénéral"
+    ],
+    "communication_interaction": [
+      "Remerciement",
+      "RéactionAnnonce",
+      "InscriptionOuParticipation",
+      "DemandePrécisions",
+      "HumourSarcasme",
+      "PartageLien",
+      "TagD’unAmi"
+    ],
+    "veille_exterieure": {
+      "reclamation": [
+        "Plainte",
+        "SignalementIncident",
+        "DemandeSuivi",
+        "FeedbackServiceClient",
+        "Escalade",
+        "PartageCaptureEcran"
+      ],
+      "attaque_marque": [
+        "Critique",
+        "ComparaisonConcurrente",
+        "DéfenseDeMarque",
+        "IronieSarcasme",
+        "ExpériencePersonnelle",
+        "AppelÀAction"
+      ],
+      "mention_neutre": [
+        "OpinionGénérale",
+        "PartageArticle",
+        "DemandeD’Information",
+        "DiscussionThématique"
+      ]
+    }
+}]
+  }
+  

@@ -1,4 +1,4 @@
-[
+{"themes" :[
     {
       "id": "exp_personnelle",
       "label": "Expérience personnelle",
@@ -51,4 +51,4 @@
       "priority": 9
     }
   ]
-  
+}

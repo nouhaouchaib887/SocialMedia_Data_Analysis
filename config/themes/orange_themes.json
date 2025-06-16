@@ -1,5 +1,9 @@
 {
-  "offres": [
+  "themes": [
+    {
+      "id": "offre",
+      "name": "Offre",
+      "category_offre": [
     {
       "id": "forfaits_mobiles",
       "name": "Forfaits Mobiles", 
@@ -617,9 +621,13 @@
     }
     ]
   }
-  ],
+  ]
+    },
   
-  
+
+  {
+  "id": "initiative",
+  "name": "Initiative de marque",
   
   "initiatives": [
     {
@@ -694,7 +702,11 @@
         }
       ]
     }
-  ],
+  ]
+    },
+  {
+  "id": "communication_interaction",
+  "name": "Communication & Interaction",
   "Communication & Engagement Client": [
 
       {
@@ -751,6 +763,6 @@
         ]
       }
     ]
+    }
   
-  
-}
+  ]}

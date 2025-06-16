@@ -1,5 +1,5 @@
 {
-  "themes": [
+  "intents": [
     {
       "id": "informations_interactions",
       "name": "Informations & Interactions client",
@@ -113,21 +113,6 @@
             { "id": "indisponibilité", "name": "Indisponibilité de service" },
             { "id": "qualité", "name": "Problème de qualité " }
           ]
-        }
-      ]
-    },
-    {
-      "id": "canal_boutiques",
-      "name": "Canal & accessibilité",
-      "keywords":[ "magasin", "point de vente", "agence", "shop", "store"],
-      "subthemes": [
-        {
-          "id": "reseau_boutique",
-          "name": "Réseau et boutiques",
-          "keywords": ["magasin", "point de vente", "agence", "shop", "store", "physique", "emplacement"],
-          "subcategories": [
-        { "id": "horaire_boutique", "name": "Horaires de boutique" },
-        { "id": "emplacement_boutique", "name": "Emplacement boutique" }]
         }
       ]
     }

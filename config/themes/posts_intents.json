@@ -1,0 +1,34 @@
+{
+    "post_themes" : [{
+    "offre": {
+      "intents": [
+        "Information",
+        "Promotion",
+        "Feedback_Request"
+      ]
+    },
+    "initiative": {
+      "intents": [
+        "CSR",
+        "Event_Announcement",
+        "Information"
+      ]
+    },
+    "communication_interaction": {
+      "intents": [
+        "Alert",
+        "Holiday_Greeting",
+        "Contest",
+        "Engagement"
+      ]
+    },
+    "veille_exterieure": {
+      "intents": [
+        "Information",
+        "Feedback_Request"
+      ]
+    }
+  }
+]
+}
+  
