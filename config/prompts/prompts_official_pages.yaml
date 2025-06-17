@@ -10,21 +10,42 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de la classification de 0 à 1
     prompt_template: >
-      Tu es un expert en analyse de contenu pour {brand_name}. Analyse ce post et classifie-le dans l'un des thèmes suivants:
+      prompt_template: >
+        Tu es un expert en analyse de contenu pour {brand_name}.
+        Le contenu à analyser est un {{content_type}}.
+
+        {% if content_type == "comment" %}
+        Ce commentaire est associé à un post dont voici les informations d’analyse :
+        IMPORTANT:
+        - Les commentaires peuvent être en arabe ou en français
+        - Même si le commentaire est en arabe, utilise les mots-clés français pour comprendre le sens et l'intention du message
+        - Considère les variations sémantiques et linguistiques entre l'arabe et le français
+        - Considère le contexte du post original pour mieux comprendre le commentaire
+        - Utilise l'analyse du post original pour guider ta classification
       
-      - offre: contenu concernant les produits, forfaits, offres commerciales , les cadeaux et les promotions, les services d'Orange
-      - initiative: contenu concernant les initiatives de marque, programmes sociaux, événements Orange
-      - communication_interaction: contenu concernant la communication client, annonces, interactions
+        
+        Post original:
+        {post_text}
+        
+        Analyse du post original:
+        {post_analysis}
+        {% endif %}
 
-      IMPORTANT:
-      - Les posts peuvent être en arabe ou en français
-      - Analyse le contexte et l'intention du message
-      - Retourne uniquement l'un de ces 3 thèmes
+        Analyse ce {{content_type}} et classifie-le dans l'un des thèmes suivants :
+        - **offre** : contenu concernant les produits, forfaits, promotions, services
+        - **initiative** : contenu concernant les actions sociales, événements, engagements de la marque
+        - **communication_interaction** : contenu lié à la relation client, annonces, concours, vœux
 
-      Post à analyser:
-      {{post_text}}
+        IMPORTANT :
+        - Le contenu peut être en arabe ou en français
+        - Analyse le **contexte** et l’**intention** du message
+        - Retourne uniquement l’un de ces 3 thèmes
 
-      {{format_instructions}}
+        Contenu à analyser :
+        {{text}}
+
+        {{format_instructions}}
+
   intent:
     description: >
       Classification de l’intention d’un post selon son thème général.
@@ -35,37 +56,75 @@ classifiers:
         description: Niveau de confiance de la classification de 0 à 1
     prompt_template: >
       Tu es un expert en analyse d'intentions pour {brand_name}. 
-      Ce post appartient au thème: {{theme_name}}
+      Le contenu à analyser est un {{content_type}}
 
-      Identifie l'INTENTION principale de ce post parmi les intentions possibles pour ce thème:
+       {% if content_type == "comment" %}
+      Ce commentaire répond à un post classifié dans le thème : {{parent_post_info.theme_name}}.
+      Identifie l'**INTENTION principale** de ce {{content_type}} parmi les intentions possibles pour le thème correspondant :
 
-      {{available_intents}}
+        {{available_intents}}
 
-      Voici les définitions des intentions:
+        Voici les définitions des intentions :
 
-      Pour OFFRE:
-      - Information: Le post informe sur un produit/service sans promotion explicite
-      - Promotion: Le post fait la promotion d'une offre avec incitation à l'achat
-      - Feedback_Request: Le post demande l'avis des clients sur un produit/service
+        **Pour OFFRE** :
+         - **Question** : L'utilisateur pose une question explicite ou implicite
+         - **Plainte** : L'utilisateur exprime une insatisfaction ou un mécontentement
+         - **Compliment** : L'utilisateur félicite ou fait un retour positif
+         - **Suggestion** : L'utilisateur propose une idée ou une amélioration
+         - **Comparaison** : L'utilisateur compare Orange à un autre opérateur
+         - **DemandeTechnique** : L'utilisateur demande une aide technique ou un support
+         - **ExpressionInteret** : L'utilisateur manifeste de l’intérêt pour une offre ou un service
+         - **PartageExperience** : L'utilisateur raconte une expérience personnelle liée à la marque
+        **Pour INITIATIVE** :
+        - **Félicitations** : L'utilisateur félicite ou encourage l’initiative, l’événement ou l’annonce faite par la marque
+        - **Motivation** : L'utilisateur exprime un enthousiasme, une adhésion ou une motivation personnelle à participer, contribuer ou suivre l’initiative
+        - **DemandeDeDetails** : L'utilisateur pose une question ou demande plus d’informations à propos d’une initiative, d’un événement ou d’une action de communication
+        - **Critique** : L'utilisateur émet une remarque négative ou une désapprobation sur l’initiative, son contenu, ou la manière dont elle est présentée ou mise en œuvre
+        - **PartageRessources** : L'utilisateur partage un lien, une information, une opportunité ou une ressource complémentaire en rapport avec le sujet abordé
+        - **FeedbackGénéral** : L'utilisateur donne un retour global, neutre ou général, sur le sujet du post sans entrer dans un autre type spécifique
 
-      Pour INITIATIVE:
-      - CSR: Responsabilité sociale d'entreprise, action communautaire ou environnementale
-      - Event_Announcement: Annonce d'un événement organisé par Orange
-      - Information: Information générale sur une initiative sans promotion
 
-      Pour COMMUNICATION_INTERACTION:
-      - Alert: Alerte, notification importante ou information urgente
-      - Holiday_Greeting: Vœux pour les fêtes, occasions spéciales
-      - Contest: Concours, jeu ou compétition
-      - Engagement: Contenu pour engager la communauté, question ouverte
+        **Pour COMMUNICATION_INTERACTION** :
+        -- **Remerciement** : L'utilisateur remercie la marque ou les organisateurs pour l'information, l'événement ou l'initiative partagée
+        - **RéactionAnnonce** : L'utilisateur réagit à une annonce ou une actualité de manière spontanée, sans poser de question ni donner de critique
+        - **InscriptionOuParticipation** : L'utilisateur manifeste son intérêt à s'inscrire ou à participer à un événement ou une activité
+        - **DemandePrécisions** : L'utilisateur demande des précisions ou des détails complémentaires sur un événement, une annonce ou une procédure
+        - **HumourSarcasme** : L'utilisateur utilise un ton humoristique, ironique ou sarcastique en réponse au contenu
+        - **PartageLien** : L'utilisateur partage un lien externe en lien (ou non) avec le contenu du post
+        - **TagD’unAmi** : L'utilisateur identifie une ou plusieurs personnes dans le commentaire via une mention/tag
+      {% else %}
+      Ce post appartient au thème : {{theme_name}}.
 
-      IMPORTANT:
-      - Le post peut être en arabe ou en français
+       Identifie l'**INTENTION principale** de ce {{content_type}} parmi les intentions possibles pour le thème correspondant :
+
+        {{available_intents}}
+
+        Voici les définitions des intentions :
+
+        **Pour OFFRE** :
+        - **Information** : Le contenu informe sur un produit/service sans promotion explicite
+        - **Promotion** : Le contenu fait la promotion d'une offre avec incitation à l'achat
+        - **Feedback_Request** : Le contenu demande l'avis des clients sur un produit/service
+
+        **Pour INITIATIVE** :
+        - **CSR** : Responsabilité sociale d'entreprise, action communautaire ou environnementale
+        - **Event_Announcement** : Annonce d'un événement organisé par Orange
+        - **Information** : Information générale sur une initiative sans promotion
+
+        **Pour COMMUNICATION_INTERACTION** :
+        - **Alert** : Alerte, notification importante ou information urgente
+        - **Holiday_Greeting** : Vœux pour les fêtes ou les occasions spéciales
+        - **Contest** : Concours, jeu ou compétition
+        - **Engagement** : Contenu visant à engager la communauté, question ouverte, appel à réaction
+      {% endif %}
+
+      **IMPORTANT** :
+      - Le contenu peut être en arabe ou en français
       - Analyse le ton, le contexte et l'objectif du message
-      - Choisis l'intention la plus appropriée parmi celles disponibles pour ce thème
+      - Choisis l’intention **la plus appropriée**
 
-      Post à analyser:
-      {{post_text}}
+      Contenu à analyser :
+       {{text}}
 
       {{format_instructions}}
   offer_category:
@@ -79,19 +138,35 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert des offres {brand_name} Ce post concerne une OFFRE. 
+      Tu es un expert des offres {brand_name} Ce {content_type} concerne une OFFRE. 
+      {% if content_type == "comment" %}
+        Ce commentaire est associé à un post dont voici les informations d’analyse :
+        IMPORTANT:
+        - Les commentaires peuvent être en arabe ou en français
+        - Même si le commentaire est en arabe, utilise les mots-clés français pour comprendre le sens et l'intention du message
+        - Considère les variations sémantiques et linguistiques entre l'arabe et le français
+        - Considère le contexte du post original pour mieux comprendre le commentaire
+        - Utilise l'analyse du post original pour guider ta classification
+
+        Post original:
+        {post_text}
+        
+        Analyse du post original:
+        {post_analysis}
+        {% endif %}
+
       Identifie la CATÉGORIE d'offre parmi les suivantes:
 
       {{categories}}
 
       IMPORTANT:
-      - Le post peut être en arabe mais les mots-clés sont en français
+      - Le contenu peut être en arabe mais les mots-clés sont en français
       - Utilise les mots-clés pour identifier la bonne catégorie
       - Choisis la catégorie la plus appropriée
 
 
-      Post à analyser:
-      {{post_text}}
+      Contenu à analyser:
+      {{text}}
 
       {{format_instructions}}
 
@@ -106,14 +181,30 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert des offres {brand_name}. Ce post concerne une offre de la catégorie: {{category_name}}
+      Tu es un expert des offres {brand_name}. Ce {content_type} concerne une offre de la catégorie: {{category_name}}
+      {% if content_type == "comment" %}
+        Ce commentaire est associé à un post dont voici les informations d’analyse :
+        
+        Post original:
+        {post_text}
+        
+        Analyse du post original:
+        {post_analysis}
 
+        IMPORTANT:
+        - Les commentaires peuvent être en arabe ou en français
+        - Même si le commentaire est en arabe, utilise les mots-clés français pour comprendre le sens et l'intention du message
+        - Considère les variations sémantiques et linguistiques entre l'arabe et le français
+        - Considère le contexte du post original pour mieux comprendre le commentaire
+        - Utilise l'analyse du post original pour guider ta classification
+
+        {% endif %}
       Identifie la SOUS-CATÉGORIE spécifique parmi les suivantes pour cette catégorie:
 
       {{subcategories}}
 
       IMPORTANT:
-      - Le post peut être en arabe mais les mots-clés sont en français
+      - Le contenu peut être en arabe mais les mots-clés sont en français
       - Utilise les mots-clés pour identifier la bonne sous-catégorie
       - Si aucune sous-catégorie ne correspond, retourne "none" comme subcategory_id
 
@@ -132,7 +223,7 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert des offres {brand_name}. Ce post concerne une offre de la sous-catégorie: {{subcategory_name}}
+      Tu es un expert des offres {brand_name}. Ce {content_type} concerne une offre de la sous-catégorie: {{subcategory_name}}
       
       Identifie le PRODUIT/OFFRE EXACTE parmi les suivants:
       
@@ -183,7 +274,7 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert des initiatives {brand_name}. Ce post concerne l'initiative : {{initiative_name}}
+      Tu es un expert des initiatives {brand_name}. Ce {content_type} concerne l'initiative : {{initiative_name}}
       
       Identifie l'ÉVÉNEMENT spécifique parmi les suivants pour cette initiative:
       
