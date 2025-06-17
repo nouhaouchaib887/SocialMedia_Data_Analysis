@@ -8,7 +8,7 @@ from typing import Dict, Any, List, Optional
 import asyncio
 
 class OrangePostAnalyzer:
-    def __init__(self, google_api_key: str, config_file: str = "../config/themes/orange_themes.json", intents_file: str = "../config/themes/posts_intents.json"):
+    def __init__(self, google_api_key: str, config_file: str = "config/themes/orange_themes.json", intents_file: str = "config/themes/posts_intents.json"):
         """
         Initialise l'analyseur de posts Orange
         
@@ -43,6 +43,28 @@ class OrangePostAnalyzer:
         
         # Définir la variable d'environnement pour assurer la compatibilité
         os.environ["GOOGLE_API_KEY"] = self.google_api_key
+
+    
+    def _get_formatted_prompt(self, classifier_name: str, inputs: Dict[str, Any]) -> str:
+        """
+        Génère et retourne le prompt final formaté pour un classifieur donné.
+        Utile pour le débogage.
+
+        Args:
+            classifier_name (str): Le nom de l'attribut du classifieur (ex: "offre_product_classifier").
+            inputs (Dict[str, Any]): Le dictionnaire des variables à insérer dans le prompt.
+
+        Returns:
+            str: Le prompt final sous forme de chaîne de caractères.
+        """
+        try:
+            classifier = getattr(self, classifier_name)
+            prompt_template = classifier["prompt"]
+            formatted_prompt = prompt_template.format_prompt(**inputs)
+            return formatted_prompt.to_string()
+        except (AttributeError, KeyError) as e:
+            return f"Erreur lors de la génération du prompt pour '{classifier_name}': {e}"
+
     
     def _load_config(self) -> Dict[str, Any]:
         """Charge la configuration des thèmes depuis le fichier JSON"""
@@ -332,6 +354,7 @@ class OrangePostAnalyzer:
             format_instructions=product_parser.get_format_instructions()
         )
         
+        
         return {
             "prompt": product_prompt,
             "parser": product_parser,
@@ -603,18 +626,39 @@ class OrangePostAnalyzer:
         
         # Étape 2: Classification de la sous-catégorie (seulement si catégorie trouvée)
         if category_result["category_id"] != "none":
-            # Récupérer les sous-catégories pour cette catégorie
             offre_theme = next((t for t in self.data["themes"] if t["id"] == "offre"), None)
             if offre_theme:
                 category_data = next((c for c in offre_theme["category_offre"] if c["id"] == category_result["category_id"]), None)
                 if category_data and "subcategories" in category_data:
-                    subcategories = category_data["subcategories"]
+                    subcategories_full_data = category_data["subcategories"]
                     
-                    subcategory_result = await self.offre_subcategory_classifier["chain"].ainvoke({
+                    subcategories_for_prompt = [
+                        {key: value for key, value in sub.items() if key != 'products'}
+                        for sub in subcategories_full_data
+                    ]
+
+                    # --- NOUVEAU : Affichage du prompt pour la sous-catégorie ---
+                    
+                    # 1. Rassembler les variables d'entrée pour le prompt de la sous-catégorie
+                    subcategory_prompt_inputs = {
                         "post_text": post_text,
                         "category_name": category_result["category_name"],
-                        "subcategories": json.dumps(subcategories, ensure_ascii=False, indent=2)
-                    })
+                        "subcategories": json.dumps(subcategories_for_prompt, ensure_ascii=False, indent=2)
+                    }
+                    
+                    # 2. Utiliser la méthode utilitaire pour formater et afficher le prompt
+                    final_subcategory_prompt_str = self._get_formatted_prompt(
+                        "offre_subcategory_classifier", 
+                        subcategory_prompt_inputs
+                    )
+                    print("\n" + "="*25 + " PROMPT SOUS-CATÉGORIE ENVOYÉ " + "="*25)
+                    print(final_subcategory_prompt_str)
+                    print("="*70 + "\n")
+                    
+                    # -------------------------------------------------------------
+                    
+                    # 3. L'appel à la chaîne utilise le dictionnaire d'entrées déjà préparé
+                    subcategory_result = await self.offre_subcategory_classifier["chain"].ainvoke(subcategory_prompt_inputs)
                     
                     if subcategory_result["subcategory_id"] != "none":
                         result["category_offre"]["subcategory_offre"] = {
@@ -623,16 +667,24 @@ class OrangePostAnalyzer:
                         }
                         result["confidence"] = min(result["confidence"], subcategory_result["confidence"])
                         
-                        # Étape 3: Classification du produit (seulement si sous-catégorie trouvée)
-                        subcategory_data = next((s for s in subcategories if s["id"] == subcategory_result["subcategory_id"]), None)
+                        # Étape 3: Classification du produit
+                        subcategory_data = next((s for s in subcategories_full_data if s["id"] == subcategory_result["subcategory_id"]), None)
                         if subcategory_data and "products" in subcategory_data:
                             products = subcategory_data["products"]
                             
-                            product_result = await self.offre_product_classifier["chain"].ainvoke({
+                            product_prompt_inputs = {
                                 "post_text": post_text,
                                 "subcategory_name": subcategory_result["subcategory_name"],
                                 "products": json.dumps(products, ensure_ascii=False, indent=2)
-                            })
+                            }
+
+                            # Affichage du prompt pour le produit (déjà présent)
+                            final_product_prompt_str = self._get_formatted_prompt("offre_product_classifier", product_prompt_inputs)
+                            print("\n" + "="*25 + " PROMPT PRODUIT ENVOYÉ " + "="*25)
+                            print(final_product_prompt_str)
+                            print("="*70 + "\n")
+                            
+                            product_result = await self.offre_product_classifier["chain"].ainvoke(product_prompt_inputs)
                             
                             if product_result["product_id"] != "general":
                                 result["category_offre"]["subcategory_offre"]["offre"] = product_result["product_name"]
@@ -712,7 +764,7 @@ class OrangePostAnalyzer:
     # Exemple d'utilisation et test
 async def main():
     # REMPLACEZ PAR VOTRE VRAIE CLÉ API GOOGLE GEMINI
-    GOOGLE_API_KEY = "AIzaSyBE655-B-jwD-fsU62Iskux2OwMUK-nP0s"
+    GOOGLE_API_KEY = "AIzaSyDroS___71S2NH_Qz08fuZBkJeX0s21dCY"
     
     # Vérification de la clé API
     if GOOGLE_API_KEY == "VOTRE_CLE_API_GOOGLE_ICI":
@@ -723,7 +775,7 @@ async def main():
         # Initialiser l'analyseur avec la clé API
         analyzer = OrangePostAnalyzer(
             google_api_key=GOOGLE_API_KEY,
-            config_file="../config/themes/orange_themes.json"
+            config_file="config/themes/orange_themes.json"
         )
         
         # Tests avec différents types de posts
