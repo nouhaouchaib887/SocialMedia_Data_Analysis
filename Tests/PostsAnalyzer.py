@@ -607,9 +607,15 @@ class OrangePostAnalyzer:
             offre_theme = next((t for t in self.data["themes"] if t["id"] == "offre"), None)
             if offre_theme:
                 category_data = next((c for c in offre_theme["category_offre"] if c["id"] == category_result["category_id"]), None)
+                subcategories = []
                 if category_data and "subcategories" in category_data:
-                    subcategories = category_data["subcategories"]
-                    
+                    for sub_category in category_data["subcategories"]:
+                        subcategories.append({
+                        "id": sub_category["id"],
+                        "name": sub_category["name"],
+                        "keywords": sub_category.get("keywords", [])
+                    })
+                    print(subcategories)
                     subcategory_result = await self.offre_subcategory_classifier["chain"].ainvoke({
                         "post_text": post_text,
                         "category_name": category_result["category_name"],
@@ -624,10 +630,10 @@ class OrangePostAnalyzer:
                         result["confidence"] = min(result["confidence"], subcategory_result["confidence"])
                         
                         # Étape 3: Classification du produit (seulement si sous-catégorie trouvée)
-                        subcategory_data = next((s for s in subcategories if s["id"] == subcategory_result["subcategory_id"]), None)
+                        subcategory_data = next((s for s in category_data["subcategories"] if s["id"] == subcategory_result["subcategory_id"]), None)
                         if subcategory_data and "products" in subcategory_data:
                             products = subcategory_data["products"]
-                            
+                            print(products)
                             product_result = await self.offre_product_classifier["chain"].ainvoke({
                                 "post_text": post_text,
                                 "subcategory_name": subcategory_result["subcategory_name"],
