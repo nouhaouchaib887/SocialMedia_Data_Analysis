@@ -1,0 +1,255 @@
+classifiers:
+  thematic:
+    description: >
+      Analyse et classification des posts dans des thèmes prédéfinis pour un opérateur spécifique.
+    output_schema:
+      - name: theme_id
+        description: ID du thème identifié: 'offre', 'initiative', 'communication_interaction'
+      - name: theme_name
+        description: Nom du thème identifié
+      - name: confidence
+        description: Niveau de confiance de la classification de 0 à 1
+    prompt_template: >
+      Tu es un expert en analyse de contenu pour {brand_name}. Analyse ce post et classifie-le dans l'un des thèmes suivants:
+      
+      - offre: contenu concernant les produits, forfaits, offres commerciales , les cadeaux et les promotions, les services d'Orange
+      - initiative: contenu concernant les initiatives de marque, programmes sociaux, événements Orange
+      - communication_interaction: contenu concernant la communication client, annonces, interactions
+
+      IMPORTANT:
+      - Les posts peuvent être en arabe ou en français
+      - Analyse le contexte et l'intention du message
+      - Retourne uniquement l'un de ces 3 thèmes
+
+      Post à analyser:
+      {{post_text}}
+
+      {{format_instructions}}
+  intent:
+    description: >
+      Classification de l’intention d’un post selon son thème général.
+    output_schema:
+      - name: intent
+        description: L'intention identifiée du post
+      - name: confidence
+        description: Niveau de confiance de la classification de 0 à 1
+    prompt_template: >
+      Tu es un expert en analyse d'intentions pour {brand_name}. 
+      Ce post appartient au thème: {{theme_name}}
+
+      Identifie l'INTENTION principale de ce post parmi les intentions possibles pour ce thème:
+
+      {{available_intents}}
+
+      Voici les définitions des intentions:
+
+      Pour OFFRE:
+      - Information: Le post informe sur un produit/service sans promotion explicite
+      - Promotion: Le post fait la promotion d'une offre avec incitation à l'achat
+      - Feedback_Request: Le post demande l'avis des clients sur un produit/service
+
+      Pour INITIATIVE:
+      - CSR: Responsabilité sociale d'entreprise, action communautaire ou environnementale
+      - Event_Announcement: Annonce d'un événement organisé par Orange
+      - Information: Information générale sur une initiative sans promotion
+
+      Pour COMMUNICATION_INTERACTION:
+      - Alert: Alerte, notification importante ou information urgente
+      - Holiday_Greeting: Vœux pour les fêtes, occasions spéciales
+      - Contest: Concours, jeu ou compétition
+      - Engagement: Contenu pour engager la communauté, question ouverte
+
+      IMPORTANT:
+      - Le post peut être en arabe ou en français
+      - Analyse le ton, le contexte et l'objectif du message
+      - Choisis l'intention la plus appropriée parmi celles disponibles pour ce thème
+
+      Post à analyser:
+      {{post_text}}
+
+      {{format_instructions}}
+  offer_category:
+    description: >
+      Classifie un post lié à une OFFRE dans l’une des grandes catégories d’offres disponibles.
+    output_schema:
+      - name: category_id
+        description: ID de la catégorie d'offre identifiée
+      - name: category_name
+        description: Nom de la catégorie d'offre
+      - name: confidence
+        description: Niveau de confiance de 0 à 1
+    prompt_template: >
+      Tu es un expert des offres {brand_name} Ce post concerne une OFFRE. 
+      Identifie la CATÉGORIE d'offre parmi les suivantes:
+
+      {{categories}}
+
+      IMPORTANT:
+      - Le post peut être en arabe mais les mots-clés sont en français
+      - Utilise les mots-clés pour identifier la bonne catégorie
+      - Choisis la catégorie la plus appropriée
+
+
+      Post à analyser:
+      {{post_text}}
+
+      {{format_instructions}}
+
+  offer_subcategory:
+    description: >
+      Classifie une offre dans une sous-catégorie spécifique à partir de la catégorie principale.
+    output_schema:
+      - name: subcategory_id
+        description: ID de la sous-catégorie identifiée
+      - name: subcategory_name
+        description: Nom de la sous-catégorie
+      - name: confidence
+        description: Niveau de confiance de 0 à 1
+    prompt_template: >
+      Tu es un expert des offres {brand_name}. Ce post concerne une offre de la catégorie: {{category_name}}
+
+      Identifie la SOUS-CATÉGORIE spécifique parmi les suivantes pour cette catégorie:
+
+      {{subcategories}}
+
+      IMPORTANT:
+      - Le post peut être en arabe mais les mots-clés sont en français
+      - Utilise les mots-clés pour identifier la bonne sous-catégorie
+      - Si aucune sous-catégorie ne correspond, retourne "none" comme subcategory_id
+
+      Post à analyser:
+      {{post_text}}
+
+      {{format_instructions}}
+  offer:
+    description: >
+      Identifie le produit ou l'offre exacte mentionnée dans un post, à partir d’une liste de produits pour une sous-catégorie donnée.
+    output_schema:
+      - name: product_id
+        description: ID du produit/offre identifié
+      - name: product_name
+        description: Nom du produit/offre
+      - name: confidence
+        description: Niveau de confiance de 0 à 1
+    prompt_template: >
+      Tu es un expert des offres {brand_name}. Ce post concerne une offre de la sous-catégorie: {{subcategory_name}}
+      
+      Identifie le PRODUIT/OFFRE EXACTE parmi les suivants:
+      
+      {{products}}
+      
+      IMPORTANT:
+      - Le post peut être en arabe mais les mots-clés sont en français
+      - Utilise les mots-clés pour identifier le bon produit
+      - Si aucun produit spécifique ne correspond, retourne "general" comme product_id
+      
+      Post à analyser:
+      {{post_text}}
+      
+      {{format_instructions}}
+  initiative:
+    description: >
+      Identifie l’initiative spécifique mentionnée dans un post, à partir d’une liste d’initiatives connues.
+    output_schema:
+      - name: initiative_id
+        description: ID de l'initiative identifiée
+      - name: initiative_name
+        description: Nom de l'initiative
+      - name: confidence
+        description: Niveau de confiance de 0 à 1
+    prompt_template: >
+      Tu es un expert des initiatives {brand_name}. Ce post concerne une INITIATIVE. 
+      Identifie l'initiative spécifique parmi les suivantes:
+      
+      {{initiatives}}
+      
+      IMPORTANT:
+      - Le post peut être en arabe mais les mots-clés sont en français
+      - Cherche les correspondances contextuelles et sémantiques
+      - Les noms propres peuvent être transcrits différemment
+      
+      Post à analyser:
+      {{post_text}}
+      
+      {{format_instructions}}
+  initiative_event:
+    description: >
+      Identifie l’événement spécifique mentionné dans un post, parmi une liste d’événements liés à une initiative donnée.
+    output_schema:
+      - name: event_id
+        description: ID de l'événement identifié
+      - name: event_name
+        description: Nom de l'événement
+      - name: confidence
+        description: Niveau de confiance de 0 à 1
+    prompt_template: >
+      Tu es un expert des initiatives {brand_name}. Ce post concerne l'initiative : {{initiative_name}}
+      
+      Identifie l'ÉVÉNEMENT spécifique parmi les suivants pour cette initiative:
+      
+      {{events}}
+      
+      IMPORTANT:
+      - Le post peut être en arabe mais les mots-clés sont en français
+      - Utilise les mots-clés pour identifier le bon événement
+      - Si aucun événement spécifique ne correspond, retourne "general" comme event_id
+      
+      Post à analyser:
+      {{post_text}}
+      
+      {{format_instructions}}
+  communication_topic:
+    description: >
+      Identifie le type de communication ou d’interaction dans un post lié à la communication client.
+    output_schema:
+      - name: topic_id
+        description: ID du topic de communication identifié
+      - name: topic_name
+        description: Nom du topic de communication
+      - name: confidence
+        description: Niveau de confiance de 0 à 1
+    prompt_template: >
+      Tu es un expert en communication {brand_name}. Ce post concerne la COMMUNICATION & INTERACTION. 
+      Identifie le type de communication parmi les suivants:
+      
+      {{topics}}
+      
+      IMPORTANT:
+      - Le post peut être en arabe mais les mots-clés sont en français
+      - Considère le contexte et l'intention du message
+      - Identifie le type de communication le plus approprié
+      
+      Post à analyser:
+      {{post_text}}
+      
+      {{format_instructions}}
+  communication_subtopic:
+    description: >
+      Identifie le sous-sujet spécifique d’un post de communication ou d’interaction.
+    output_schema:
+      - name: subtopic_id
+        description: ID du sous-sujet identifié
+      - name: subtopic_name
+        description: Nom du sous-sujet
+      - name: confidence
+        description: Niveau de confiance de 0 à 1
+    prompt_template: >
+      Tu es un expert en communication {brand_name}. Ce post concerne le topic: {{topic_name}}
+      
+      Identifie le SOUS-SUJET spécifique parmi les suivants:
+      
+      {{subtopics}}
+      
+      IMPORTANT:
+      - Le post peut être en arabe mais les mots-clés sont en français
+      - Utilise les mots-clés pour identifier le bon sous-sujet
+      - Si aucun sous-sujet spécifique ne correspond, retourne "general" comme subtopic_id
+      
+      Post à analyser:
+      {{post_text}}
+      
+      {{format_instructions}}
+
+
+
+
