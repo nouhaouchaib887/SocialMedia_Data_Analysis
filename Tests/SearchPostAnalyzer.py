@@ -10,7 +10,7 @@ import yaml
 
 class SearchPostAnalyzer:
     def __init__(self, google_api_key: str, 
-                 config_file: str = "config/themes/general_themes.json", 
+                 config_file: str = "config/themes/general_themes.json",
                  intents_file: str = "config/themes/posts_intents.json", 
                  prompts_file: str = "config/prompts/search_prompts.yaml"):
         """
@@ -294,5 +294,4 @@ async def main():
         print(f"Erreur d'initialisation: {e}")
 
 if __name__ == "__main__":
-    # Pour tester la classe
     asyncio.run(main())
