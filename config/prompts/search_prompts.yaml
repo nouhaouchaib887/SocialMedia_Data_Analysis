@@ -1,0 +1,122 @@
+# ===================================================================
+# Fichier de configuration des prompts pour SearchPostAnalyzer
+# Chaque clé correspond à un classifieur spécifique dans le code.
+# Adapté pour l'analyse de posts de veille extérieure (sources non-officielles)
+# ===================================================================
+
+# ---------------------------------
+# 1. Classifieur de Thème Principal
+# ---------------------------------
+theme: |
+  Tu es un expert en analyse de contenu pour la veille concurrentielle dans le secteur des télécommunications au Maroc.
+  Analyse ce post provenant d'une source EXTERNE (non-officielle) et classifie-le dans l'un des thèmes suivants:
+  
+  {available_themes}
+  
+  IMPORTANT:
+  - Ce post provient d'une source externe (blog, forum, réseaux sociaux, actualités)
+  - Les posts peuvent être en arabe, français ou darija
+  - Analyse le contexte, le contenu et l'intention du message
+  - Utilise les mots-clés fournis pour chaque thème comme guide
+  - Focus sur l'identification du secteur/domaine principal du post
+  
+  Post à analyser:
+  {post_text}
+  
+  {format_instructions}
+
+# --------------------------
+# 2. Classifieur d'Intention
+# --------------------------
+intent: |
+  Tu es un expert en analyse d'intentions pour la veille extérieure dans les télécommunications au Maroc.
+  Ce post provient d'une SOURCE EXTERNE et concerne la veille extérieure.
+  
+  Identifie l'INTENTION principale de ce post parmi les intentions suivantes pour la veille extérieure:
+  
+  {available_intents}
+  
+  Voici les définitions des intentions pour la VEILLE EXTÉRIEURE:
+  
+  - Information: Le post fournit des informations factuelles sur un sujet (nouveautés, annonces, actualités)
+  - Feedback_Request: Le post demande l'avis du public, feedback ou retour d'expérience
+  
+  IMPORTANT:
+  - Ce post provient d'une source NON-OFFICIELLE (blog, forum, actualités, réseaux sociaux)
+  - Le post peut être en arabe, français ou darija
+  - Analyse l'objectif principal: informer ou demander un retour
+  - Considère le ton et le contexte du message
+  
+  Post à analyser:
+  {post_text}
+  
+  {format_instructions}
+
+# -----------------------------------
+# 3. Classifieur de Catégorie
+# -----------------------------------
+category: |
+  Tu es un expert en veille concurrentielle pour les télécommunications au Maroc.
+  Analyse ce post de source externe concernant le thème: {theme_name}
+  
+  Identifie la CATÉGORIE spécifique parmi les suivantes:
+  
+  {categories}
+  
+  IMPORTANT:
+  - Ce post provient d'une source externe (non-officielle)
+  - Le post peut être en arabe, français ou darija
+  - Utilise les mots-clés pour identifier la bonne catégorie
+  - Analyse le contenu principal du message
+  - Si aucune catégorie ne correspond parfaitement, choisis la plus proche
+  
+  Post à analyser:
+  {post_text}
+  
+  {format_instructions}
+
+# ------------------------------------
+# 4. Classifieur de Sous-catégorie
+# ------------------------------------
+subcategory: |
+  Tu es un expert en veille concurrentielle pour les télécommunications au Maroc.
+  Ce post de source externe concerne la catégorie: {category_name}
+  
+  Identifie la SOUS-CATÉGORIE spécifique parmi les suivantes:
+  
+  {subcategories}
+  
+  IMPORTANT:
+  - Ce post provient d'une source externe (non-officielle)
+  - Le post peut être en arabe, français ou darija
+  - Utilise les mots-clés pour identifier la bonne sous-catégorie
+  - Analyse le contenu spécifique du message
+  - Si aucune sous-catégorie ne correspond, retourne "none" comme subcategory_id
+  
+  Post à analyser:
+  {post_text}
+  
+  {format_instructions}
+
+# ----------------------------------
+# 5. Classifieur d'Élément Spécifique
+# ----------------------------------
+specific: |
+  Tu es un expert en veille concurrentielle pour les télécommunications au Maroc.
+  Ce post de source externe concerne la sous-catégorie: {subcategory_name}
+  
+  Identifie l'ÉLÉMENT SPÉCIFIQUE parmi les suivants:
+  
+  {items}
+  
+  IMPORTANT:
+  - Ce post provient d'une source externe (non-officielle)
+  - Le post peut être en arabe, français ou darija
+  - Utilise les mots-clés pour identifier l'élément spécifique
+  - Cherche les mentions directes ou indirectes des éléments listés
+  - Si aucun élément spécifique ne correspond, retourne "general" comme specific_id
+  
+  Post à analyser:
+  {post_text}
+  
+  {format_instructions}
