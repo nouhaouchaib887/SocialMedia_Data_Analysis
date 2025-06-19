@@ -1,54 +1,171 @@
 # ===================================================================
 # Fichier de configuration des prompts pour SearchPostAnalyzer
-# Adapté pour l'analyse de posts externes
+# Adapté pour l'analyse de posts et commentaires externes
+# Structure identique au fichier d'inspiration avec classifiers
 # ===================================================================
 
-# ---------------------------------
-# 1. Classifieur de Thème Principal
-# ---------------------------------
-theme: |
-  Tu es un expert en analyse de contenu dans le secteur des télécommunications au Maroc.
-  Analyse ce post provenant d'une source EXTERNE et classifie-le dans l'un des thèmes suivants:
-  
-  {available_themes}
-  
-  IMPORTANT:
-  - Ce post provient d'une source externe (groupe, page, profil personnel)
-  - Les posts peuvent être en arabe, français ou darija
-  - Analyse le contexte, le contenu et l'intention du message
-  - Retourne uniquement l'un de ces thèmes
-  – Si aucun thème ne correspond de manière satisfaisante, retourne None.
-  
-  Post à analyser:
-  {post_text}
-  
-  {format_instructions}
+classifiers:
+  theme:
+    description: >
+      Analyse et classification des posts et commentaires externes dans des thèmes prédéfinis pour la veille extérieure.
+    output_schema:
+      - name: theme_id
+        description: ID du thème identifié
+      - name: theme_name
+        description: Nom du thème identifié
+      - name: confidence
+        description: Niveau de confiance de la classification de 0 à 1
+    prompt_template: >
+      Tu es un expert en analyse de contenu dans le secteur des télécommunications au Maroc.
+      Le contenu à analyser est un {{content_type}}.
+      
+      {% if content_type == "comment" %}
+      Ce commentaire est associé à un post dont voici les informations d'analyse :
+      IMPORTANT:
+      - Les commentaires peuvent être en arabe, français ou darija
+      - Même si le commentaire est en arabe, utilise les concepts français pour comprendre le sens et l'intention du message
+      - Considère les variations sémantiques et linguistiques entre l'arabe et le français
+      - Considère le contexte du post original pour mieux comprendre le commentaire
+      - Utilise l'analyse du post original pour guider ta classification
+      
+      Post original:
+      {post_text}
+      
+      Analyse du post original:
+      {post_analysis}
+      {% endif %}
+      
+      Analyse ce {{content_type}} provenant d'une source EXTERNE et classifie-le dans l'un des thèmes suivants:
+      
+      {available_themes}
+      
+      IMPORTANT:
+      - Ce {{content_type}} provient d'une source externe (groupe, page ou profil personnel)
+      - Le contenu peut être en arabe, français ou darija
+      - Analyse attentivement le contexte, le contenu et l'intention du message
+      - Retourne uniquement l'un de ces thèmes
+      - Si aucun thème ne correspond de manière satisfaisante, retourne None
+      
+      Contenu à analyser:
+      {{text}}
+      
+      {{format_instructions}}
 
-# --------------------------
-# 2. Classifieur d'Intention
-# --------------------------
-intent: |
-  Tu es un expert en analyse d'intentions dans les télécommunications au Maroc.
-  Ce post provient d'une SOURCE EXTERNE et concerne la veille extérieure.
+  intent:
+    description: >
+      Classification de l'intention d'un post ou commentaire externe selon son contexte et sa finalité.
+    output_schema:
+      - name: intent
+        description: L'intention identifiée du contenu
+      - name: confidence
+        description: Niveau de confiance de la classification de 0 à 1
+    prompt_template: >
+      Tu es un expert en analyse d'intentions dans les télécommunications au Maroc.
+      Le contenu à analyser est un {{content_type}}.
+      
+      {% if content_type == "comment" %}
+      Ce commentaire répond à un post classifié dans le thème : {{parent_post_info.theme_name}}.
+      Ce commentaire provient d'une SOURCE EXTERNE et concerne la veille extérieure.
+      
+      Identifie l'INTENTION principale de ce {{content_type}} parmi les intentions possibles pour la veille extérieure:
+      
+      {{available_intents}}
+      
+      Voici les définitions des intentions pour les COMMENTAIRES dans la veille extérieure, organisées par catégories:
+      
+      **RÉCLAMATION** (Commentaires liés à des problèmes ou insatisfactions):
+      - **Plainte** : L'utilisateur exprime une insatisfaction ou un mécontentement
+      - **SignalementIncident** : L'utilisateur signale un problème technique ou un dysfonctionnement
+      - **DemandeSuivi** : L'utilisateur demande des nouvelles ou un suivi sur un problème
+      - **FeedbackServiceClient** : L'utilisateur donne un retour sur le service client reçu
+      - **Escalade** : L'utilisateur menace d'escalader le problème ou exprime une frustration extrême
+      - **PartageCaptureEcran** : L'utilisateur partage une capture d'écran pour illustrer un problème
+      
+      **ATTAQUE_MARQUE** (Commentaires critiques ou de comparaison):
+      - **Critique** : L'utilisateur émet une critique négative sur une marque ou un service
+      - **ComparaisonConcurrente** : L'utilisateur compare défavorablement avec la concurrence
+      - **DéfenseDeMarque** : L'utilisateur défend une marque face aux critiques
+      - **IronieSarcasme** : L'utilisateur utilise l'ironie ou le sarcasme pour critiquer
+      - **ExpériencePersonnelle** : L'utilisateur partage une mauvaise expérience personnelle
+      - **AppelÀAction** : L'utilisateur incite les autres à une action contre une marque
+      
+      **MENTION_NEUTRE** (Commentaires informatifs ou neutres):
+      - **OpinionGénérale** : L'utilisateur donne une opinion générale sans critique spécifique
+      - **PartageArticle** : L'utilisateur partage un lien ou une information
+      - **DemandeD'Information** : L'utilisateur pose une question ou demande des informations
+      - **DiscussionThématique** : L'utilisateur participe à une discussion générale sur le sujet
+      
+      {% else %}
+      Ce post provient d'une SOURCE EXTERNE et concerne la veille extérieure.
+      Identifie l'INTENTION principale de ce post parmi les intentions suivantes pour la veille extérieure:
   
-  Identifie l'INTENTION principale de ce post parmi les intentions suivantes pour la veille extérieure:
-  
-  {available_intents}
-  
-  Voici les définitions des intentions pour la VEILLE EXTÉRIEURE:
-  
-  - Information: Le post fournit des informations factuelles sur un sujet (nouveautés, annonces, actualités)
-  - Feedback_Request: Le post demande l'avis du public, feedback ou retour d'expérience
-  
-  IMPORTANT:
-  - Ce post provient d'une source externe (groupe, page, profil personnel)
-  - Le post peut être en arabe, français ou darija
-  - Analyse l'objectif principal: informer ou demander un retour
-  - Considère le ton et le contexte du message
-  - Retourne uniquement l'un de ces thèmes
-  – Si aucun thème ne correspond de manière satisfaisante, retourne None.
-  
-  Post à analyser:
-  {post_text}
-  
-  {format_instructions}
+      {available_intents}
+
+      Voici les définitions des intentions pour la VEILLE EXTÉRIEURE:
+
+      - Information: Le post fournit des informations factuelles sur un sujet (nouveautés, annonces, actualités)
+      - Feedback_Request: Le post demande l'avis du public, feedback ou retour d'expérience
+
+      
+      {% endif %}
+      
+      IMPORTANT:
+      - Ce {{content_type}} provient d'une source externe (groupe, page ou profil personnel)
+      - Le contenu peut être en arabe, français ou darija
+      - Analyse l'objectif principal et le ton du message
+      - Considère le contexte et l'intention du message
+      - Retourne uniquement l'une de ces intentions
+      - Si aucune intention ne correspond de manière satisfaisante, retourne None
+      
+      Contenu à analyser:
+      {{text}}
+      
+      {{format_instructions}}
+
+  sentiment:
+    description: >
+      Analyse du sentiment général d'un post ou commentaire externe dans le contexte des télécommunications.
+    output_schema:
+      - name: sentiment
+        description: Le sentiment identifié du contenu
+      - name: confidence
+        description: Niveau de confiance de la classification de 0 à 1
+      - name: polarity_score
+        description: Score de polarité de -1 (très négatif) à 1 (très positif)
+    prompt_template: >
+      Tu es un expert en analyse de sentiment dans le secteur des télécommunications au Maroc.
+      Le contenu à analyser est un {{content_type}}.
+      
+      {% if content_type == "comment" %}
+      Ce commentaire est associé à un post dont voici les informations d'analyse :
+      
+      Post original:
+      {post_text}
+      
+      Analyse du post original:
+      {post_analysis}
+      
+      IMPORTANT:
+      - Les commentaires peuvent être en arabe, français ou darija
+      - Considère le contexte du post original pour mieux comprendre le sentiment
+      - Les expressions en darija peuvent avoir des nuances particulières
+      {% endif %}
+      
+      Analyse le SENTIMENT général de ce {{content_type}} :
+      
+      Sentiments possibles:
+      - **Positif** : Satisfaction, joie, approbation, enthousiasme
+      - **Négatif** : Insatisfaction, colère, frustration, critique
+      - **Neutre** : Information factuelle, sans émotion particulière
+      
+      IMPORTANT:
+      - Le contenu peut être en arabe, français ou darija
+      - Considère le ton, les émojis, les expressions utilisées
+      - Analyse le contexte global du message
+      - Sois attentif aux nuances culturelles et linguistiques
+      - Retourne également un score de polarité de -1 à 1
+      
+      Contenu à analyser:
+      {{text}}
+      
+      {{format_instructions}}
