@@ -170,21 +170,21 @@ class ExternalContentAnalyzer:
                 "topic_name": result["topic"]["name"],
                 "available_intents": ", ".join(available_intents)
             })
-            
+            intent_confidence = intent_result.get("confidence", 0.0)
+
             # Ajouter l'intention au résultat
             result["intent"] = {
                 "name": intent_result["intent"],
-                "confidence": intent_result["confidence"]
             }
-            
+
             # Mettre à jour la confiance globale
-            result["confidence"] = min(result["confidence"], intent_result["confidence"])
+            result["confidence"] = min(result.get("confidence", 1.0), intent_confidence)
+            
             
         except Exception as e:
             print(f"Erreur lors de la classification d'intention: {e}")
             result["intent"] = {
                 "name": "unknown",
-                "confidence": 0.0
             }
         
         return result
@@ -201,18 +201,21 @@ class ExternalContentAnalyzer:
                 "content_type": content_type,
                 "text": text,
                 "post_text": post_text,
-                "post_analysis": json.dumps(post_analysis, ensure_ascii=False, indent=2) if post_analysis else "N/A",
+                "post_analysis": post_analysis
             })
+            sentiment_confidence = sentiment_result.get("confidence", 0.0)
             result["sentiment"] = {
                 "value": sentiment_result.get("sentiment"),
-                "confidence": sentiment_result.get("confidence", 0.0),
                 "polarity_score": sentiment_result.get("polarity_score", 0.0)
             }
+
+            # La confiance globale devient le minimum de la confiance actuelle et de celle du sentiment.
+            result["confidence"] = min(result.get("confidence", 1.0), sentiment_confidence)
+
         except Exception as e:
             print(f"Erreur lors de l'analyse du sentiment: {e}")
             result["sentiment"] = {
                 "value": "unknown",
-                "confidence": 0.0,
                 "polarity_score": 0.0
             }
         return result
@@ -230,6 +233,7 @@ class ExternalContentAnalyzer:
                 "post_analysis": post_analysis_str,
                 "available_topics": json.dumps(available_topics, ensure_ascii=False, indent=2)
             })
+            
 
             return {
                 "topic": {
@@ -242,7 +246,6 @@ class ExternalContentAnalyzer:
             print(f"Erreur lors de la classification du topic: {e}")
             return {
                 "topic": {"id": "error", "name": "error"},
-                "confidence": 0.0
             }
 
 
@@ -270,7 +273,6 @@ class ExternalContentAnalyzer:
         )
 
         # 2. Classification de l'Intention : Uniquement si un thème pertinent est trouvé.
-        #    Cette étape enrichit le dictionnaire `result` existant.
         topic_id = result.get("topic", {}).get("id")
         if topic_id and topic_id != "none" and topic_id != "error":
             result = await self._classify_intent(
