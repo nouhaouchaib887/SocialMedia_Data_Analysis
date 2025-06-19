@@ -611,16 +611,13 @@ class ContentAnalyzer:
         Analyse un post et retourne sa classification complète selon le schéma Orange
         Classification hiérarchique étape par étape avec intentions
         """
-        relevance_result = await self.relevance_analyzer["chain"].ainvoke({
-            "brand_name": self.brand_name,
-            "content_type": content_type,
-            "text":text
-
-                                                                     })
+                                          
         # 1. Classification du thème principal avec le prompt YAML
         theme_result = await self.theme_classifier["chain"].ainvoke({
             "brand_name": self.brand_name,
             "content_type": content_type,
+            "post_text": post_text,
+            "post_analysis": post_analysis,
             "text":text
 
                                                                      })
@@ -887,6 +884,115 @@ class ContentAnalyzer:
         "parser": relevance_parser,
         "chain": relevance_prompt | self.llm | relevance_parser
     }
+    async def _analyze_relevance(self, content_type,text: str, result: Dict[str, Any], post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
+        """Classifie l'intention du post basée sur le thème identifié"""
+        try:
+            # Récupérer les intentions disponibles pour ce thème
+            relevance_result = await self.relevance_analyzer["chain"].ainvoke({
+            "brand_name": self.brand_name,
+            "content_type": content_type,
+            "post_text": post_text,
+            "post_analysis": post_analysis,
+            "text":text 
+             })
+        
+            relevance_result_ =  {
+                "relevance": {
+                "relevance_post": relevance_result["relevance_post"],
+                "general_relevance": relevance_result["general_relevance"]
+            },
+            "confidence": relevance_result["confidence"]
+        } 
+    
+            
+            # Mettre à jour la confiance globale
+            result["confidence"] = min(result["confidence"], relevance_result_["confidence"])
+            
+        except Exception as e:
+            print(f"Erreur lors de l'analyse de pertinence: {e}")
+            result["relevance"] = {
+                "relevance_post": "unknown",
+                "general_relevance": "unknown",
+                "confidence": 0.0
+            }
+        
+        return result
+    def _create_relevance_analyzer_from_yaml(self):
+        """Crée l'analyseur de pertinence à partir du fichier YAML"""
+        # Récupération de la configuration de l'analyseur de pertinence
+        relevance_config = self.prompts_config.get('analyzers', {}).get('relevance_analyzer', {})
+        if not relevance_config:
+            raise ValueError("Configuration 'relevance_analyzer' non trouvée dans le fichier prompts YAML")
+    
+        # Configuration du schéma de réponse depuis YAML
+        output_schema = relevance_config.get('output_schema', [])
+        relevance_schema = []
+        for schema_item in output_schema:
+            relevance_schema.append(
+            ResponseSchema(
+                name=schema_item['name'],
+                description=schema_item['description']
+            )
+        )
+    
+        relevance_parser = StructuredOutputParser.from_response_schemas(relevance_schema)
+    
+        # Récupération du template de prompt depuis YAML
+        prompt_template = relevance_config.get('prompt_template', '')
+    
+        # Rendu du template avec les variables spécifiques
+        rendered_prompt = self._render_prompt_template(
+        prompt_template,
+        brand_name="{brand_name}",
+        post_text="{post_text}",  # Placeholder pour le texte du post original
+        post_analysis="{post_analysis}",  # Placeholder pour l'analyse du post original
+        text="{text}",  # Placeholder pour le texte du commentaire à analyser
+        format_instructions="{format_instructions}"  # Placeholder pour les instructions de format
+    )
+    
+        relevance_prompt = ChatPromptTemplate.from_template(rendered_prompt)
+        relevance_prompt = relevance_prompt.partial(
+        format_instructions=relevance_parser.get_format_instructions()
+    )
+    
+        return {
+        "prompt": relevance_prompt,
+        "parser": relevance_parser,
+        "chain": relevance_prompt | self.llm | relevance_parser
+    }
+    async def _analyze_relevance(self, content_type,text: str, result: Dict[str, Any], post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
+        """Classifie l'intention du post basée sur le thème identifié"""
+        try:
+            # Récupérer les intentions disponibles pour ce thème
+            relevance_result = await self.relevance_analyzer["chain"].ainvoke({
+            "brand_name": self.brand_name,
+            "content_type": content_type,
+            "post_text": post_text,
+            "post_analysis": post_analysis,
+            "text":text 
+             })
+        
+            relevance_result_ =  {
+                "relevance": {
+                "relevance_post": relevance_result["relevance_post"],
+                "general_relevance": relevance_result["general_relevance"]
+            },
+            "confidence": relevance_result["confidence"]
+        } 
+    
+            
+            # Mettre à jour la confiance globale
+            result["confidence"] = min(result["confidence"], relevance_result_["confidence"])
+            
+        except Exception as e:
+            print(f"Erreur lors de l'analyse de pertinence: {e}")
+            result["relevance"] = {
+                "relevance_post": "unknown",
+                "general_relevance": "unknown",
+                "confidence": 0.0
+            }
+        
+        return result
     
     def analyze_content_sync(self, content_type, text: str,post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
         """Version synchrone de l'analyse de post"""
