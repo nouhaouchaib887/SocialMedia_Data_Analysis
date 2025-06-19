@@ -483,7 +483,7 @@ classifiers:
       - name: polarity_score
         description: Score de polarité de -1 (très négatif) à 1 (très positif)
     prompt_template: >
-      Tu es un expert en analyse de sentiment et d'émotions dans le secteur des télécommunications au Maroc.
+      Tu es un expert en analyse de sentiment et d'émotions pour {brand_name}..
       Le contenu à analyser est un commentaire.
     
       Ce commentaire est associé à un post dont voici les informations d'analyse :
