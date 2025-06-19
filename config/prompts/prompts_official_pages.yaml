@@ -22,7 +22,7 @@ classifiers:
         - Considère les variations sémantiques et linguistiques entre l'arabe et le français
         - Considère le contexte du post original pour mieux comprendre le commentaire
         - Utilise l'analyse du post original pour guider ta classification
-      
+        
         
         Post original:
         {post_text}

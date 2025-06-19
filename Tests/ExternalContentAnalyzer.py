@@ -138,7 +138,7 @@ class ExternalContentAnalyzer:
                         return theme_data[theme_id].get("intents", [])
                 return []
             else:
-                intents_config = self.intents_comments_data.get("comment_intents", [{}])[0].get("veille_exterieure", {})
+                intents_config = self.intents_comments_data.get("themes", [{}])[0].get("veille_exterieure", {})
                 # Agréger toutes les intentions des sous-catégories
                 all_intents = []
                 for category in intents_config.values():
