@@ -128,6 +128,7 @@ class ExternalContentAnalyzer:
             "parser": parser,
             "chain": prompt | self.llm | parser
         }
+    
     def _get_intents_for_topic(self, content_type: str, theme_id: str = "veille_exterieure" , topic_id : str =None) -> List[str]:
         """Récupère les intentions disponibles pour un thème donné"""
         try:
@@ -148,6 +149,7 @@ class ExternalContentAnalyzer:
         except Exception as e:
             print(f"Erreur lors de la récupération des intentions pour le topic {theme_id}: {e}")
             return []
+        
         
     async def _classify_intent(self, content_type,text: str, result: Dict[str, Any] ,post_text: str = "", post_analysis: str = "",theme_id:str ="veille_exterieure", topic_id: str =None) -> Dict[str, Any]:
         """Classifie l'intention du post basée sur le thème identifié"""
@@ -188,42 +190,60 @@ class ExternalContentAnalyzer:
         return result
     
     async def _analyze_relevance(self, content_type,text: str, result: Dict[str, Any], topic_id: str ,post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
-        """Classifie l'intention du post basée sur le thème identifié"""
+
+
+        return result
+    
+    async def _analyze_sentiment(self, content_type: str, text: str, post_text: str, post_analysis: Optional[Dict], result: Dict[str, Any]) -> Dict[str, Any]:
+        """Analyse le sentiment d'un contenu (généralement un commentaire)."""
         try:
-            # Récupérer les intentions disponibles pour ce thème
-            available_intents = self._get_intents_for_topic(topic_id)
-            
-            if not available_intents:
-                print(f"Aucune intention trouvée pour le thème: {topic_id}")
-                return result
-            
-            # Classification de l'intention
-            intent_result = await self.intent_classifier["chain"].ainvoke({
+            sentiment_result = await self.sentiment_classifier["chain"].ainvoke({
                 "content_type": content_type,
-                "post_text": post_text,
-                "post_analysi": post_analysis,
                 "text": text,
-                "topic_name": result["topic"]["name"],
-                "available_intents": ", ".join(available_intents)
+                "post_text": post_text,
+                "post_analysis": json.dumps(post_analysis, ensure_ascii=False, indent=2) if post_analysis else "N/A",
             })
-            
-            # Ajouter l'intention au résultat
-            result["intent"] = {
-                "name": intent_result["intent"],
-                "confidence": intent_result["confidence"]
+            result["sentiment"] = {
+                "value": sentiment_result.get("sentiment"),
+                "confidence": sentiment_result.get("confidence", 0.0),
+                "polarity_score": sentiment_result.get("polarity_score", 0.0)
             }
-            
-            # Mettre à jour la confiance globale
-            result["confidence"] = min(result["confidence"], intent_result["confidence"])
-            
         except Exception as e:
-            print(f"Erreur lors de la classification d'intention: {e}")
-            result["intent"] = {
-                "name": "unknown",
+            print(f"Erreur lors de l'analyse du sentiment: {e}")
+            result["sentiment"] = {
+                "value": "unknown",
+                "confidence": 0.0,
+                "polarity_score": 0.0
+            }
+        return result
+    
+    async def _analyze_topic(self, content_type: str, text: str, post_text: str, post_analysis: Optional[Dict]) -> Dict[str, Any]:
+        """Analyse le thème (topic) d'un contenu et retourne le dictionnaire de résultat initial."""
+        try:
+            post_analysis_str = json.dumps(post_analysis, ensure_ascii=False, indent=2) if post_analysis else "N/A"
+            available_topics = self.topics_data.get("topics", [])
+
+            topic_result = await self.topic_classifier["chain"].ainvoke({
+                "content_type": content_type,
+                "text": text,
+                "post_text": post_text,
+                "post_analysis": post_analysis_str,
+                "available_topics": json.dumps(available_topics, ensure_ascii=False, indent=2)
+            })
+
+            return {
+                "topic": {
+                    "id": topic_result.get("topic_id"),
+                    "name": topic_result.get("topic_name")
+                },
+                "confidence": topic_result.get("confidence", 0.0)
+            }
+        except Exception as e:
+            print(f"Erreur lors de la classification du topic: {e}")
+            return {
+                "topic": {"id": "error", "name": "error"},
                 "confidence": 0.0
             }
-        
-        return result
 
 
     async def analyze_content(self, content_type: str, text: str, post_text: str = "", post_analysis: Optional[Dict] = None) -> Dict[str, Any]:
@@ -241,39 +261,35 @@ class ExternalContentAnalyzer:
         """
         result = {}
 
-        # 1. Classification du Topic (toujours exécutée)
-        available_topics = self.topics_data.get("topics", [])
-        topic_result = await self.topic_classifier["chain"].ainvoke({
-            "content_type": content_type,
-            "text": text,
-            "post_text": post_text,
-            "post_analysis": post_analysis,
-            "available_topics": json.dumps(available_topics, ensure_ascii=False, indent=2)
-        })
-        result["topic"] = {
-            "id": topic_result.get("topic_id"),
-            "name": topic_result.get("topic_name")
-        }
-        result["confidence"] = topic_result.get("confidence", 0.0)
+        # 1. Analyse du Topic : C'est la première étape, elle crée le dictionnaire de résultat.
+        result = await self._analyze_topic(
+            content_type=content_type,
+            text=text,
+            post_text=post_text,
+            post_analysis=post_analysis
+        )
 
-        # 3. Classification des intentions basée sur le thème
-        if topic_result["topic_id"] != "none":
-            result = await self._classify_intent(content_type,text, result)
+        # 2. Classification de l'Intention : Uniquement si un thème pertinent est trouvé.
+        #    Cette étape enrichit le dictionnaire `result` existant.
+        topic_id = result.get("topic", {}).get("id")
+        if topic_id and topic_id != "none" and topic_id != "error":
+            result = await self._classify_intent(
+                content_type=content_type,
+                text=text,
+                post_text=post_text,
+                post_analysis=post_analysis,
+                result=result
+            )
         
-        # 3. Analyse du Sentiment (Conditionnelle, uniquement pour les commentaires)
+        # 3. Analyse du Sentiment (Conditionnelle, maintenant dans sa propre fonction)
         if content_type == "comment":
-            sentiment_result = await self.sentiment_classifier["chain"].ainvoke({
-                "content_type": content_type,
-                "text": text,
-                "post_text": post_text,
-                "post_analysis": json.dumps(post_analysis, ensure_ascii=False, indent=2) if post_analysis else "N/A",
-            })
-            result["sentiment"] = {
-                "value": sentiment_result.get("sentiment"),
-                "confidence": sentiment_result.get("confidence", 0.0),
-                "polarity_score": sentiment_result.get("polarity_score", 0.0)
-            }
-        
+            result = await self._analyze_sentiment(
+                content_type=content_type,
+                text=text,
+                post_text=post_text,
+                post_analysis=post_analysis,
+                result=result
+            )
 
         return result
 
