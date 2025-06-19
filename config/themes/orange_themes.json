@@ -393,7 +393,7 @@
         {
           "id": "recharges_internet",
           "name": "Recharges Internet", 
-          "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web"],
+          "keywords": ["data", "internet", "mégabytes", "gigabytes", "surf", "navigation", "web","*3","*6","*7"],
           "products": [
             {
               "id": "recharge_etoile3",
