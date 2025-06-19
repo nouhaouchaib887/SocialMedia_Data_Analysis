@@ -5,14 +5,14 @@
 # ===================================================================
 
 classifiers:
-  theme:
+  topic:
     description: >
       Analyse et classification des posts et commentaires externes dans des thèmes prédéfinis pour la veille extérieure.
     output_schema:
-      - name: theme_id
-        description: ID du thème identifié
-      - name: theme_name
-        description: Nom du thème identifié
+      - name: topic_id
+        description: ID du topic identifié
+      - name: topic_name
+        description: Nom du topic identifié
       - name: confidence
         description: Niveau de confiance de la classification de 0 à 1
     prompt_template: >
@@ -37,7 +37,7 @@ classifiers:
       
       Analyse ce {{content_type}} provenant d'une source EXTERNE et classifie-le dans l'un des thèmes suivants:
       
-      {available_themes}
+      {available_topics}
       
       IMPORTANT:
       - Ce {{content_type}} provient d'une source externe (groupe, page ou profil personnel)
@@ -64,7 +64,7 @@ classifiers:
       Le contenu à analyser est un {{content_type}}.
       
       {% if content_type == "comment" %}
-      Ce commentaire répond à un post classifié dans le thème : {{parent_post_info.theme_name}}.
+      Ce commentaire répond à un post classifié dans le thème : {{parent_post_info.topic_name}}.
       Ce commentaire provient d'une SOURCE EXTERNE et concerne la veille extérieure.
       
       Identifie l'INTENTION principale de ce {{content_type}} parmi les intentions possibles pour la veille extérieure:

@@ -13,7 +13,7 @@
     "initiative": [
       "Félicitations",
       "Motivation",
-      "DemandeDeDetails",
+      "Demande De Details",
       "Critique",
       "PartageRessources",
       "FeedbackGénéral"
@@ -21,18 +21,18 @@
     "communication_interaction": [
       "Remerciement",
       "RéactionAnnonce",
-      "InscriptionOuParticipation",
-      "DemandePrécisions",
-      "HumourSarcasme",
-      "PartageLien",
+      "Inscription Ou Participation",
+      "Demande Précisions",
+      "Humour Sarcasme",
+      "Partage Lien",
       "TagD’unAmi"
     ],
     "veille_exterieure": {
       "reclamation": [
         "Plainte",
-        "SignalementIncident",
-        "DemandeSuivi",
-        "FeedbackServiceClient",
+        "Signalement Incident",
+        "Demande Suivi",
+        "Feedback Service Client",
         "Escalade",
         "PartageCaptureEcran"
       ],
@@ -45,10 +45,10 @@
         "AppelÀAction"
       ],
       "mention_neutre": [
-        "OpinionGénérale",
-        "PartageArticle",
-        "DemandeD’Information",
-        "DiscussionThématique"
+        "Opinion_Générale",
+        "Partage_Article",
+        "Demande_D’Information",
+        "Discussion_Thématique"
       ]
     }
 }]
