@@ -468,3 +468,63 @@ classifiers:
       - Considère les variations linguistiques et culturelles dans l'expression des idées
     
       {format_instructions}
+
+
+  sentiment:
+    description: >
+      Analyse du sentiment général et de l'émotion principale d'un post ou commentaire externe dans le contexte des télécommunications.
+    output_schema:
+      - name: sentiment
+        description: Le sentiment identifié du contenu ('positif', 'négatif', 'neutre')
+      - name: emotion
+        description: L'émotion principale exprimée ('frustré', 'satisfait', 'reconnaissant', 'interessé', 'indifférent')
+      - name: confidence
+        description: Niveau de confiance de la classification de 0 à 1
+      - name: polarity_score
+        description: Score de polarité de -1 (très négatif) à 1 (très positif)
+    prompt_template: >
+      Tu es un expert en analyse de sentiment et d'émotions dans le secteur des télécommunications au Maroc.
+      Le contenu à analyser est un commentaire.
+    
+      Ce commentaire est associé à un post dont voici les informations d'analyse :
+    
+      Post original:
+      {post_text}
+    
+      Analyse du post original:
+      {post_analysis}
+    
+      IMPORTANT:
+      - Les commentaires peuvent être en arabe, français ou darija
+      - Considère le contexte du post original pour mieux comprendre le sentiment et l'émotion
+      - Les expressions en darija peuvent avoir des nuances particulières
+      - Tiens compte des expressions culturelles marocaines pour exprimer les émotions
+      - Cherche les marqueurs émotionnels comme la ponctuation excessive, les majuscules, les émojis
+
+    
+      Analyse le SENTIMENT général et l'ÉMOTION principale de ce commentaire :
+    
+      Sentiments possibles:
+      - **Positif** : Satisfaction, joie, approbation, enthousiasme
+      - **Négatif** : Insatisfaction, colère, frustration, critique
+      - **Neutre** : Information factuelle, sans émotion particulière
+    
+      Émotions possibles:
+      - **frustré** : le commentaire exprime de la frustration, déception, mécontentement
+      - **satisfait** : le commentaire exprime de la satisfaction, contentement
+      - **reconnaissant** : le commentaire exprime de la gratitude, remerciement
+      - **interessé** : le commentaire exprime de la curiosité, intérêt
+      - **indifférent** : le commentaire n'exprime pas d'émotion particulière
+    
+      IMPORTANT:
+      - Le contenu peut être en arabe, français ou darija
+      - Considère le ton, les émojis, les expressions utilisées
+      - Analyse le contexte global du message
+      - Sois attentif aux nuances culturelles et linguistiques
+      - Retourne également un score de polarité de -1 à 1
+      - L'émotion et le sentiment peuvent être cohérents (ex: frustré/négatif) ou nuancés
+    
+      Contenu à analyser:
+      {{text}}
+    
+      {{format_instructions}}

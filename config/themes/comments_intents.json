@@ -1,6 +1,7 @@
-{ "comment_intents" : [
+{ "themes" : [
     {
-    "offre": [
+    "offre": {
+      "intents": [
       "Question",
       "Plainte",
       "Compliment",
@@ -9,16 +10,19 @@
       "DemandeTechnique",
       "ExpressionInteret",
       "PartageExperience"
-    ],
-    "initiative": [
+    ]
+  },
+    "initiative": {
+      "intents": [
       "Félicitations",
       "Motivation",
       "Demande De Details",
       "Critique",
       "PartageRessources",
       "FeedbackGénéral"
-    ],
-    "communication_interaction": [
+    ]},
+    "communication_interaction": {
+      "intents":[
       "Remerciement",
       "RéactionAnnonce",
       "Inscription Ou Participation",
@@ -26,9 +30,9 @@
       "Humour Sarcasme",
       "Partage Lien",
       "TagD’unAmi"
-    ],
+    ]},
     "veille_exterieure": {
-      "reclamation": [
+      "reclamation":  [
         "Plainte",
         "Signalement Incident",
         "Demande Suivi",
