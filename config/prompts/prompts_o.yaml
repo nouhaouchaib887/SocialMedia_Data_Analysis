@@ -433,3 +433,38 @@ classifiers:
       {text}
       
       {format_instructions}
+  relevance_analyzer:
+    description: >
+      Analyse la pertinence d'un commentaire par rapport au post original et au secteur télécoms.
+    output_schema:
+      - name: relevance_post
+        description: Pertinence du commentaire par rapport au topic du post original (true/false)
+      - name: general_relevance
+        description: Pertinence du commentaire par rapport au secteur des télécoms (true/false)
+      - name: confidence
+        description: Niveau de confiance de l'analyse de 0 à 1
+    prompt_template: >
+      Tu es un expert en analyse de contenu pour {brand_name}. Analyse ce commentaire et détermine sa pertinence.
+    
+      Post original:
+      {post_text}
+    
+      Analyse du post original:
+      {post_analysis}
+    
+      Commentaire à analyser:
+      {text}
+    
+      Détermine:
+      1. Si le commentaire est pertinent par rapport au contenu du post original (reste dans le même sujet)
+      2. Si le commentaire est lié à {brand_name} ou au secteur des télécoms en général
+    
+      IMPORTANT:
+      - Les commentaires peuvent être en arabe ou en français
+      - Tiens compte du contexte culturel marocain
+      - Cherche les liens sémantiques, pas seulement lexicaux
+      - Utilise l'analyse du post original pour te guider
+      - Même si le commentaire est en arabe, utilise la compréhension sémantique pour évaluer la pertinence
+      - Considère les variations linguistiques et culturelles dans l'expression des idées
+    
+      {format_instructions}
