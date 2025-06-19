@@ -10,27 +10,31 @@ import yaml
 from jinja2 import Template
 
 class ExternalContentAnalyzer:
-    def __init__(self, google_api_key: str, 
-                 topics_file: str = "../config/themes/general_themes.json",
-                 intents_file: str = "../config/themes/comments_intents.json", 
-                 prompts_file: str = "../config/prompts/search_prompts.yaml"):
+    def __init__(self, google_api_key: str,
+                 topics_file="config/themes/general_themes.json",
+                 intents_post_file="config/themes/posts_intents.json",
+                 intents_comments_file="config/themes/comments_intents.json",
+                 prompts_file="config/prompts/search_prompts.yaml"):
         """
         Initialise l'analyseur de contenu externe (veille extérieure).
         
         Args:
             google_api_key: Clé API Google Gemini.
             topics_file: Chemin vers le fichier JSON des thèmes généraux.
-            intents_file: Chemin vers le fichier JSON des intentions des commentaires.
+            intents_post_file: Chemin vers le fichier JSON des intentions des posts.
+            intents_comments_file: Chemin vers le fichier JSON des intentions des commentaires.
             prompts_file: Chemin vers le fichier YAML des prompts structurés.
         """
         self.topics_file = topics_file
-        self.intents_file = intents_file
+        self.intents_posts_file = intents_post_file
+        self.intents_comments_file = intents_comments_file
         self.prompts_file = prompts_file
         self.google_api_key = google_api_key
 
         # Chargement des configurations
         self.topics_data = self._load_json_config(self.topics_file)
-        self.intents_data = self._load_json_config(self.intents_file)
+        self.intents_posts_data = self._load_json_config(self.intents_posts_file)
+        self.intents_comments_data = self._load_json_config(self.intents_comments_file)
         self.prompts_config = self._load_prompts_config()
         
         # Configuration de la clé API Google
@@ -124,26 +128,103 @@ class ExternalContentAnalyzer:
             "parser": parser,
             "chain": prompt | self.llm | parser
         }
-
-    def _get_intents_for_veille_exterieure(self, content_type: str) -> List[str]:
-        """Récupère les intentions disponibles pour la veille extérieure."""
+    def _get_intents_for_topic(self, content_type: str, theme_id: str = "veille_exterieure" , topic_id : str =None) -> List[str]:
+        """Récupère les intentions disponibles pour un thème donné"""
         try:
-            intents_config = self.intents_data.get("comment_intents", [{}])[0].get("veille_exterieure", {})
-            if content_type == "comment":
+            if content_type == "post":
+                for theme_data in self.intents_posts_data.get("themes", []):
+                    if theme_id in theme_data:
+                        return theme_data[theme_id].get("intents", [])
+                return []
+            else:
+                intents_config = self.intents_comments_data.get("comment_intents", [{}])[0].get("veille_exterieure", {})
                 # Agréger toutes les intentions des sous-catégories
                 all_intents = []
                 for category in intents_config.values():
                     if isinstance(category, list):
                         all_intents.extend(category)
                 return all_intents
-            else: # post
-                # Pour les posts, les intentions sont définies directement dans le prompt YAML.
-                # On peut retourner une liste indicative ou vide. Ici on retourne les intentions de commentaires pour l'exemple.
-                # L'idéal serait de les définir aussi dans le JSON.
-                return ["Information", "Feedback_Request", "Critique"] # Exemple, comme dans votre YAML
+            
         except Exception as e:
-            print(f"Erreur lors de la récupération des intentions pour la veille extérieure: {e}")
+            print(f"Erreur lors de la récupération des intentions pour le topic {theme_id}: {e}")
             return []
+        
+    async def _classify_intent(self, content_type,text: str, result: Dict[str, Any] ,post_text: str = "", post_analysis: str = "",theme_id:str ="veille_exterieure", topic_id: str =None) -> Dict[str, Any]:
+        """Classifie l'intention du post basée sur le thème identifié"""
+        try:
+            # Récupérer les intentions disponibles pour ce thème
+            available_intents = self._get_intents_for_topic("post","veille_exterieure")
+            
+            if not available_intents:
+                print(f"Aucune intention trouvée pour le topic: {theme_id}")
+                return result
+            
+            # Classification de l'intention
+            intent_result = await self.intent_classifier["chain"].ainvoke({
+                "content_type": content_type,
+                "post_text": post_text,
+                "post_analysi": post_analysis,
+                "text": text,
+                "topic_name": result["topic"]["name"],
+                "available_intents": ", ".join(available_intents)
+            })
+            
+            # Ajouter l'intention au résultat
+            result["intent"] = {
+                "name": intent_result["intent"],
+                "confidence": intent_result["confidence"]
+            }
+            
+            # Mettre à jour la confiance globale
+            result["confidence"] = min(result["confidence"], intent_result["confidence"])
+            
+        except Exception as e:
+            print(f"Erreur lors de la classification d'intention: {e}")
+            result["intent"] = {
+                "name": "unknown",
+                "confidence": 0.0
+            }
+        
+        return result
+    
+    async def _analyze_relevance(self, content_type,text: str, result: Dict[str, Any], topic_id: str ,post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
+        """Classifie l'intention du post basée sur le thème identifié"""
+        try:
+            # Récupérer les intentions disponibles pour ce thème
+            available_intents = self._get_intents_for_topic(topic_id)
+            
+            if not available_intents:
+                print(f"Aucune intention trouvée pour le thème: {topic_id}")
+                return result
+            
+            # Classification de l'intention
+            intent_result = await self.intent_classifier["chain"].ainvoke({
+                "content_type": content_type,
+                "post_text": post_text,
+                "post_analysi": post_analysis,
+                "text": text,
+                "topic_name": result["topic"]["name"],
+                "available_intents": ", ".join(available_intents)
+            })
+            
+            # Ajouter l'intention au résultat
+            result["intent"] = {
+                "name": intent_result["intent"],
+                "confidence": intent_result["confidence"]
+            }
+            
+            # Mettre à jour la confiance globale
+            result["confidence"] = min(result["confidence"], intent_result["confidence"])
+            
+        except Exception as e:
+            print(f"Erreur lors de la classification d'intention: {e}")
+            result["intent"] = {
+                "name": "unknown",
+                "confidence": 0.0
+            }
+        
+        return result
+
 
     async def analyze_content(self, content_type: str, text: str, post_text: str = "", post_analysis: Optional[Dict] = None) -> Dict[str, Any]:
         """
@@ -166,7 +247,7 @@ class ExternalContentAnalyzer:
             "content_type": content_type,
             "text": text,
             "post_text": post_text,
-            "post_analysis": json.dumps(post_analysis, ensure_ascii=False, indent=2) if post_analysis else "N/A",
+            "post_analysis": post_analysis,
             "available_topics": json.dumps(available_topics, ensure_ascii=False, indent=2)
         })
         result["topic"] = {
@@ -175,20 +256,9 @@ class ExternalContentAnalyzer:
         }
         result["confidence"] = topic_result.get("confidence", 0.0)
 
-        # 2. Classification de l'Intention (toujours exécutée)
-        available_intents = self._get_intents_for_veille_exterieure(content_type)
-        parent_post_info = post_analysis.get("topic", {}) if post_analysis else {}
-        
-        intent_result = await self.intent_classifier["chain"].ainvoke({
-            "content_type": content_type,
-            "text": text,
-            "parent_post_info": parent_post_info,
-            "available_intents": ", ".join(available_intents)
-        })
-        result["intent"] = {
-            "name": intent_result.get("intent"),
-            "confidence": intent_result.get("confidence", 0.0)
-        }
+        # 3. Classification des intentions basée sur le thème
+        if topic_result["topic_id"] != "none":
+            result = await self._classify_intent(content_type,text, result)
         
         # 3. Analyse du Sentiment (Conditionnelle, uniquement pour les commentaires)
         if content_type == "comment":
@@ -204,8 +274,6 @@ class ExternalContentAnalyzer:
                 "polarity_score": sentiment_result.get("polarity_score", 0.0)
             }
         
-        # L'ancien bloc `else` qui ajoutait `sentiment: None` a été supprimé.
-        # La clé 'sentiment' ne sera donc ajoutée au dictionnaire que si le contenu est un commentaire.
 
         return result
 
@@ -228,7 +296,8 @@ async def main():
         analyzer = ExternalContentAnalyzer(
             google_api_key=GOOGLE_API_KEY,
             topics_file="config/themes/general_themes.json",
-            intents_file="config/themes/comments_intents.json",
+            intents_post_file="config/themes/posts_intents.json",
+            intents_comments_file="config/themes/comments_intents.json",
             prompts_file="config/prompts/search_prompts.yaml"
         )
         
