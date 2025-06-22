@@ -24,8 +24,7 @@ class TiktokProducer:
                  topic: str = "tiktok-data",
                  max_posts: int = 2,
                  max_comments_per_post: int = 3,
-                 days_back: int = 15,
-                 backup_dir: str = "tiktok_data_backup"):
+                 days_back: int = 15):
         """
         Initialize the Tiktok Producer.
         
@@ -42,7 +41,6 @@ class TiktokProducer:
         """
         self.kafka_config = kafka_config
         self.topic = topic
-        self.backup_dir = backup_dir
         # Setup logging
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -61,8 +59,7 @@ class TiktokProducer:
         self.producer = None
         self._init_kafka_producer()
         
-        # Create backup directory
-        os.makedirs(backup_dir, exist_ok=True)
+        
         
         # Initialize counters
         self.published_posts = 0
@@ -129,16 +126,13 @@ class TiktokProducer:
                 'version': '1.0'
             },
             # Collection metadata
-            'collection_metadata': {
-                'collector_brand': self.collector.brand_name,
-                'collector_page': self.collector.profile_name,
-                'collection_params': {
+            'collection_params': {
                     'max_posts': self.collector.max_posts,
                     'max_comments_per_post': self.collector.max_comments_per_post,
                     'days_back': self.collector.days_back,
                     'from_date': getattr(self.collector, 'from_date', None)
                 }
-            }
+            
 
         }
         
@@ -194,37 +188,7 @@ class TiktokProducer:
             self.logger.error(f"❌ Unexpected error publishing to {topic}: {str(e)}")
             return False
     
-    def _save_backup_file(self, data: List[Dict], data_type: str) -> str:
-        """
-        Save data to backup JSON file.
-        
-        Args:
-            data (list): Data to save
-            data_type (str): Type of data (posts, comments, etc.)
-            
-        Returns:
-            str: Backup filename
-        """
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{self.collector.brand_name}_{data_type}_{timestamp}.json"
-        filepath = os.path.join(self.backup_dir, filename)
-        
-        backup_data = {
-            'metadata': {
-                'brand_name': self.collector.brand_name,
-                'profile_name': self.collector.profile_name,
-                'collection_time': timestamp,
-                'data_type': data_type,
-                'total_records': len(data)
-            },
-            'data': data
-        }
-        
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(backup_data, f, ensure_ascii=False, indent=2)
-        
-        self.logger.info(f"💾 Backup saved: {filepath}")
-        return filepath
+    
     
     def publish_post_with_comments(self, post: Dict) -> bool:
         """
@@ -267,8 +231,6 @@ class TiktokProducer:
         self.failed_posts = 0
         self.total_comments_published = 0
         
-        backup_files = []
-        collected_posts_data = []
         
         try:
             # Collect posts one by one and publish immediately with comments
@@ -276,7 +238,7 @@ class TiktokProducer:
             
             if not posts:
                 self.logger.warning("❌ No posts collected")
-                return self._create_summary(), backup_files
+                return self._create_summary()
             
             self.logger.info(f"📊 Processing {len(posts)} posts...")
             
@@ -305,8 +267,7 @@ class TiktokProducer:
                 
                     # Now publish the complete post with comments
                     post_published = self.publish_post_with_comments(post)
-                    if post_published:
-                        collected_posts_data.append(post)
+                
                 
                     # Add delay to avoid rate limiting (except for last post)
                     if i < len(posts):
@@ -317,15 +278,7 @@ class TiktokProducer:
             self.logger.error(f"❌ Error during collection: {str(e)}")
         
         finally:
-            # Always create backups of what we managed to collect
-            if collected_posts_data:
-                # Create backup with the same structure as published to Kafka
-                enriched_backup_data = []
-                for post in collected_posts_data:
-                    enriched_backup_data.append(self._enrich_post_data(post))
-                
-                backup_file = self._save_backup_file(enriched_backup_data, "Tiktok_posts_with_comments")
-                backup_files.append(backup_file)
+            
             
             # Flush and close Kafka producer
             if self.producer:
@@ -338,7 +291,7 @@ class TiktokProducer:
         summary = self._create_summary()
         self._print_final_summary(summary)
         
-        return summary, backup_files
+        return summary
     
     def _create_summary(self) -> Dict:
         """Create summary statistics."""
@@ -397,22 +350,21 @@ def main():
     # Initialize producer
     producer = TiktokProducer(
         kafka_config=kafka_config,
-        apify_token="",
+        apify_token="apify_api_c84soB2gwlEwt3wzLhENao0KardhjD42qd0j",
         brand_name="orangemaroc",
         profile_name="orangemaroc",
-        topic="mon_topic" , # Single topic for posts with comments
-        max_posts=50,
-        max_comments_per_post=500,
+        topic="tiktok-data-test" , # Single topic for posts with comments
+        max_posts=2,
+        max_comments_per_post=2,
         days_back=100
     )
     
     try:
         # Run collection and publishing
-        summary, backup_files = producer.collect_and_publish()
+        summary = producer.collect_and_publish()
         
         print(f"\n💾 Backup files created:")
-        for file in backup_files:
-            print(f"   📁 {file}")
+        
             
     finally:
         # Always close the producer

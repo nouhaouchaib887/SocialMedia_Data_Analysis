@@ -1,4 +1,10 @@
-[
+{
+  "metadata": {
+    "brand_name": "inwi.ma",
+    "search_query": "#انوي",
+    "data_type": "facebook_search_post_with_comments"
+  },
+  "data": [
   {
     "post_id": "122121254990821642",
     "source_id": "61574649282594",
@@ -9623,3 +9629,4 @@
     ]
   }
 ]
+}

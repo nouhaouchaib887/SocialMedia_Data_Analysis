@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "brand_name": "orangemaroc",
+    "page_name": "orangemaroc",
+    "collection_time": "20250620_014247",
+    "data_type": "facebook_posts_with_comments",
+    "total_records": 2
+  },
+  "data": [
+    {
+      "post_id": "1110698611095541",
+      "source_id": "100064662374992",
+      "created_time": "2025-06-19T08:31:09",
+      "permalink": "https://www.facebook.com/orangemaroc/posts/1110698611095541",
+      "page_id": "100064662374992",
+      "page_name": "orangemaroc",
+      "message": "⏳🤫…",
+      "media_type": "Video",
+      "media_url": "https://www.facebook.com/reel/1085134030198369/",
+      "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/502473286_574017645507922_1136631229758146141_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=1&ccb=1-7&_nc_sid=7965db&_nc_ohc=xibmL-COIioQ7kNvwHbSZ9o&_nc_oc=Adkpaw3oFMo51bnRd4MAopqGqeOhpdakE35nltYzvWnKCsG62WZSqUtfpxvJFjwBACE&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=kVlzpOnfpcQkCtxM-Nl65w&oh=00_AfP8ZVfUQ0rHPzcv044NXysQiJSSa-9EUGGf4zCBrvIvWw&oe=685A9A16",
+      "can_share": true,
+      "shares": 79,
+      "can_comment": true,
+      "comments_count": 179,
+      "can_like": true,
+      "like_count": 4054,
+      "hashtags": [],
+      "mentions": [],
+      "platform": "facebook",
+      "brand_name": "orangemaroc",
+      "comments": [
+        {
+          "comment_id": "10000135976700492",
+          "comment_url": "https://www.facebook.com/reel/1085134030198369/?comment_id=10000135976700492",
+          "user_id": "pfbid0EPr8aupqCTxes3wC9F6MxA8JJ5dzwPumTkSyXyoHyQkUAen9wo1Ha9a2UTWqDMzYl",
+          "user_name": "Àmirat Rohiha",
+          "user_url": null,
+          "created_time": "2025-06-19T08:40:30.000Z",
+          "message": "سلام عليكم وش نجمة 6 مطلوقة من فضلكم",
+          "like_count": "6",
+          "reply_count": 8,
+          "hashtags": [],
+          "mentions": [],
+          "platform": "facebook",
+          "brand_name": "orangemaroc",
+          "comment_metadata": {
+            "parent_post_id": "1110698611095541",
+            "comment_engagement_score": 14,
+            "comment_length": 36,
+            "has_hashtags": false,
+            "has_mentions": false
+          }
+        },
+        {
+          "comment_id": "726139040106110",
+          "comment_url": "https://www.facebook.com/reel/1085134030198369/?comment_id=726139040106110",
+          "user_id": "pfbid0bToNDoCEZmg9HZsrkYhwcecweGQxvGjcWVFqJ27GrCnrR4UKvST7MUfxajYnwikZl",
+          "user_name": "Tarik Bouka",
+          "user_url": null,
+          "created_time": "2025-06-19T18:21:59.000Z",
+          "message": "Très déçu par le service client.\nCela fait plus d’un mois que j’attends l’activation de mon abonnement fibre, malgré de nombreux appels, relances et promesses non tenues. À chaque fois, on me demande de patienter, sans aucun suivi sérieux ni solution concrète. Un service client injoignable et inefficace, qui donne une très mauvaise image de l'entreprise.\nJe ne recommande pas du tout cette expérience, et j'espère qu'une vraie prise en charge sera enfin faite.\nNuméro de la ligne 05 21 12 44 54\nPour référence : ligne n° 05 21 12 44 54 (si quelqu’un souhaite enfin prendre ce dossier au sérieux).",
+          "like_count": "0",
+          "reply_count": 1,
+          "hashtags": [],
+          "mentions": [],
+          "platform": "facebook",
+          "brand_name": "orangemaroc",
+          "comment_metadata": {
+            "parent_post_id": "1110698611095541",
+            "comment_engagement_score": 1,
+            "comment_length": 598,
+            "has_hashtags": false,
+            "has_mentions": false
+          }
+        }
+      ],
+      "kafka_metadata": {
+        "topic": "facebook-data-test",
+        "produced_at": "2025-06-20T00:42:47.320082",
+        "producer_timestamp": 1750380167320,
+        "message_type": "facebook_post_with_comments",
+        "version": "1.0"
+      },
+      "collection_metadata": {
+        "collector_brand": "orangemaroc",
+        "collector_page": "orangemaroc",
+        "collection_params": {
+          "max_posts": 2,
+          "max_comments_per_post": 2,
+          "days_back": 15,
+          "from_date": "2025-06-05T00:00:00.000Z"
+        }
+      },
+      "statistics": {
+        "total_comments": 2,
+        "total_hashtags": 0,
+        "total_mentions": 0,
+        "engagement_score": 4312
+      }
+    },
+    {
+      "post_id": "1109528371212565",
+      "source_id": "100064662374992",
+      "created_time": "2025-06-17T19:28:48",
+      "permalink": "https://www.facebook.com/orangemaroc/posts/1109528371212565",
+      "page_id": "100064662374992",
+      "page_name": "orangemaroc",
+      "message": "⚽️🧡\n\nبرنامج Orange Koora Talents وصل لمدينة العيون 🔥\n\nخليوكم متبعين معانا المراحل الجاية اللي كلها حماس وشغف ⚽️🧡\n\n#OrangeKayna",
+      "media_type": "Video",
+      "media_url": "https://www.facebook.com/reel/1251113536742818/",
+      "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/508458050_1805206757082107_5466023722038451909_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=100&ccb=1-7&_nc_sid=282d23&_nc_ohc=bRqvmzRwvpQQ7kNvwEYNr_U&_nc_oc=AdniA6n7qjy4TmKGvz65OcT_VguPeHo0j5yt5apTuUmVH5gzzAknARL9JZQMfYV57XY&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=kVlzpOnfpcQkCtxM-Nl65w&oh=00_AfPRyGJrm48cPFzXmQv1uRK4o_VWcUeD2GKUb-RVaacgDA&oe=685A7726",
+      "can_share": true,
+      "shares": 15,
+      "can_comment": true,
+      "comments_count": 164,
+      "can_like": true,
+      "like_count": 299,
+      "hashtags": [
+        "OrangeKayna"
+      ],
+      "mentions": [],
+      "platform": "facebook",
+      "brand_name": "orangemaroc",
+      "comments": [
+        {
+          "comment_id": "1107875164522680",
+          "comment_url": "https://www.facebook.com/reel/1251113536742818/?comment_id=1107875164522680",
+          "user_id": "pfbid0UbBaz4Qr1weRkuGfoz32q56hp4yDR3q8PHdtCiSJrEfJdLMNMQW9bsh7Zewtn5Fxl",
+          "user_name": "لعزيب اكراراد",
+          "user_url": "https://www.facebook.com/ibrahim.ait.35110",
+          "created_time": "2025-06-17T19:32:55.000Z",
+          "message": "سلام واش مزال عرض *6؟",
+          "like_count": "2",
+          "reply_count": 2,
+          "hashtags": [],
+          "mentions": [],
+          "platform": "facebook",
+          "brand_name": "orangemaroc",
+          "comment_metadata": {
+            "parent_post_id": "1109528371212565",
+            "comment_engagement_score": 4,
+            "comment_length": 21,
+            "has_hashtags": false,
+            "has_mentions": false
+          }
+        },
+        {
+          "comment_id": "1408189810424833",
+          "comment_url": "https://www.facebook.com/reel/1251113536742818/?comment_id=1408189810424833",
+          "user_id": "pfbid02MNUFqormDJroBMNRXGZHR4k7nWHNoLZt93gB8wFV2AhuWzaArrVktdzfQoDCnnLxl",
+          "user_name": "Hicham Kassid",
+          "user_url": "https://www.facebook.com/hajar.kassim.98",
+          "created_time": "2025-06-17T19:33:36.000Z",
+          "message": "خويا كاين عرض نجمة 6",
+          "like_count": "3",
+          "reply_count": 7,
+          "hashtags": [],
+          "mentions": [],
+          "platform": "facebook",
+          "brand_name": "orangemaroc",
+          "comment_metadata": {
+            "parent_post_id": "1109528371212565",
+            "comment_engagement_score": 10,
+            "comment_length": 20,
+            "has_hashtags": false,
+            "has_mentions": false
+          }
+        }
+      ],
+      "kafka_metadata": {
+        "topic": "facebook-data-test",
+        "produced_at": "2025-06-20T00:42:47.320155",
+        "producer_timestamp": 1750380167320,
+        "message_type": "facebook_post_with_comments",
+        "version": "1.0"
+      },
+      "collection_metadata": {
+        "collector_brand": "orangemaroc",
+        "collector_page": "orangemaroc",
+        "collection_params": {
+          "max_posts": 2,
+          "max_comments_per_post": 2,
+          "days_back": 15,
+          "from_date": "2025-06-05T00:00:00.000Z"
+        }
+      },
+      "statistics": {
+        "total_comments": 2,
+        "total_hashtags": 1,
+        "total_mentions": 0,
+        "engagement_score": 478
+      }
+    }
+  ]
+}

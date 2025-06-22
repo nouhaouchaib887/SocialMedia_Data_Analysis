@@ -43,7 +43,6 @@ class FacebookSearchProducer:
         """
         self.kafka_config = kafka_config
         self.topic = topic
-        self.backup_dir = backup_dir
         
         # Setup logging
         logging.basicConfig(level=logging.INFO)
@@ -131,24 +130,13 @@ class FacebookSearchProducer:
                 'version': '1.0'
             },
             # Collection metadata
-            'collection_metadata': {
-                'collector_brand': self.collector.brand_name,
-                'search_query': self.collector.search_query,
-                'page_name': self.collector.page_name,
-                'collection_params': {
+            
+            'collection_params': {
+                    'search_query': self.collector.search_query,
                     'max_posts': self.collector.max_posts,
                     'max_comments_per_post': self.collector.max_comments_per_post,
                     'post_time_range': self.collector.post_time_range
-                }
-            },
-            # Statistics with safe type conversion
-            'statistics': {
-                'total_comments': safe_list_len(post.get('comments', [])),
-                'total_hashtags': safe_list_len(post.get('hashtags', [])),
-                'total_mentions': safe_list_len(post.get('mentions', [])),
-                'engagement_score': (safe_int(post.get('like_count', 0)) + 
-                                   safe_int(post.get('shares', 0)) + 
-                                   safe_int(post.get('comments_count', 0)))
+                
             }
         }
         
@@ -204,40 +192,7 @@ class FacebookSearchProducer:
             self.logger.error(f"❌ Unexpected error publishing to {topic}: {str(e)}")
             return False
     
-    def _save_backup_file(self, data: List[Dict], data_type: str) -> str:
-        """
-        Save data to backup JSON file.
-        
-        Args:
-            data (list): Data to save
-            data_type (str): Type of data (posts, comments, etc.)
-            
-        Returns:
-            str: Backup filename
-        """
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        safe_query = self.collector.search_query.replace('#', '').replace(' ', '_').lower() if self.collector.search_query else "search"
-        filename = f"{self.collector.brand_name}_{safe_query}_{data_type}_{timestamp}.json"
-        filepath = os.path.join(self.backup_dir, filename)
-        
-        backup_data = {
-            'metadata': {
-                'brand_name': self.collector.brand_name,
-                'search_query': self.collector.search_query,
-                'page_name': self.collector.page_name,
-                'collection_time': timestamp,
-                'data_type': data_type,
-                'total_records': len(data),
-                'post_time_range': self.collector.post_time_range
-            },
-            'data': data
-        }
-        
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(backup_data, f, ensure_ascii=False, indent=2)
-        
-        self.logger.info(f"💾 Backup saved: {filepath}")
-        return filepath
+   
     
     def publish_post_with_comments(self, post: Dict) -> bool:
         """
@@ -281,8 +236,7 @@ class FacebookSearchProducer:
         self.failed_posts = 0
         self.total_comments_published = 0
         
-        backup_files = []
-        collected_posts_data = []
+       
         
         try:
             # Collect all data using the FacebookSearchCollector
@@ -290,7 +244,7 @@ class FacebookSearchProducer:
             
             if not posts:
                 self.logger.warning("❌ No posts collected")
-                return self._create_summary(), backup_files
+                return self._create_summary()
             
             self.logger.info(f"📊 Processing {len(posts)} posts...")
             
@@ -299,8 +253,7 @@ class FacebookSearchProducer:
                 
                 # Publish the post with comments (comments are already included by FacebookSearchCollector)
                 post_published = self.publish_post_with_comments(post)
-                if post_published:
-                    collected_posts_data.append(post)
+               
                 
                 # Add delay to avoid overwhelming Kafka (except for last post)
                 if i < len(posts):
@@ -312,15 +265,6 @@ class FacebookSearchProducer:
             self.logger.error(f"❌ Error during collection: {str(e)}")
         
         finally:
-            # Always create backups of what we managed to collect
-            if collected_posts_data:
-                # Create backup with the same structure as published to Kafka
-                enriched_backup_data = []
-                for post in collected_posts_data:
-                    enriched_backup_data.append(self._enrich_post_data(post))
-                
-                backup_file = self._save_backup_file(enriched_backup_data, "facebook_search_posts_with_comments")
-                backup_files.append(backup_file)
             
             # Flush and close Kafka producer
             if self.producer:
@@ -333,7 +277,7 @@ class FacebookSearchProducer:
         summary = self._create_summary()
         self._print_final_summary(summary)
         
-        return summary, backup_files
+        return summary
     
     def _create_summary(self) -> Dict:
         """Create summary statistics."""
@@ -399,10 +343,10 @@ def main():
     # Example :  Search by #brand name
     producer_search= FacebookSearchProducer(
         kafka_config=kafka_config,
-        apify_token="",
+        apify_token="apify_api_c84soB2gwlEwt3wzLhENao0KardhjD42qd0j",
         brand_name="orangemaroc",
         search_query="#orangemaroc",
-        topic="facebook-search-data",
+        topic="facebook-search-data-test",
         max_posts=2,
         max_comments_per_post=2,
         post_time_range="30d"
@@ -411,11 +355,9 @@ def main():
     try:
         # Run collection and publishing for hashtag search
         print("=== HASHTAG SEARCH COLLECTION ===")
-        summary1, backup_files1 = producer_search.collect_and_publish()
+        summary1 = producer_search.collect_and_publish()
         
-        print(f"\n💾 Backup files created for hashtag search:")
-        for file in backup_files1:
-            print(f"   📁 {file}")
+        
         
             
     finally:

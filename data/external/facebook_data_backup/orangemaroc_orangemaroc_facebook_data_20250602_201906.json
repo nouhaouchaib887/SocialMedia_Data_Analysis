@@ -1,4 +1,10 @@
-[
+{
+  "metadata": {
+    "brand_name": "inwi.ma",
+    "search_query": "#orangemaroc",
+    "data_type": "facebook_search_post_with_comments",
+  },
+  "data": [
   {
     "post_id": "1032578052240931",
     "source_id": "100064662374992",
@@ -3452,3 +3458,4 @@
     ]
   }
 ]
+}

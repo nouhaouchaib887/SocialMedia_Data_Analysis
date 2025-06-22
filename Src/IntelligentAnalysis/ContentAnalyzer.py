@@ -11,7 +11,7 @@ from jinja2 import Template
 
 
 class ContentAnalyzer:
-    def __init__(self, google_api_key: str, brand_name: str, intents_file_posts: str = "../../config/themes/posts_intents.json",intents_file_comments: str = "../../config/themes/comments_intents.json", prompts_file: str = "../../config/prompts/prompts_o.yaml"):
+    def __init__(self, google_api_key: str, brand_name: str, intents_file_posts: str = "../config/themes/posts_intents.json",intents_file_comments: str = "../config/themes/comments_intents.json", prompts_file: str = "../config/prompts/prompts_o.yaml"):
         """
         Initialise l'analyseur de posts Orange
         
@@ -21,7 +21,7 @@ class ContentAnalyzer:
             intents_file: Chemin vers le fichier de configuration JSON des intentions
             prompts_file: Chemin vers le fichier YAML des prompts
         """
-        self.config_file = f"../../config/themes/{brand_name}_themes.json"
+        self.config_file = f"../config/themes/{brand_name}_themes.json"
         self.intents_file_posts = intents_file_posts
         self.intents_file_comments = intents_file_comments
         self.prompts_file = prompts_file
@@ -288,7 +288,7 @@ class ContentAnalyzer:
              "brand_name": self.brand_name,
                 "content_type": content_type,
                 "post_text": post_text,
-                "post_analysis": post_analysis,
+                "post_analysis": json.dumps(post_analysis, indent=2, ensure_ascii=False),
                 "text":text
 
                                                                      })
@@ -329,7 +329,7 @@ class ContentAnalyzer:
                 "brand_name": self.brand_name,
                 "content_type": content_type,
                 "post_text": post_text,
-                "post_analysi": post_analysis,
+                "post_analysi":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
                 "text": text,
                 "theme_name": result["theme"]["name"],
                 "available_intents": ", ".join(available_intents)
@@ -373,7 +373,7 @@ class ContentAnalyzer:
             "content_type": content_type,
             "categories":  categories,
             "post_text": post_text,
-            "post_analysis": post_analysis,
+            "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
             "text": text})
         
         result["category_offre"] = {
@@ -401,7 +401,7 @@ class ContentAnalyzer:
                         "brand_name": self.brand_name,
                         "content_type": content_type,
                         "post_text": post_text,
-                        "post_analysis": post_analysis,
+                        "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
                         "text": text,
                         "category_name": category_result["category_name"],
                         "subcategories": json.dumps(subcategories, ensure_ascii=False, indent=2)
@@ -423,7 +423,7 @@ class ContentAnalyzer:
                                 "brand_name": self.brand_name,
                                 "content_type": content_type,
                                 "post_text": post_text,
-                                "post_analysis": post_analysis,
+                                "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
                                 "text": text,
                                 "subcategory_name": subcategory_result["subcategory_name"],
                                 "products": json.dumps(products, ensure_ascii=False, indent=2)
@@ -455,7 +455,7 @@ class ContentAnalyzer:
             "content_type": content_type,
             "post_text": post_text,
             "initiatives": initiatives,
-            "post_analysis": post_analysis,
+            "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
             "text": text})
         
         result["initiative"] = {
@@ -477,7 +477,7 @@ class ContentAnalyzer:
                         "brand_name": self.brand_name,
                         "content_type": content_type,
                         "post_text": post_text,
-                        "post_analysis": post_analysis,
+                        "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
                         "text": text,
                         "initiative_name": initiative_result["initiative_name"],
                         "events": json.dumps(events, ensure_ascii=False, indent=2)
@@ -508,7 +508,7 @@ class ContentAnalyzer:
             "brand_name": self.brand_name,
             "content_type": content_type,
             "post_text": post_text,
-            "post_analysis": post_analysis,
+            "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
             "topics": topics,
             "text": text})
         
@@ -531,7 +531,7 @@ class ContentAnalyzer:
                         "brand_name": self.brand_name,
                         "content_type": content_type,
                         "post_text": post_text,
-                        "post_analysis": post_analysis,
+                        "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
                         "text": text,
                         "topic_name": topic_result["topic_name"],
                         "subtopics": json.dumps(subtopics, ensure_ascii=False, indent=2)
@@ -550,7 +550,7 @@ class ContentAnalyzer:
             relevance_result = await self.relevance_analyzer["chain"].ainvoke({
             "brand_name": self.brand_name,
             "post_text": post_text,
-            "post_analysis": post_analysis,
+            "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
             "text":text 
              })
         
@@ -583,7 +583,7 @@ class ContentAnalyzer:
             sentiment_result = await self.sentiment_classifier["chain"].ainvoke({
                 "brand_name": self.brand_name,
                 "post_text": post_text,
-                "post_analysis": post_analysis,
+                "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
                 "text": text
 
             })
@@ -592,7 +592,7 @@ class ContentAnalyzer:
             result["sentiment"] = {
                 "sentiment": sentiment_result["sentiment"],
                 "emotion": sentiment_result["emotion"],
-                "polarity": sentiment_result["polarity_score"]
+                "polarity_score": sentiment_result["polarity_score"]
                 
             }
             result["confidence"] =  sentiment_result["confidence"]

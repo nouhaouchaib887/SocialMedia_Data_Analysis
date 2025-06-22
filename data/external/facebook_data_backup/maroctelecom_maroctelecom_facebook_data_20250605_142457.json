@@ -1,4 +1,10 @@
-[
+{
+  "metadata": {
+    "brand_name": "inwi.ma",
+    "search_query": "#maroctelecom",
+    "data_type": "facebook_search_post_with_comments"
+  },
+  "data": [
   {
     "post_id": "122111878772878117",
     "source_id": "61576343536072",
@@ -36717,3 +36723,4 @@
     ]
   }
 ]
+}
