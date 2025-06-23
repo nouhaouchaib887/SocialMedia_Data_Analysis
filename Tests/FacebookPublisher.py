@@ -6,14 +6,14 @@ from typing import Dict, Any
 import logging
 import pathlib
 
-class InstagramDataKafkaPublisher:
+class FacebookDataKafkaPublisher:
     """
-    Une classe pour lire des données de pages Instagram officielles depuis des fichiers JSON,
+    Une classe pour lire des données de pages Facebook officielles depuis des fichiers JSON,
     les transformer et les publier dans un topic Kafka.
     """
     def __init__(self, kafka_config: Dict[str, Any]):
         self.producer = KafkaProducer(**kafka_config)
-        self.topic = "instagram-data"
+        self.topic = "facebook-data"
         self.logger = logging.getLogger(__name__)
 
     def transform_post_to_kafka_message(self, post_data: Dict[str, Any], collection_params: Dict[str, Any]) -> Dict[str, Any]:
@@ -38,20 +38,21 @@ class InstagramDataKafkaPublisher:
             "like_count": post_data.get("like_count"),
             "hashtags": post_data.get("hashtags", []),
             "mentions": post_data.get("mentions", []),
-            "platform": "instagram", # Spécifique à Instagram
+            "platform": post_data.get("platform"),
             "brand_name": post_data.get("brand_name"),
             "comments": post_data.get("comments", []),
             "kafka_metadata": {
                 "topic": self.topic,
                 "produced_at": datetime.now(timezone.utc).isoformat(),
                 "producer_timestamp": current_timestamp,
-                "message_type": "instagram_post_with_comments", # Spécifique à Instagram
+                "message_type": "facebook_post_with_comments",
                 "version": "1.0"
             },
             "collection_params": collection_params
         }
         return kafka_message
     
+    # ### CORRECTION IMPORTANTE CI-DESSOUS ###
     def publish_from_json_file(self, json_file_path: str) -> Dict[str, Any]:
         """
         Lit un fichier JSON et publie tous ses posts dans Kafka.
@@ -66,20 +67,23 @@ class InstagramDataKafkaPublisher:
 
             # NOUVELLE LOGIQUE POUR GÉRER TOUTES LES STRUCTURES
             if isinstance(data, dict) and 'data' in data and 'metadata' in data:
-                self.logger.debug(f"Structure 'dict avec metadata' détectée pour {json_file_path}")
+                # Structure 1: Dictionnaire avec 'data' et 'metadata'
+                self.logger.debug(f"Structure de type 'dict avec metadata' détectée pour {json_file_path}")
                 posts = data.get('data', [])
                 metadata = data.get('metadata', {})
                 collection_params = metadata.get('collection_params', {})
             elif isinstance(data, dict) and 'post_id' in data:
-                self.logger.debug(f"Structure 'post unique' détectée pour {json_file_path}")
-                posts = [data]
-                collection_params = {}
+                # Structure 2: Dictionnaire représentant un post unique
+                self.logger.debug(f"Structure de type 'post unique' détectée pour {json_file_path}")
+                posts = [data] # On le met dans une liste pour que la boucle fonctionne
+                collection_params = {} # Pas de metadata
             elif isinstance(data, list):
-                self.logger.debug(f"Structure 'list' détectée pour {json_file_path}")
+                # Structure 3: Liste de posts directement
+                self.logger.debug(f"Structure de type 'list' détectée pour {json_file_path}")
                 posts = data
-                collection_params = {}
+                collection_params = {} # Pas de metadata
             else:
-                self.logger.warning(f"Structure JSON non supportée dans {json_file_path}.")
+                self.logger.warning(f"Structure JSON non supportée dans {json_file_path}. Le fichier n'est ni un dict avec 'data', ni un post unique, ni une list.")
                 return {'status': 'unsupported_format', 'published_count': 0, 'failed_count': 0}
 
             if not posts:
@@ -96,7 +100,7 @@ class InstagramDataKafkaPublisher:
                     future.get(timeout=10)
                     published_count += 1
                 except Exception as e:
-                    self.logger.error(f"Échec de publication du post {post.get('post_id', 'unknown')} dans {json_file_path}: {e}")
+                    self.logger.error(f"Échec de publication du post {post.get('post_id', 'unknown')} dans le fichier {json_file_path}: {e}")
                     failed_count += 1
             
             self.producer.flush()
@@ -116,9 +120,6 @@ class InstagramDataKafkaPublisher:
             self.logger.info("Producteur Kafka fermé.")
 
 def main():
-    """
-    Fonction principale pour lancer la publication des données Instagram.
-    """
     kafka_config = {
         'bootstrap_servers': ['localhost:9092'],
         'value_serializer': lambda v: json.dumps(v, ensure_ascii=False).encode('utf-8'),
@@ -127,11 +128,11 @@ def main():
         'retries': 3
     }
     
-    root_directory = pathlib.Path('/home/doha/Desktop/SocialMedia_Data_Analysis/data/official_pages/instagram_data_backup')
+    root_directory = pathlib.Path('/home/doha/Desktop/SocialMedia_Data_Analysis/data/official_pages/facebook_data_backup')
     
-    publisher = InstagramDataKafkaPublisher(kafka_config)
+    publisher = FacebookDataKafkaPublisher(kafka_config)
     
-    logging.info(f"Démarrage de la publication pour le répertoire Instagram : {root_directory.resolve()}")
+    logging.info(f"Démarrage de la publication pour le répertoire : {root_directory.resolve()}")
     
     try:
         if not root_directory.is_dir():
@@ -163,13 +164,13 @@ def main():
             else:
                 files_failed += 1
 
-        logging.info("========== RÉSUMÉ FINAL (INSTAGRAM) ==========")
+        logging.info("========== RÉSUMÉ FINAL ==========")
         logging.info(f"Fichiers traités avec succès : {files_success}/{len(json_files)}")
         logging.info(f"Fichiers en échec : {files_failed}/{len(json_files)}")
-        logging.info("---------------------------------------------")
+        logging.info("----------------------------------")
         logging.info(f"Total des posts publiés avec succès : {total_posts_published}")
         logging.info(f"Total des échecs de publication (par post) : {total_posts_failed}")
-        logging.info("==============================================")
+        logging.info("==================================")
 
     except Exception as e:
         logging.critical(f"Une erreur imprévue est survenue: {e}", exc_info=True)
@@ -177,5 +178,6 @@ def main():
         publisher.close()
 
 if __name__ == "__main__":
+    # Changez le level en logging.DEBUG pour voir les messages "Structure de type..."
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     main()

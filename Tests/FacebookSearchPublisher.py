@@ -1,46 +1,39 @@
 import json
 import time
 from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from kafka import KafkaProducer
 import logging
+import pathlib
 
 class FacebookSearchDataKafkaPublisher:
+    """
+    Une classe pour lire des données Facebook depuis des fichiers JSON,
+    les transformer et les publier dans un topic Kafka.
+    """
     def __init__(self, kafka_config: Dict[str, Any]):
         """
-        Initialize Kafka producer with configuration
+        Initialise le producteur Kafka avec la configuration donnée.
         
         Args:
-            kafka_config: Dictionary containing Kafka configuration
-            Example:
-            {
-                'bootstrap_servers': ['localhost:9092'],
-                'value_serializer': lambda v: json.dumps(v).encode('utf-8'),
-                'key_serializer': lambda k: k.encode('utf-8') if k else None
-            }
+            kafka_config: Dictionnaire contenant la configuration Kafka.
         """
         self.producer = KafkaProducer(**kafka_config)
-        self.topic = "facebook-search-data-test"  # Topic for facebook data
+        self.topic = "facebook-search-data" 
         self.logger = logging.getLogger(__name__)
         
     def _transform_comment_to_kafka_format(self, comment: Dict[str, Any], parent_post_id: str, brand_name: str) -> Dict[str, Any]:
-        """
-        Transform comment data to match Kafka message format
-        """
-        # Handle null comments (empty comments from your JSON)
+        """Transforme les données d'un commentaire pour le format du message Kafka."""
         if not comment.get('comment_id'):
             return None
             
-        # Calculate engagement score
         like_count = comment.get('like_count', 0)
         reply_count = comment.get('reply_count', 0)
         engagement_score = like_count + reply_count
         
-        # Calculate comment length
         message = comment.get('message', '')
         comment_length = len(message)
         
-        # Check for hashtags and mentions
         has_hashtags = len(comment.get('hashtags', [])) > 0
         has_mentions = len(comment.get('mentions', [])) > 0
         
@@ -68,20 +61,13 @@ class FacebookSearchDataKafkaPublisher:
         }
     
     def _transform_post_to_kafka_format(self, post: Dict[str, Any], search_query: str, brand_name: str) -> Dict[str, Any]:
-        """
-        Transform post data to match Kafka message format
-        """
-        # Transform comments, filtering out null ones
-        transformed_comments = []
-        for comment in post.get('comments', []):
-            transformed_comment = self._transform_comment_to_kafka_format(
-                comment, post['post_id'], brand_name
-            )
-            if transformed_comment:  # Only add non-null comments
-                transformed_comments.append(transformed_comment)
+        """Transforme les données d'un post pour le format du message Kafka."""
+        transformed_comments = [
+            transformed_comment for comment in post.get('comments', [])
+            if (transformed_comment := self._transform_comment_to_kafka_format(comment, post['post_id'], brand_name)) is not None
+        ]
         
-        # Create current timestamp for kafka metadata
-        current_timestamp = int(time.time() * 1000)  # milliseconds
+        current_timestamp = int(time.time() * 1000)
         
         kafka_message = {
             "post_id": post.get('post_id'),
@@ -117,159 +103,128 @@ class FacebookSearchDataKafkaPublisher:
             },
             "collection_params": {
                 "search_query": search_query,
-                "max_posts": None,  # You can set this based on your needs
-                "max_comments_per_post": None,  # You can set this based on your needs
-                "post_time_range": "30d"  # Default value, adjust as needed
+                "max_posts": None,
+                "max_comments_per_post": None,
+                "post_time_range": "30d"
             }
         }
-        
         return kafka_message
     
     def publish_from_json_file(self, file_path: str) -> Dict[str, Any]:
         """
-        Read JSON file and publish data to Kafka topic
+        Lit un fichier JSON et publie ses données dans le topic Kafka.
         
         Args:
-            file_path: Path to the JSON file containing Facebook data
+            file_path: Chemin vers le fichier JSON contenant les données Facebook.
             
         Returns:
-            Dictionary with publishing results
+            Un dictionnaire avec le résultat de la publication.
         """
         try:
-            # Read JSON file
+            # Lit le fichier JSON en s'assurant que l'encodage est utf-8
             with open(file_path, 'r', encoding='utf-8') as file:
                 data = json.load(file)
             
-            # Extract metadata
             metadata = data.get('metadata', {})
             brand_name = metadata.get('brand_name', 'unknown')
             search_query = metadata.get('search_query', '')
             
-            # Process each post
             published_count = 0
             failed_count = 0
             
             for post in data.get('data', []):
                 try:
-                    # Transform post to Kafka format
-                    kafka_message = self._transform_post_to_kafka_format(
-                        post, search_query, brand_name
-                    )
-                    
-                    # Use post_id as key for partitioning
+                    kafka_message = self._transform_post_to_kafka_format(post, search_query, brand_name)
                     key = post.get('post_id')
                     
-                    # Publish to Kafka
-                    future = self.producer.send(
-                        topic=self.topic,
-                        key=key,
-                        value=kafka_message
-                    )
-                    
-                    # Wait for the message to be sent
+                    future = self.producer.send(topic=self.topic, key=key, value=kafka_message)
                     record_metadata = future.get(timeout=10)
                     
-                    self.logger.info(f"Published post {key} to topic {record_metadata.topic} "
-                                   f"partition {record_metadata.partition} "
-                                   f"offset {record_metadata.offset}")
-                    
+                    self.logger.info(f"Post publié {key} -> topic '{record_metadata.topic}' [partition {record_metadata.partition}]")
                     published_count += 1
-                    
                 except Exception as e:
-                    self.logger.error(f"Failed to publish post {post.get('post_id', 'unknown')}: {str(e)}")
+                    self.logger.error(f"Échec de la publication du post {post.get('post_id', 'unknown')}: {e}")
                     failed_count += 1
             
-            # Ensure all messages are sent
             self.producer.flush()
             
             return {
-                'status': 'completed',
-                'published_count': published_count,
-                'failed_count': failed_count,
-                'total_posts': len(data.get('data', [])),
-                'brand_name': brand_name,
-                'search_query': search_query
+                'status': 'completed', 'published_count': published_count, 'failed_count': failed_count,
+                'total_posts': len(data.get('data', [])), 'brand_name': brand_name
             }
-            
         except Exception as e:
-            self.logger.error(f"Error processing file {file_path}: {str(e)}")
-            return {
-                'status': 'error',
-                'error': str(e),
-                'published_count': 0,
-                'failed_count': 0
-            }
-    
-    def publish_single_post(self, post_data: Dict[str, Any], search_query: str, brand_name: str) -> bool:
-        """
-        Publish a single post to Kafka
-        
-        Args:
-            post_data: Single post data dictionary
-            search_query: Search query used to find the post
-            brand_name: Brand name for the post
-            
-        Returns:
-            True if successful, False otherwise
-        """
-        try:
-            # Transform post to Kafka format
-            kafka_message = self._transform_post_to_kafka_format(
-                post_data, search_query, brand_name
-            )
-            
-            # Use post_id as key
-            key = post_data.get('post_id')
-            
-            # Publish to Kafka
-            future = self.producer.send(
-                topic=self.topic,
-                key=key,
-                value=kafka_message
-            )
-            
-            # Wait for confirmation
-            record_metadata = future.get(timeout=10)
-            
-            self.logger.info(f"Published post {key} to topic {record_metadata.topic}")
-            return True
-            
-        except Exception as e:
-            self.logger.error(f"Failed to publish post: {str(e)}")
-            return False
+            self.logger.error(f"Erreur lors du traitement du fichier {file_path}: {e}")
+            return {'status': 'error', 'error': str(e)}
     
     def close(self):
-        """
-        Close the Kafka producer
-        """
+        """Ferme le producteur Kafka proprement."""
         if self.producer:
             self.producer.close()
-            self.logger.info("Kafka producer closed")
+            self.logger.info("Producteur Kafka fermé.")
 
-# Example usage
+# ==============================================================================
+# POINT D'ENTRÉE DU SCRIPT
+# ==============================================================================
 if __name__ == "__main__":
-    # Configure logging
-    logging.basicConfig(level=logging.INFO)
+    # Configuration du logging pour des messages clairs
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     
-    # Kafka configuration
+    # Configuration de Kafka
     kafka_config = {
         'bootstrap_servers': ['localhost:9092'],
-        'value_serializer': lambda v: json.dumps(v).encode('utf-8'),
+        
+        # ### CORRECTION IMPORTANTE ###
+        # Ajout de `ensure_ascii=False` pour que les caractères arabes 
+        # soient conservés tels quels dans le JSON avant d'être encodés en UTF-8.
+        'value_serializer': lambda v: json.dumps(v, ensure_ascii=False).encode('utf-8'),
+        
         'key_serializer': lambda k: k.encode('utf-8') if k else None,
-        'acks': 'all',  # Wait for all replicas to acknowledge
-        'retries': 3,   # Retry failed sends
-        'batch_size': 16384,  # Batch size in bytes
-        'linger_ms': 10,  # Wait time to batch messages
+        'acks': 'all',
+        'retries': 3,
+        'batch_size': 16384,
+        'linger_ms': 10,
     }
     
-    # Initialize publisher
+    # Définir le répertoire à scanner.
+    # Assurez-vous que ce chemin est correct.
+    root_directory = pathlib.Path('/home/doha/Desktop/SocialMedia_Data_Analysis/data/external')
+    
+    # Initialiser le publisher
     publisher = FacebookSearchDataKafkaPublisher(kafka_config)
     
+    logging.info(f"Démarrage de la publication pour le répertoire : {root_directory.resolve()}")
+    
     try:
-        # Publish from JSON file
-        result = publisher.publish_from_json_file('../data/external/facebook_data_backup/inwi_إنوي_facebook_data_20250605_195731.json')
-        print(f"Publishing result: {result}")
+        if not root_directory.is_dir():
+            logging.error(f"Le répertoire spécifié n'existe pas : {root_directory.resolve()}")
+        else:
+            # Trouve tous les fichiers se terminant par .json, même dans les sous-dossiers
+            json_files = list(root_directory.rglob('*.json'))
+            
+            if not json_files:
+                logging.warning("Aucun fichier .json trouvé dans le répertoire.")
+            else:
+                logging.info(f"{len(json_files)} fichier(s) .json trouvé(s). Début de la publication...")
+                
+                total_success = 0
+                total_failures = 0
+
+                for i, json_file in enumerate(json_files, 1):
+                    logging.info(f"--- [{i}/{len(json_files)}] Publication du fichier : {json_file.name} ---")
+                    try:
+                        result = publisher.publish_from_json_file(str(json_file))
+                        logging.info(f"-> Résultat : {result}")
+                        if result.get('status') == 'completed':
+                            total_success += result.get('published_count', 0)
+                            total_failures += result.get('failed_count', 0)
+                    except Exception as e:
+                        logging.error(f"!!! Erreur critique lors de la publication du fichier {json_file.name}: {e}")
+
+                logging.info("========== RÉSUMÉ FINAL ==========")
+                logging.info(f"Total des posts publiés avec succès : {total_success}")
+                logging.info(f"Total des échecs de publication : {total_failures}")
+                logging.info("==================================")
         
     finally:
-        # Always close the producer
+        # Toujours fermer le producteur à la fin, même en cas d'erreur.
         publisher.close()
