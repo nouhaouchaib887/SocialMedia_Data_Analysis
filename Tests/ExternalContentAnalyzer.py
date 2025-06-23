@@ -90,6 +90,7 @@ class ExternalContentAnalyzer:
         self.topic_classifier = self._create_classifier_from_yaml('topic')
         self.intent_classifier = self._create_classifier_from_yaml('intent')
         self.sentiment_classifier = self._create_classifier_from_yaml('sentiment')
+        self.relevance_analyzer = self._create_classifier_from_yaml('relevance_analyzer')
 
     def _create_classifier_from_yaml(self, classifier_name: str):
         """Crée un classifieur générique à partir de sa configuration dans le fichier YAML."""
@@ -165,7 +166,7 @@ class ExternalContentAnalyzer:
             intent_result = await self.intent_classifier["chain"].ainvoke({
                 "content_type": content_type,
                 "post_text": post_text,
-                "post_analysi": post_analysis,
+                "post_analysis": post_analysis,
                 "text": text,
                 "topic_name": result["topic"]["name"],
                 "available_intents": ", ".join(available_intents)
@@ -189,7 +190,7 @@ class ExternalContentAnalyzer:
         
         return result
     
-    async def _analyze_relevance(self, content_type,text: str, result: Dict[str, Any], topic_id: str ,post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
+    async def c(self, content_type,text: str, result: Dict[str, Any], topic_id: str ,post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
 
 
         return result
@@ -206,6 +207,7 @@ class ExternalContentAnalyzer:
             sentiment_confidence = sentiment_result.get("confidence", 0.0)
             result["sentiment"] = {
                 "value": sentiment_result.get("sentiment"),
+                "emotion": sentiment_result["emotion"],
                 "polarity_score": sentiment_result.get("polarity_score", 0.0)
             }
 
@@ -247,7 +249,33 @@ class ExternalContentAnalyzer:
             return {
                 "topic": {"id": "error", "name": "error"},
             }
-
+        
+    async def _analyze_relevance(self,text: str, result: Dict[str, Any], post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
+        """Classifie l'intention du post basée sur le thème identifié"""
+        try:
+            # Récupérer les intentions disponibles pour ce thème
+            relevance_result = await self.relevance_analyzer["chain"].ainvoke({
+            "post_text": post_text,
+            "post_analysis":  post_analysis,
+            "text":text 
+             })
+        
+            result["relevance"] = {
+                "relevance_post": relevance_result.get("relevance_post", "unknown"),
+                "general_relevance": relevance_result.get("general_relevance", "unknown")
+            }
+            relevance_confidence = relevance_result.get("confidence", 0.0)
+            result["confidence"] = min(result.get("confidence", 1.0), relevance_confidence)
+            
+        except Exception as e:
+            print(f"Erreur lors de l'analyse de pertinence: {e}")
+            result["relevance"] = {
+                "relevance_post": "unknown",
+                "general_relevance": "unknown",
+                "confidence": 0.0
+            }
+        
+        return result
 
     async def analyze_content(self, content_type: str, text: str, post_text: str = "", post_analysis: Optional[Dict] = None) -> Dict[str, Any]:
         """
@@ -292,6 +320,7 @@ class ExternalContentAnalyzer:
                 post_analysis=post_analysis,
                 result=result
             )
+            result = await self._analyze_relevance(text, result ,post_text, post_analysis)
 
         return result
 
