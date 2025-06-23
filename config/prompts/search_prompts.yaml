@@ -17,7 +17,7 @@ classifiers:
         description: Niveau de confiance de la classification de 0 à 1
     prompt_template: >
       Tu es un expert en analyse de contenu dans le secteur des télécommunications au Maroc.
-      Le contenu à analyser est un {{content_type}}.
+      Le contenu à analyser est un {{ content_type }}.
       
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
@@ -29,27 +29,27 @@ classifiers:
       - Utilise l'analyse du post original pour guider ta classification
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
       {% endif %}
       
-      Analyse ce {{content_type}} provenant d'une source EXTERNE et classifie-le dans l'un des thèmes suivants:
+      Analyse ce {{ content_type }} provenant d'une source EXTERNE et classifie-le dans l'un des thèmes suivants:
       
-      {available_topics}
+      {{ available_topics }}
       
       IMPORTANT:
-      - Ce {{content_type}} provient d'une source externe (groupe, page ou profil personnel)
+      - Ce {{ content_type }} provient d'une source externe (groupe, page ou profil personnel)
       - Le contenu peut être en arabe, français ou darija
       - Analyse attentivement le contexte, le contenu et l'intention du message
       - Retourne uniquement l'un de ces thèmes
       - Si aucun thème ne correspond de manière satisfaisante, retourne None
       
       Contenu à analyser:
-      {{text}}
+      {{ text }}
       
-      {{format_instructions}}
+      {{ format_instructions }}
 
   intent:
     description: >
@@ -61,15 +61,15 @@ classifiers:
         description: Niveau de confiance de la classification de 0 à 1
     prompt_template: >
       Tu es un expert en analyse d'intentions dans les télécommunications au Maroc.
-      Le contenu à analyser est un {{content_type}}.
+      Le contenu à analyser est un {{ content_type }}.
       
       {% if content_type == "comment" %}
-      Ce commentaire répond à un post classifié dans le thème : {{parent_post_info.topic_name}}.
+      Ce commentaire répond à un post classifié dans le thème : {{ parent_post_info.topic_name }}.
       Ce commentaire provient d'une SOURCE EXTERNE et concerne la veille extérieure.
       
-      Identifie l'INTENTION principale de ce {{content_type}} parmi les intentions possibles pour la veille extérieure:
+      Identifie l'INTENTION principale de ce {{ content_type }} parmi les intentions possibles pour la veille extérieure:
       
-      {{available_intents}}
+      {{ available_intents }}
       
       Voici les définitions des intentions pour les COMMENTAIRES dans la veille extérieure, organisées par catégories:
       
@@ -99,7 +99,7 @@ classifiers:
       Ce post provient d'une SOURCE EXTERNE et concerne la veille extérieure.
       Identifie l'INTENTION principale de ce post parmi les intentions suivantes pour la veille extérieure:
   
-      {available_intents}
+      {{ available_intents }}
 
       Voici les définitions des intentions pour la VEILLE EXTÉRIEURE:
 
@@ -110,7 +110,7 @@ classifiers:
       {% endif %}
       
       IMPORTANT:
-      - Ce {{content_type}} provient d'une source externe (groupe, page ou profil personnel)
+      - Ce {{ content_type }} provient d'une source externe (groupe, page ou profil personnel)
       - Le contenu peut être en arabe, français ou darija
       - Analyse l'objectif principal et le ton du message
       - Considère le contexte et l'intention du message
@@ -118,9 +118,9 @@ classifiers:
       - Si aucune intention ne correspond de manière satisfaisante, retourne None
       
       Contenu à analyser:
-      {{text}}
+      {{ text }}
       
-      {{format_instructions}}
+      {{ format_instructions }}
   
   relevance_analyzer:
     description: >
@@ -136,13 +136,13 @@ classifiers:
       Tu es un expert en analyse de contenu dans le contexte des télécommunications. Analyse ce commentaire et détermine sa pertinence.
     
       Post original:
-      {post_text}
+      {{ post_text }}
     
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
     
       Commentaire à analyser:
-      {text}
+      {{ text }}
     
       Détermine:
       1. Si le commentaire est pertinent par rapport au contenu du post original (reste dans le même sujet)
@@ -156,7 +156,7 @@ classifiers:
       - Même si le commentaire est en arabe, utilise la compréhension sémantique pour évaluer la pertinence
       - Considère les variations linguistiques et culturelles dans l'expression des idées
     
-      {format_instructions}
+      {{ format_instructions }}
 
   sentiment:
     description: >
@@ -172,16 +172,16 @@ classifiers:
         description: Score de polarité de -1 (très négatif) à 1 (très positif)
     prompt_template: >
       Tu es un expert en analyse de sentiment dans le secteur des télécommunications au Maroc.
-      Le contenu à analyser est un {{content_type}}.
+      Le contenu à analyser est un {{ content_type }}.
       
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
       
       IMPORTANT:
       - Les commentaires peuvent être en arabe, français ou darija
@@ -189,7 +189,7 @@ classifiers:
       - Les expressions en darija peuvent avoir des nuances particulières
       {% endif %}
       
-      Analyse le SENTIMENT général et l'ÉMOTION principale de ce {{content_type}} :
+      Analyse le SENTIMENT général et l'ÉMOTION principale de ce {{ content_type }} :
       
       Sentiments possibles:
       - **Positif** : Satisfaction, joie, approbation, enthousiasme
@@ -211,6 +211,6 @@ classifiers:
       - Retourne également un score de polarité de -1 à 1
       
       Contenu à analyser:
-      {{text}}
+      {{ text }}
       
-      {{format_instructions}}
+      {{ format_instructions }}

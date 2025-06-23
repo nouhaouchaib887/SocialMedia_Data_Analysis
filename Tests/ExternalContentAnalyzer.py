@@ -3,11 +3,11 @@ import json
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.output_parsers import ResponseSchema, StructuredOutputParser
-from langchain_core.runnables import RunnablePassthrough
+# from langchain_core.runnables import RunnablePassthrough # Cet import n'est plus utilisé
 from typing import Dict, Any, List, Optional
 import asyncio
 import yaml
-from jinja2 import Template
+# from jinja2 import Template # ### CORRECTION: Cet import est supprimé car LangChain gère le templating
 
 class ExternalContentAnalyzer:
     def __init__(self, google_api_key: str,
@@ -17,13 +17,6 @@ class ExternalContentAnalyzer:
                  prompts_file="config/prompts/search_prompts.yaml"):
         """
         Initialise l'analyseur de contenu externe (veille extérieure).
-        
-        Args:
-            google_api_key: Clé API Google Gemini.
-            topics_file: Chemin vers le fichier JSON des thèmes généraux.
-            intents_post_file: Chemin vers le fichier JSON des intentions des posts.
-            intents_comments_file: Chemin vers le fichier JSON des intentions des commentaires.
-            prompts_file: Chemin vers le fichier YAML des prompts structurés.
         """
         self.topics_file = topics_file
         self.intents_posts_file = intents_post_file
@@ -31,23 +24,19 @@ class ExternalContentAnalyzer:
         self.prompts_file = prompts_file
         self.google_api_key = google_api_key
 
-        # Chargement des configurations
         self.topics_data = self._load_json_config(self.topics_file)
         self.intents_posts_data = self._load_json_config(self.intents_posts_file)
         self.intents_comments_data = self._load_json_config(self.intents_comments_file)
         self.prompts_config = self._load_prompts_config()
         
-        # Configuration de la clé API Google
         self._setup_api_key()
         
-        # Initialisation du modèle LLM
         self.llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash", 
+            model="gemini-2.5-flash", 
             temperature=0.1,
             google_api_key=self.google_api_key
         )
         
-        # Configuration des analyseurs
         self.setup_analyzers()
 
     def _setup_api_key(self):
@@ -80,10 +69,11 @@ class ExternalContentAnalyzer:
             print(f"Erreur de parsing YAML: {e}")
             raise
 
-    def _render_prompt_template(self, template_str: str, **kwargs) -> str:
-        """Utilise Jinja2 pour rendre le template avec les variables."""
-        template = Template(template_str)
-        return template.render(**kwargs)
+    # ### CORRECTION: Cette méthode est supprimée car elle est la cause du problème.
+    # def _render_prompt_template(self, template_str: str, **kwargs) -> str:
+    #     """Utilise Jinja2 pour rendre le template avec les variables."""
+    #     template = Template(template_str)
+    #     return template.render(**kwargs)
 
     def setup_analyzers(self):
         """Configuration des analyseurs (topic, intent, sentiment) à partir du fichier YAML."""
@@ -92,36 +82,26 @@ class ExternalContentAnalyzer:
         self.sentiment_classifier = self._create_classifier_from_yaml('sentiment')
         self.relevance_analyzer = self._create_classifier_from_yaml('relevance_analyzer')
 
+    # ### CORRECTION MAJEURE: La méthode de création de classifieur est modifiée ici.
     def _create_classifier_from_yaml(self, classifier_name: str):
         """Crée un classifieur générique à partir de sa configuration dans le fichier YAML."""
         classifier_config = self.prompts_config.get('classifiers', {}).get(classifier_name)
         if not classifier_config:
             raise ValueError(f"Configuration pour '{classifier_name}' non trouvée dans {self.prompts_file}")
 
-        # Création du parser de sortie à partir du schéma YAML
         output_schema_config = classifier_config.get('output_schema', [])
         response_schemas = [ResponseSchema(**item) for item in output_schema_config]
         parser = StructuredOutputParser.from_response_schemas(response_schemas)
 
-        # Création du template de prompt
         prompt_template_str = classifier_config.get('prompt_template', '')
         
-        # Placeholders pour le rendu Jinja2 initial
-        # Les vraies valeurs seront injectées lors de l'appel `ainvoke`
-        placeholders = {
-            "content_type": "{content_type}",
-            "text": "{text}",
-            "post_text": "{post_text}",
-            "post_analysis": "{post_analysis}",
-            "parent_post_info": "{parent_post_info}", # Spécifique pour l'intention
-            "available_topics": "{available_topics}", # Spécifique au topic
-            "available_intents": "{available_intents}", # Spécifique à l'intention
-            "format_instructions": "{format_instructions}"
-        }
+        # On ne pré-rend plus le template. On le passe directement à LangChain
+        # en lui spécifiant d'utiliser le moteur Jinja2.
+        prompt = ChatPromptTemplate.from_template(
+            template=prompt_template_str,
+            template_format="jinja2"  # C'est la ligne la plus importante de la correction.
+        )
         
-        rendered_prompt_str = self._render_prompt_template(prompt_template_str, **placeholders)
-        
-        prompt = ChatPromptTemplate.from_template(rendered_prompt_str)
         prompt = prompt.partial(format_instructions=parser.get_format_instructions())
 
         return {
@@ -140,7 +120,6 @@ class ExternalContentAnalyzer:
                 return []
             else:
                 intents_config = self.intents_comments_data.get("themes", [{}])[0].get("veille_exterieure", {})
-                # Agréger toutes les intentions des sous-catégories
                 all_intents = []
                 for category in intents_config.values():
                     if isinstance(category, list):
@@ -151,58 +130,54 @@ class ExternalContentAnalyzer:
             print(f"Erreur lors de la récupération des intentions pour le topic {theme_id}: {e}")
             return []
         
-        
+    # ### CORRECTION: La structure des données passées à ainvoke est modifiée pour correspondre au template.
     async def _classify_intent(self, content_type,text: str, result: Dict[str, Any] ,post_text: str = "", post_analysis: str = "",theme_id:str ="veille_exterieure", topic_id: str =None) -> Dict[str, Any]:
         """Classifie l'intention du post basée sur le thème identifié"""
         try:
-            # Récupérer les intentions disponibles pour ce thème
-            available_intents = self._get_intents_for_topic("post","veille_exterieure")
+            available_intents = self._get_intents_for_topic(content_type, "veille_exterieure")
             
             if not available_intents:
                 print(f"Aucune intention trouvée pour le topic: {theme_id}")
                 return result
             
-            # Classification de l'intention
+            # Le template YAML attend {{ parent_post_info.topic_name }}. 
+            # Il faut donc créer cette structure imbriquée.
+            parent_info = {"topic_name": result.get("topic", {}).get("name", "N/A")}
+
             intent_result = await self.intent_classifier["chain"].ainvoke({
                 "content_type": content_type,
                 "post_text": post_text,
                 "post_analysis": post_analysis,
                 "text": text,
-                "topic_name": result["topic"]["name"],
+                "parent_post_info": parent_info, # Correction ici
                 "available_intents": ", ".join(available_intents)
             })
             intent_confidence = intent_result.get("confidence", 0.0)
 
-            # Ajouter l'intention au résultat
-            result["intent"] = {
-                "name": intent_result["intent"],
-            }
-
-            # Mettre à jour la confiance globale
+            result["intent"] = { "name": intent_result["intent"] }
             result["confidence"] = min(result.get("confidence", 1.0), intent_confidence)
-            
             
         except Exception as e:
             print(f"Erreur lors de la classification d'intention: {e}")
-            result["intent"] = {
-                "name": "unknown",
-            }
+            result["intent"] = { "name": "unknown" }
         
         return result
     
-    async def c(self, content_type,text: str, result: Dict[str, Any], topic_id: str ,post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
-
-
-        return result
+    # ### CORRECTION: Suppression de la méthode vide 'c' pour nettoyer le code.
+    # async def c(self, ...):
+    #     return result
     
     async def _analyze_sentiment(self, content_type: str, text: str, post_text: str, post_analysis: Optional[Dict], result: Dict[str, Any]) -> Dict[str, Any]:
         """Analyse le sentiment d'un contenu (généralement un commentaire)."""
         try:
+            # Conversion de l'analyse du post en string pour le prompt
+            post_analysis_str = json.dumps(post_analysis, ensure_ascii=False, indent=2) if post_analysis else "N/A"
+            
             sentiment_result = await self.sentiment_classifier["chain"].ainvoke({
                 "content_type": content_type,
                 "text": text,
                 "post_text": post_text,
-                "post_analysis": post_analysis
+                "post_analysis": post_analysis_str
             })
             sentiment_confidence = sentiment_result.get("confidence", 0.0)
             result["sentiment"] = {
@@ -211,7 +186,6 @@ class ExternalContentAnalyzer:
                 "polarity_score": sentiment_result.get("polarity_score", 0.0)
             }
 
-            # La confiance globale devient le minimum de la confiance actuelle et de celle du sentiment.
             result["confidence"] = min(result.get("confidence", 1.0), sentiment_confidence)
 
         except Exception as e:
@@ -236,7 +210,6 @@ class ExternalContentAnalyzer:
                 "available_topics": json.dumps(available_topics, ensure_ascii=False, indent=2)
             })
             
-
             return {
                 "topic": {
                     "id": topic_result.get("topic_id"),
@@ -251,14 +224,15 @@ class ExternalContentAnalyzer:
             }
         
     async def _analyze_relevance(self,text: str, result: Dict[str, Any], post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
-        """Classifie l'intention du post basée sur le thème identifié"""
+        """Analyse la pertinence du contenu."""
         try:
-            # Récupérer les intentions disponibles pour ce thème
+            post_analysis_str = json.dumps(post_analysis, ensure_ascii=False, indent=2) if post_analysis else "N/A"
+
             relevance_result = await self.relevance_analyzer["chain"].ainvoke({
-            "post_text": post_text,
-            "post_analysis":  post_analysis,
-            "text":text 
-             })
+                "post_text": post_text,
+                "post_analysis":  post_analysis_str,
+                "text":text 
+            })
         
             result["relevance"] = {
                 "relevance_post": relevance_result.get("relevance_post", "unknown"),
@@ -280,19 +254,9 @@ class ExternalContentAnalyzer:
     async def analyze_content(self, content_type: str, text: str, post_text: str = "", post_analysis: Optional[Dict] = None) -> Dict[str, Any]:
         """
         Analyse un contenu externe (post ou commentaire) et retourne sa classification complète.
-        
-        Args:
-            content_type: 'post' ou 'comment'.
-            text: Le contenu textuel à analyser.
-            post_text: Le texte du post parent (si `content_type` est 'comment').
-            post_analysis: L'analyse déjà effectuée du post parent (si `content_type` est 'comment').
-            
-        Returns:
-            Un dictionnaire contenant l'analyse complète. La clé 'sentiment' n'est présente que pour les commentaires.
         """
         result = {}
 
-        # 1. Analyse du Topic : C'est la première étape, elle crée le dictionnaire de résultat.
         result = await self._analyze_topic(
             content_type=content_type,
             text=text,
@@ -300,7 +264,6 @@ class ExternalContentAnalyzer:
             post_analysis=post_analysis
         )
 
-        # 2. Classification de l'Intention : Uniquement si un thème pertinent est trouvé.
         topic_id = result.get("topic", {}).get("id")
         if topic_id and topic_id != "none" and topic_id != "error":
             result = await self._classify_intent(
@@ -311,7 +274,6 @@ class ExternalContentAnalyzer:
                 result=result
             )
         
-        # 3. Analyse du Sentiment (Conditionnelle, maintenant dans sa propre fonction)
         if content_type == "comment":
             result = await self._analyze_sentiment(
                 content_type=content_type,
@@ -320,7 +282,12 @@ class ExternalContentAnalyzer:
                 post_analysis=post_analysis,
                 result=result
             )
-            result = await self._analyze_relevance(text, result ,post_text, post_analysis)
+            result = await self._analyze_relevance(
+                text=text, 
+                result=result,
+                post_text=post_text, 
+                post_analysis=post_analysis
+            )
 
         return result
 
@@ -328,18 +295,15 @@ class ExternalContentAnalyzer:
         """Version synchrone de l'analyse de contenu."""
         return asyncio.run(self.analyze_content(content_type, text, post_text, post_analysis))
 
-# --- Exemple d'utilisation et test ---
+# Le reste du fichier main() est déjà correct et n'a pas besoin de modification.
 async def main():
-    # REMPLACEZ PAR VOTRE VRAIE CLÉ API GOOGLE GEMINI
-    GOOGLE_API_KEY = "AIzaSyDroS___71S2NH_Qz08fuZBkJeX0s21dCY"
+    GOOGLE_API_KEY = "AIzaSyDroS___71S2NH_Qz08fuZBkJeX0s21dCY" # Remplacez par votre clé
     
-    # Vérification de la clé API
-    if GOOGLE_API_KEY == "VOTRE_CLE_API_GOOGLE_ICI":
+    if "VOTRE_CLE_API" in GOOGLE_API_KEY:
         print("⚠️  ATTENTION: Veuillez remplacer GOOGLE_API_KEY par votre vraie clé API Google Gemini")
         return
 
     try:
-        # Initialiser l'analyseur
         analyzer = ExternalContentAnalyzer(
             google_api_key=GOOGLE_API_KEY,
             topics_file="config/themes/general_themes.json",
@@ -348,7 +312,6 @@ async def main():
             prompts_file="config/prompts/search_prompts.yaml"
         )
         
-        # === Exemple d'un Post et ses Commentaires ===
         post_content = "طريقة كفاش تسلف من إنوي✅🤩"
         comments = [
             "خويا عفاك أنا عندي أورنج، واش كاينة شي طريقة؟",
@@ -358,7 +321,6 @@ async def main():
         
         print("=== Analyse d'un Post Externe et ses Commentaires ===\n")
         
-        # 1. Analyser le post principal
         print("📝 ANALYSE DU POST PRINCIPAL:")
         print(f"Contenu: {post_content}")
         print("-" * 50)
@@ -372,7 +334,6 @@ async def main():
         
         print("\n" + "="*70 + "\n")
         
-        # 2. Analyser chaque commentaire en utilisant le contexte du post
         if post_analysis:
             for i, comment in enumerate(comments, 1):
                 print(f"💬 ANALYSE DU COMMENTAIRE {i}:")
@@ -384,7 +345,7 @@ async def main():
                         content_type="comment",
                         text=comment,
                         post_text=post_content,
-                        post_analysis=post_analysis  # <-- Passage du contexte
+                        post_analysis=post_analysis
                     )
                     print(f"Résultat Commentaire {i}: {json.dumps(comment_analysis, ensure_ascii=False, indent=2)}")
                 except Exception as e:
