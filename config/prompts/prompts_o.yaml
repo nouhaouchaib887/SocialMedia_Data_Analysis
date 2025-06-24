@@ -10,17 +10,17 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de la classification de 0 à 1
     prompt_template: >
-      Tu es un expert en analyse de contenu pour {{brand_name}}.
-      Le contenu à analyser est un {{content_type}}.
+      Tu es un expert en analyse de contenu pour {{ brand_name }}.
+      Le contenu à analyser est un {{ content_type }}.
 
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
      
       Post original:
-      {{post_text}}
+      {{ post_text }}
       
       Analyse du post original:
-      {{post_analysis}}
+      {{ post_analysis }}
 
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -30,7 +30,7 @@ classifiers:
       - Utilise l'analyse du post original pour guider ta classification
       {% endif %}
 
-      Analyse ce {content_type} et classifie-le dans l'un des thèmes suivants :
+      Analyse ce {{ content_type }} et classifie-le dans l'un des thèmes suivants :
       - **offre** : contenu concernant les produits, forfaits, promotions, services
       - **initiative** : contenu concernant les actions sociales, événements, engagements de la marque
       - **communication_interaction** : contenu lié à la relation client, annonces, concours, vœux
@@ -43,9 +43,9 @@ classifiers:
       - Retourne uniquement l'un de ces 4 thèmes 
 
       Contenu à analyser :
-      {{text}}
+      {{ text }}
 
-      {{format_instructions}}
+      {{ format_instructions }} 
 
   intent:
     description: >
@@ -56,14 +56,14 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de la classification de 0 à 1
     prompt_template: >
-      Tu es un expert en analyse d'intentions pour {brand_name}. 
-      Le contenu à analyser est un {content_type}
+      Tu es un expert en analyse d'intentions pour {{ brand_name }}. 
+      Le contenu à analyser est un {{ content_type }}
 
       {% if content_type == "comment" %}
-      Ce commentaire est classifié dans le thème : {theme_name}.
-      Identifie l'**INTENTION principale** de ce {content_type} parmi les intentions possibles pour le thème correspondant :
+      Ce commentaire est classifié dans le thème : {{ theme_name }}.
+      Identifie l'**INTENTION principale** de ce {{ content_type }} parmi les intentions possibles pour le thème correspondant :
 
-      {available_intents}
+      {{ available_intents }}
 
       Voici les définitions des intentions :
 
@@ -94,11 +94,11 @@ classifiers:
       - **PartageLien** : L'utilisateur partage un lien externe en lien (ou non) avec le contenu du post
       - **TagD'unAmi** : L'utilisateur identifie une ou plusieurs personnes dans le commentaire via une mention/tag
       {% else %}
-      Ce post appartient au thème : {theme_name}.
+      Ce post appartient au thème : {{ theme_name }}.
 
-      Identifie l'**INTENTION principale** de ce {content_type} parmi les intentions possibles pour le thème correspondant :
+      Identifie l'**INTENTION principale** de ce {{ content_type }} parmi les intentions possibles pour le thème correspondant :
 
-      {available_intents}
+      {{ available_intents }}
 
       Voici les définitions des intentions :
 
@@ -126,9 +126,9 @@ classifiers:
       - Choisis l'intention **la plus appropriée** ou "none" si aucune ne convient
 
       Contenu à analyser :
-      {text}
+      {{ text }}
 
-      {format_instructions}
+      {{ format_instructions }} 
 
   offer_category:
     description: >
@@ -141,15 +141,15 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert des offres {brand_name}. Ce {content_type} concerne une OFFRE. 
+      Tu es un expert des offres {{ brand_name }}. Ce {{ content_type }} concerne une OFFRE. 
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
 
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -161,7 +161,7 @@ classifiers:
 
       Identifie la CATÉGORIE d'offre parmi les suivantes:
 
-      {categories}
+      {{ categories }}
 
       IMPORTANT:
       - Le contenu peut être en arabe mais les mots-clés sont en français
@@ -170,9 +170,9 @@ classifiers:
       - Choisis la catégorie la plus appropriée ou "none" si aucune ne convient
 
       Contenu à analyser:
-      {text}
+      {{ text }}
 
-      {format_instructions}
+      {{ format_instructions }} 
 
   offer_subcategory:
     description: >
@@ -185,15 +185,15 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert des offres pour {brand_name}. Ce {content_type} concerne une offre de la catégorie: {category_name}
+      Tu es un expert des offres pour {{ brand_name }}. Ce {{ content_type }} concerne une offre de la catégorie: {{ category_name }}
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
 
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -205,7 +205,7 @@ classifiers:
 
       Identifie la SOUS-CATÉGORIE spécifique parmi les suivantes pour cette catégorie:
 
-      {subcategories}
+      {{ subcategories }}
 
       IMPORTANT:
       - Le contenu peut être en arabe mais les mots-clés sont en français
@@ -213,9 +213,9 @@ classifiers:
       - Si aucune sous-catégorie ne correspond, retourne "none" comme subcategory_id
 
       Contenu à analyser:
-      {text}
+      {{ text }}
 
-      {format_instructions}
+      {{ format_instructions }}
 
   offer:
     description: >
@@ -228,15 +228,15 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert des offres {brand_name}. Ce {content_type} concerne une offre de la sous-catégorie: {subcategory_name}
+      Tu es un expert des offres {{ brand_name }}. Ce {{ content_type }} concerne une offre de la sous-catégorie: {{ subcategory_name }}
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
 
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -248,7 +248,7 @@ classifiers:
       
       Identifie le PRODUIT/OFFRE EXACTE parmi les suivants:
       
-      {products}
+      {{ products }}
       
       IMPORTANT:
       - Le contenu peut être en arabe mais les mots-clés sont en français
@@ -256,9 +256,9 @@ classifiers:
       - Si aucun produit spécifique ne correspond, retourne "none" comme product_id
       
       Contenu à analyser:
-      {text}
+      {{ text }}
       
-      {format_instructions}
+      {{ format_instructions }}
 
   initiative:
     description: >
@@ -270,16 +270,18 @@ classifiers:
         description: Nom de l'initiative ou 'None' si aucune initiative ne correspond
       - name: confidence
         description: Niveau de confiance de 0 à 1
+    # ... (votre fichier YAML avant)
+
     prompt_template: >
-      Tu es un expert des initiatives pour {brand_name}. Ce {content_type} concerne une INITIATIVE. 
+      Tu es un expert des initiatives pour {{ brand_name }}. Ce {{ content_type }} concerne une INITIATIVE. 
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
 
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -291,7 +293,7 @@ classifiers:
 
       Identifie l'initiative spécifique parmi les suivantes:
       
-      {initiatives}
+      {{ initiatives }}
       
       IMPORTANT:
       - Le contenu peut être en arabe mais les mots-clés sont en français
@@ -300,9 +302,11 @@ classifiers:
       - Si aucune initiative spécifique ne correspond, retourne "none" comme initiative_id
       
       Contenu à analyser:
-      {text}
+      {{ text }}
       
-      {format_instructions}
+      {{ format_instructions }} 
+      
+# ... (votre fichier YAML après)
 
   initiative_event:
     description: >
@@ -315,15 +319,15 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert des initiatives {brand_name}. Ce {content_type} concerne l'initiative : {initiative_name}
+      Tu es un expert des initiatives {{ brand_name }}. Ce {{ content_type }} concerne l'initiative : {{ initiative_name }}
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
 
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -335,7 +339,7 @@ classifiers:
       
       Identifie l'ÉVÉNEMENT spécifique parmi les suivants pour cette initiative:
       
-      {events}
+      {{ events }}
       
       IMPORTANT:
       - Le contenu peut être en arabe mais les mots-clés sont en français
@@ -343,9 +347,9 @@ classifiers:
       - Si aucun événement spécifique ne correspond, retourne "none" comme event_id
       
       Contenu à analyser:
-      {text}
+      {{ text }}
       
-      {format_instructions}
+      {{ format_instructions }}
 
   communication_topic:
     description: >
@@ -358,15 +362,15 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert en communication {brand_name}. Ce {content_type} concerne la COMMUNICATION & INTERACTION. 
+      Tu es un expert en communication {{ brand_name }}. Ce {{ content_type }} concerne la COMMUNICATION & INTERACTION. 
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
 
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -378,7 +382,7 @@ classifiers:
 
       Identifie le type de communication parmi les suivants:
       
-      {topics}
+      {{ topics }}
       
       IMPORTANT:
       - Le contenu peut être en arabe mais les mots-clés sont en français
@@ -387,9 +391,9 @@ classifiers:
       - Identifie le type de communication le plus approprié ou "none" si aucun ne convient
       
       Contenu à analyser:
-      {text}
+      {{ text }}
       
-      {format_instructions}
+      {{ format_instructions }}
 
   communication_subtopic:
     description: >
@@ -402,15 +406,15 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de 0 à 1
     prompt_template: >
-      Tu es un expert en communication {brand_name}. Ce {content_type} concerne le topic: {topic_name}
+      Tu es un expert en communication {{ brand_name }}. Ce {{ content_type }} concerne le topic: {{ topic_name }}
       {% if content_type == "comment" %}
       Ce commentaire est associé à un post dont voici les informations d'analyse :
       
       Post original:
-      {post_text}
+      {{ post_text }}
       
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
 
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -422,7 +426,7 @@ classifiers:
 
       Identifie le SOUS-SUJET spécifique parmi les suivants:
       
-      {subtopics}
+      {{ subtopics }}
       
       IMPORTANT:
       - Le contenu peut être en arabe mais les mots-clés sont en français
@@ -430,9 +434,9 @@ classifiers:
       - Si aucun sous-sujet spécifique ne correspond, retourne "none" comme subtopic_id
       
       Contenu à analyser:
-      {text}
+      {{ text }}
       
-      {format_instructions}
+      {{ format_instructions }}
   relevance_analyzer:
     description: >
       Analyse la pertinence d'un commentaire par rapport au post original et au secteur télécoms.
@@ -444,20 +448,20 @@ classifiers:
       - name: confidence
         description: Niveau de confiance de l'analyse de 0 à 1
     prompt_template: >
-      Tu es un expert en analyse de contenu pour {brand_name}. Analyse ce commentaire et détermine sa pertinence.
+      Tu es un expert en analyse de contenu pour {{ brand_name }}. Analyse ce commentaire et détermine sa pertinence.
     
       Post original:
-      {post_text}
+      {{ post_text }}
     
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
     
       Commentaire à analyser:
-      {text}
+      {{ text }}
     
       Détermine:
       1. Si le commentaire est pertinent par rapport au contenu du post original (reste dans le même sujet)
-      2. Si le commentaire est lié à {brand_name} ou au secteur des télécoms en général
+      2. Si le commentaire est lié à {{ brand_name }} ou au secteur des télécoms en général
     
       IMPORTANT:
       - Les commentaires peuvent être en arabe ou en français
@@ -467,7 +471,7 @@ classifiers:
       - Même si le commentaire est en arabe, utilise la compréhension sémantique pour évaluer la pertinence
       - Considère les variations linguistiques et culturelles dans l'expression des idées
     
-      {format_instructions}
+      {{ format_instructions }}
 
 
   sentiment:
@@ -483,16 +487,16 @@ classifiers:
       - name: polarity_score
         description: Score de polarité de -1 (très négatif) à 1 (très positif)
     prompt_template: >
-      Tu es un expert en analyse de sentiment et d'émotions pour {brand_name}..
+      Tu es un expert en analyse de sentiment et d'émotions pour {{ brand_name }}.
       Le contenu à analyser est un commentaire.
     
       Ce commentaire est associé à un post dont voici les informations d'analyse :
     
       Post original:
-      {post_text}
+      {{ post_text }}
     
       Analyse du post original:
-      {post_analysis}
+      {{ post_analysis }}
     
       IMPORTANT:
       - Les commentaires peuvent être en arabe, français ou darija
@@ -525,6 +529,6 @@ classifiers:
       - L'émotion et le sentiment peuvent être cohérents (ex: frustré/négatif) ou nuancés
     
       Contenu à analyser:
-      {{text}}
+      {{ text }}
     
-      {{format_instructions}}
+      {{ format_instructions }} 

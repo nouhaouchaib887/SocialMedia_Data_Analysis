@@ -108,6 +108,7 @@ class ContentAnalyzer:
         template = Template(template_str)
         return template.render(**kwargs)
     
+
     def setup_analyzers(self):
         """Configuration des analyseurs pour chaque niveau de classification"""
         # 1. Classificateur de thème principal avec prompt YAML
@@ -158,35 +159,7 @@ class ContentAnalyzer:
         # Récupération du template de prompt depuis YAML
         prompt_template = classifier_config.get('prompt_template', '')
         
-        base_params = {
-        "brand_name": "{brand_name}",
-        "post_text": "{post_text}",  # Vide par défaut
-        "post_analysis": "{post_analysis}",  # Vide par défaut
-        "text": "{text}",
-        "format_instructions": "{format_instructions}"
-        }
-
-        if classifier_name == "intent":
-            base_params.update({
-                "theme_name": "{theme_name}",
-                "content_type": "{content_type}",
-                "available_intents": "{available_intents}"
-            })
-
-        elif classifier_name =="relevance_analyzer":
-             base_params.update({
-                "content_type": "{content_type}"
-   
-            })
-        
-        elif classifier_name =="sentiment":
-             base_params.update({
-                "content_type": "{content_type}"
-   
-            })
-
-        
-        elif classifier_name == "offer_category":
+        if classifier_name == "offer_category":
             # Extraction des catégories d'offres depuis les données
             offre_theme = next((t for t in self.data["themes"] if t["id"] == "offre"), None)
             categories = []
@@ -197,51 +170,16 @@ class ContentAnalyzer:
                 "name": category["name"],
                 "keywords": category.get("keywords", [])
             })
-            base_params.update({
-                 "categories": "{categories}",
-                 "content_type": "{content_type}",
-            })
-        elif classifier_name =="offer_subcategory":
-            base_params.update({
-                "content_type": "{content_type}",
-                 "category_name":"{category_name}",
-                 "subcategories": "{subcategories}",
-            })
-        elif classifier_name =="offer":
-            base_params.update({
-                "content_type": "{content_type}",
-                 "subcategory_name": "{subcategory_name}",
-                 "products": "{products}"
-            })
-        elif classifier_name== "initiative" :
-            base_params.update({
-                "content_type": "{content_type}",
-                 "initiatives": "{initiatives}"
-            })
-        elif classifier_name == "initiative_event": 
-             base_params.update({
-                 "content_type": "{content_type}",
-                  "initiative_name": "{initiative_name}",  # Placeholder pour le nom de l'initiative
-                "events":"{events}",  # Placeholder pour la liste des événements
-                  
-            })
-        elif classifier_name == "communication_topic" :
-             base_params.update({
-                "content_type": "{content_type}",
-                 "topics" : "{topics}",
-                  })
-
-        elif classifier_name == "communication_subtopic":
-             base_params.update({
-                 "content_type": "{content_type}",
-                 "topic_name": "{topic_name}",  # Placeholder pour le nom du topic
-                
-                "subtopics": "{subtopics}",  # Placeholder pour la liste des sous-sujets
-                  }) 
             
-        rendered_prompt = self._render_prompt_template(prompt_template, **base_params)
+    
+            
+        #rendered_prompt = self._render_prompt_template(prompt_template, **base_params)
+        classifier_prompt = ChatPromptTemplate.from_template(
+        template=prompt_template,
+        template_format="jinja2"  # C'est cette ligne qui résout tout.
+    )
         
-        classifier_prompt = ChatPromptTemplate.from_template(rendered_prompt)
+        #classifier_prompt = ChatPromptTemplate.from_template(rendered_prompt)
         classifier_prompt = classifier_prompt.partial(
             format_instructions=classifier_parser.get_format_instructions()
 
@@ -254,7 +192,35 @@ class ContentAnalyzer:
             "parser": classifier_parser,
             "chain": classifier_prompt | self.llm | classifier_parser
         }
-
+    def _display_final_prompt(self, classifier_name: str, input_data: Dict[str, Any]):
+        """Affiche le prompt final formaté avec les données d'entrée."""
+        print(f"\n{'='*20} PROMPT FINAL - {classifier_name.upper()} {'='*20}")
+        
+        try:
+            classifier = getattr(self, f"{classifier_name}_classifier", None)
+            if not classifier:
+                print(f"Classifieur {classifier_name} non trouvé")
+                return
+            
+            # Formater le prompt avec les données d'entrée
+            formatted_prompt = classifier["prompt"].format(**input_data)
+            
+            # Si c'est un ChatPromptTemplate, on récupère les messages
+            if hasattr(formatted_prompt, 'messages'):
+                for i, message in enumerate(formatted_prompt.messages):
+                    print(f"Message {i+1} ({message._class.name_}):")
+                    print(f"Contenu: {message.content}")
+                    print("-" * 50)
+            else:
+                print(f"Prompt formaté:\n{formatted_prompt}")
+            
+        except Exception as e:
+            print(f"Erreur lors de l'affichage du prompt pour {classifier_name}: {e}")
+            # Affichage de fallback
+            print(f"Données d'entrée: {json.dumps(input_data, ensure_ascii=False, indent=2)}")
+        
+        print(f"{'='*(42 + len(classifier_name))}\n")
+    
     
     def _get_intents_for_theme(self, theme_id: str,content_type) -> List[str]:
         """Récupère les intentions disponibles pour un thème donné"""
@@ -280,7 +246,7 @@ class ContentAnalyzer:
                 return []
     
     
-    async def _classify_theme(self, content_type,text: str,post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
+    async def _classify_theme(self, result: Dict[str, Any],content_type,text: str,post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
         """Classifie l'intention du post basée sur le thème identifié"""
         try:
             # Récupérer les intentions disponibles pour ce thème
@@ -291,15 +257,17 @@ class ContentAnalyzer:
                 "post_analysis": json.dumps(post_analysis, indent=2, ensure_ascii=False),
                 "text":text
 
-                                                                     })
+                                                         })
+            print(theme_result)
+            print(result)
+            
             # Structure de base du résultat
-            result = {
-            "theme": {
+            result["theme"] = {
                 "id": theme_result["theme_id"],
                 "name": theme_result["theme_name"]
-            },
-            "confidence": theme_result["confidence"]
-        }
+            }
+            #result["confidence"] = min(theme_result["confidence"], result["confidence"])
+    
             
 
             
@@ -323,9 +291,8 @@ class ContentAnalyzer:
             if not available_intents:
                 print(f"Aucune intention trouvée pour le thème: {theme_id}")
                 return result
-            
-            # Classification de l'intention
-            intent_result = await self.intent_classifier["chain"].ainvoke({
+            #input data
+            input_data = {
                 "brand_name": self.brand_name,
                 "content_type": content_type,
                 "post_text": post_text,
@@ -333,7 +300,10 @@ class ContentAnalyzer:
                 "text": text,
                 "theme_name": result["theme"]["name"],
                 "available_intents": ", ".join(available_intents)
-            })
+            }
+            
+            # Classification de l'intention
+            intent_result = await self.intent_classifier["chain"].ainvoke(input_data)
             
             # Ajouter l'intention au résultat
             result["intent"] = {
@@ -543,7 +513,7 @@ class ContentAnalyzer:
         
         return result
     
-    async def _analyze_relevance(self,text: str, result: Dict[str, Any], post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
+    async def _analyze_relevance(self,text: str, post_text: str = "", post_analysis: str = "") -> Dict[str, Any]:
         """Classifie l'intention du post basée sur le thème identifié"""
         try:
             # Récupérer les intentions disponibles pour ce thème
@@ -553,18 +523,22 @@ class ContentAnalyzer:
             "post_analysis":  json.dumps(post_analysis, indent=2, ensure_ascii=False),
             "text":text 
              })
-        
-            relevance_result_ =  {
-                "relevance": {
+            
+            # Ajouter l'intention au résultat
+            result = {
+                "relevance" :{
                 "relevance_post": relevance_result["relevance_post"],
                 "general_relevance": relevance_result["general_relevance"]
-            },
-            "confidence": relevance_result["confidence"]
-        } 
+                }
+                
+            }
+           
+            # Mettre à jour la confiance globale
+            result["confidence"] =  relevance_result["confidence"]
+        
+          
     
             
-            # Mettre à jour la confiance globale
-            result["confidence"] = min(result["confidence"], relevance_result_["confidence"])
             
         except Exception as e:
             print(f"Erreur lors de l'analyse de pertinence: {e}")
@@ -588,14 +562,13 @@ class ContentAnalyzer:
 
             })
             
-            # Ajouter l'intention au résultat
+            # Ajouter le sentiment au résultat
             result["sentiment"] = {
                 "sentiment": sentiment_result["sentiment"],
                 "emotion": sentiment_result["emotion"],
                 "polarity_score": sentiment_result["polarity_score"]
                 
             }
-            result["confidence"] =  sentiment_result["confidence"]
             # Mettre à jour la confiance globale
             result["confidence"] = min(result["confidence"], sentiment_result["confidence"])
             
@@ -614,30 +587,40 @@ class ContentAnalyzer:
         Analyse un post et retourne sa classification complète selon le schéma Orange
         Classification hiérarchique étape par étape avec intentions
         """
-                                          
-        # 1. Classification du thème principal avec le prompt YAML
-    
-        result = await self._classify_theme(content_type, text,post_text, post_analysis)
-        theme_id = result["theme"]["id"]
-        # 2. Classification spécifique selon le thème - HIÉRARCHIQUE
-        if theme_id  == "offre":
-            result = await self._classify_offre_hierarchical(content_type, text, result,post_text, post_analysis)
+        if content_type =="comment":
+            print("")
+            result = await self._analyze_relevance(text,post_text, post_analysis)
+            print("")
+        else:
+            result = { "theme":{
+                "id":"",
+                "name":""
+            },
+            "confidence": ""} 
+                              
+        if (content_type == "comment" and  result.get("relevance", {}).get("general_relevance") == "true" ) or content_type !="comment":
             
-        elif theme_id  == "initiative":
-            result = await self._classify_initiative_hierarchical(content_type,text, result,post_text, post_analysis)
+            # 1. Classification du thème principal avec le prompt YAML
+            result = await self._classify_theme(result,content_type, text,post_text, post_analysis)
+            theme_id = result["theme"]["id"]
+            # 2. Classification spécifique selon le thème - HIÉRARCHIQUE
+            if theme_id  == "offre":
+                result = await self._classify_offre_hierarchical(content_type, text, result,post_text, post_analysis)
             
-        elif theme_id  == "communication_interaction":
-            result = await self._classify_communication_hierarchical(content_type,text, result,post_text, post_analysis)
+            elif theme_id  == "initiative":
+                result = await self._classify_initiative_hierarchical(content_type,text, result,post_text, post_analysis)
+            
+            elif theme_id  == "communication_interaction":
+                result = await self._classify_communication_hierarchical(content_type,text, result,post_text, post_analysis)
         
-        # 3. Classification des intentions basée sur le thème
-        if theme_id  != "none":
-            result = await self._classify_intent(content_type,text, result, theme_id ,post_text, post_analysis)
-        # 3. Classification des intentions basée sur le thème
-        if theme_id  != "none":
-            result = await self._analyze_relevance(text, result ,post_text, post_analysis)
-        # 3. Classification des intentions basée sur le thème
-        if theme_id  != "none":
-            result = await self._analyze_sentiment(text, result, post_text, post_analysis)
+            # 3. Classification des intentions basée sur le thème
+            if theme_id  != "none":
+                result = await self._classify_intent(content_type,text, result, theme_id ,post_text, post_analysis)
+            if content_type == "comment":
+
+                # 3. Classification des intentions basée sur le thème
+                if theme_id  != "none":
+                    result = await self._analyze_sentiment(text, result, post_text, post_analysis)
         
         return result
     
@@ -647,7 +630,7 @@ class ContentAnalyzer:
     # Exemple d'utilisation et test
 async def main():
     # REMPLACEZ PAR VOTRE VRAIE CLÉ API GOOGLE GEMINI
-    GOOGLE_API_KEY = "AIzaSyBiaGLmlDgYBw-yUrpT1XfX49hOB3xNI4s"
+    GOOGLE_API_KEY = "AIzaSyDroS___71S2NH_Qz08fuZBkJeX0s21dCY"
     
     # Vérification de la clé API
     if GOOGLE_API_KEY == "VOTRE_CLE_API_GOOGLE_ICI":
@@ -671,7 +654,8 @@ async def main():
         # Commentaires associés au post
         comments = [
             "واخا هاد المسابقة زوينة بزاف! شكرا Orange 🧡",
-            "كيفاش نقدر نشارك؟ الرابط ما خدامش عندي"
+            "كيفاش نقدر نشارك؟ الرابط ما خدامش عندي",
+            "amazon chnou fiha"
         ]
         
         print("=== Analyse d'un Post avec ses Commentaires ===\n")
