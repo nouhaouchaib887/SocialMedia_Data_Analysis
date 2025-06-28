@@ -376,7 +376,7 @@
         {
           "id": "recharges_appels",
           "name": "Recharges Appels", 
-          "keywords": ["minutes", "appels", "voix", "communication", "bonus vocal","*1","*22"],
+          "keywords": ["*1","star 1","etoile 1","minutes", "appels", "voix", "communication", "bonus vocal","*1","*22"],
           "products": [
             {
               "id": "recharge_etoile1",
@@ -415,7 +415,7 @@
         {
           "id": "recharges_tout_en_un",
           "name": "Recharges Tout-en-un", 
-          "keywords": ["combo", "mixte", "appels+internet", "bundle", "pack", "tout inclus","*2"],
+          "keywords": ["etoile 2","combo", "mixte", "appels+internet", "bundle", "pack", "tout inclus","*2"],
           "products": [
             {
               "id": "recharge_etoile2",
