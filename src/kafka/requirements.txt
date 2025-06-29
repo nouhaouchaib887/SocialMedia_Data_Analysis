@@ -1,0 +1,8 @@
+# Kafka consumer client
+kafka-python>=2.0.2
+
+# Async MongoDB driver
+motor>=3.3.1
+
+# YAML file parsing
+PyYAML>=6.0

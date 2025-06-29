@@ -1,0 +1,16 @@
+# LangChain core and integrations
+langchain-core>=0.1.40
+langchain>=0.2.0
+langchain-google-genai>=0.0.6
+
+# Google Gemini API client
+google-generativeai>=0.3.1
+
+# Template rendering
+jinja2>=3.1.2
+
+# YAML parsing
+PyYAML>=6.0
+
+# Typing + utils (optionnel mais utile pour structuration)
+typing-extensions>=4.5.0
