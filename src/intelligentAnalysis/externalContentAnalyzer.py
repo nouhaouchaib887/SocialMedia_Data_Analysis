@@ -32,7 +32,7 @@ class ExternalContentAnalyzer:
         self._setup_api_key()
         
         self.llm = ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash", 
+            model="gemini-2.0-flash-lite", 
             temperature=0.1,
             google_api_key=self.google_api_key
         )
@@ -248,7 +248,6 @@ class ExternalContentAnalyzer:
             
         except Exception as e:
             print(f"Erreur lors de l'analyse de pertinence: {e}")
-            # Résultat d'erreur adapté au type de contenu
             if content_type == "post":
                 result["relevance"] = { "general_relevance": "unknown" }
             else:
@@ -258,54 +257,95 @@ class ExternalContentAnalyzer:
 
     async def analyze_content(self, content_type: str, text: str, post_text: str = "", post_analysis: Optional[Dict] = None) -> Dict[str, Any]:
         """
-        Analyse un contenu externe (post ou commentaire) et retourne sa classification complète.
+        Analyse un contenu externe. Pour un "post", la pertinence est vérifiée en premier.
         """
-        result = {}
+        # --- LOGIQUE POUR LES POSTS (OPTIMISÉE) ---
+        if content_type == "post":
+            # 1. On analyse la pertinence EN PREMIER
+            result = {}
+            relevance_analysis = await self.relevance_analyzer["chain"].ainvoke({
+                "content_type": "post",
+                "text": text,
+                "post_text": "N/A",
+                "post_analysis": "N/A"
+            })
+            result["relevance"] = {
+                "general_relevance": relevance_analysis.get("general_relevance", False)
+            }
+            result["confidence"] = relevance_analysis.get("confidence", 0.0)
 
-        result = await self._analyze_topic(
-            content_type=content_type,
-            text=text,
-            post_text=post_text,
-            post_analysis=post_analysis
-        )
+            # 2. Si le post n'est pas pertinent, on s'arrête là.
+            if not result.get("relevance", {}).get("general_relevance"):
+                print("  [ANALYSE] Post jugé non pertinent. Analyse arrêtée.")
+                result['topic'] = {'id': 'not_relevant', 'name': 'Non pertinent'}
+                return result # Arrêt précoce pour économiser les appels API
 
-        topic_id = result.get("topic", {}).get("id")
-        if topic_id and topic_id != "none" and topic_id != "error":
-            result = await self._classify_intent(
-                content_type=content_type,
+            # 3. Si le post EST pertinent, on continue l'analyse (thème, intention, etc.)
+            print("  [ANALYSE] Post pertinent. Poursuite de l'analyse (thème, intention)...")
+            
+            # Analyse du thème
+            topic_result = await self._analyze_topic("post", text, "", None) # _analyze_topic retourne déjà le bon format
+            result.update(topic_result) # On fusionne le résultat du thème
+
+            # Analyse de l'intention si le thème est valide
+            topic_id = result.get("topic", {}).get("id")
+            if topic_id and topic_id not in ["none", "error"]:
+                 result = await self._classify_intent(
+                    content_type="post",
+                    text=text,
+                    result=result
+                )
+            
+            return result
+
+        # --- LOGIQUE POUR LES COMMENTAIRES (RESTE INCHANGÉE) ---
+        elif content_type == "comment":
+            # Pour un commentaire, l'ordre original est plus logique
+             # 1. Analyse du Thème du commentaire, en utilisant le post comme contexte.
+            result = await self._analyze_topic(
+                content_type="comment",
                 text=text,
                 post_text=post_text,
-                post_analysis=post_analysis,
-                result=result
-            )
-        
-        
-        if content_type == "comment":
-            result = await self._analyze_sentiment(
-                content_type=content_type,
-                text=text,
-                post_text=post_text,
-                post_analysis=post_analysis,
-                result=result
-            )
-            # Analyse de pertinence pour les commentaires
-            result = await self._analyze_relevance(
-                content_type="comment", 
-                text=text,  # Utilise 'text' au lieu de 'comment_text'
-                result=result, 
-                post_text=post_text, 
                 post_analysis=post_analysis
             )
-        else:
-            # Analyse de pertinence pour les posts
+            
+            # 2. Analyse de la Pertinence du commentaire (par rapport au post et en général).
             result = await self._analyze_relevance(
-                content_type="post", 
-                text=text,  # Utilise 'text' au lieu de 'post_text'
+                content_type="comment",
+                text=text,
+                result=result,
+                post_text=post_text,
+                post_analysis=post_analysis
+            )
+    
+            # 3. Analyse du Sentiment du commentaire.
+            result = await self._analyze_sentiment(
+                content_type="comment",
+                text=text,
+                post_text=post_text,
+                post_analysis=post_analysis,
                 result=result
             )
-
-
-        return result
+    
+            # 4. Analyse de l'Intention du commentaire.
+            topic_id = result.get("topic", {}).get("id")
+            if topic_id and topic_id not in ["none", "error"]:
+                result = await self._classify_intent(
+                    content_type="comment",
+                    text=text,
+                    result=result,
+                    post_text=post_text,
+                    post_analysis=post_analysis
+                )
+            else:
+                result["intent"] = {'name': 'N/A'}
+                
+            print("  [ANALYSE] Analyse du commentaire terminée.")
+            
+            return result
+        
+        else:
+            raise ValueError(f"Type de contenu inconnu: {content_type}")
 
     def analyze_content_sync(self, content_type: str, text: str, post_text: str = "", post_analysis: Optional[Dict] = None) -> Dict[str, Any]:
         """Version synchrone de l'analyse de contenu."""
@@ -313,7 +353,7 @@ class ExternalContentAnalyzer:
 
 async def main():
     # Remplacez par votre clé API valide
-    GOOGLE_API_KEY = "AIzaSyDroS___71S2NH_Qz08fuZBkJeX0s21dCY" 
+    GOOGLE_API_KEY = "AIzaSyCSF8QXA4bIxQvdCUlFWZqzGOxYRM6fJKM" 
     
     if "VOTRE_CLE_API" in GOOGLE_API_KEY:
         print("⚠️  ATTENTION: Veuillez remplacer GOOGLE_API_KEY par votre vraie clé API Google Gemini")
