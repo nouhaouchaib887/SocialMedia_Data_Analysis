@@ -4,69 +4,39 @@ from datetime import datetime
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 import logging
-import os
 from typing import List, Dict, Tuple, Optional
-from collectors.TikTok.TiktokAPifyCollector import TiktokAPifyCollector
-# Import your existing TiktokCollectorw
-# from your_module import TiktokCollector
 
 class TiktokProducer:
     """
-    A Kafka producer that collects Tiktok data and publishes it to Kafka topics.
-    Also saves data to JSON files as backup.
+    A Kafka producer that publishes TikTok data to Kafka topics.
+    Handles Kafka connection, publishing, and error handling.
     """
     
     def __init__(self, 
                  kafka_config: Dict,
-                 apify_token: str,
-                 brand_name: str,
-                 profile_name: str,
-                 topic: str = "tiktok-data",
-                 max_posts: int = 2,
-                 max_comments_per_post: int = 3,
-                 days_back: int = 15):
+                 topic: str = "tiktok-data"):
         """
-        Initialize the Tiktok Producer.
+        Initialize the Kafka Producer.
         
         Args:
             kafka_config (dict): Kafka configuration (bootstrap_servers, etc.)
-            apify_token (str): Apify API token
-            brand_name (str): Brand name for Tiktok page
-            profile_name (str): Tiktok page name
-            topic (str): Kafka topic for Tiktok data (posts with comments)
-            max_posts (int): Maximum number of posts to collect
-            max_comments_per_post (int): Maximum number of comments per post
-            days_back (int): Number of days to go back for post collection
-            backup_dir (str): Directory to save backup JSON files
+            topic (str): Kafka topic for TikTok data (posts with comments)
         """
         self.kafka_config = kafka_config
         self.topic = topic
+        
         # Setup logging
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
-        # Initialize Tiktokcollector
-        self.collector = TiktokAPifyCollector(
-            apify_token=apify_token,
-            brand_name=brand_name,
-            profile_name=profile_name,
-            max_posts=max_posts,
-            max_comments_per_post=max_comments_per_post,
-            days_back=days_back
-        )
-        
         
         # Initialize Kafka producer
         self.producer = None
         self._init_kafka_producer()
         
-        
-        
         # Initialize counters
         self.published_posts = 0
         self.failed_posts = 0
         self.total_comments_published = 0
-        
-        
         
     def _init_kafka_producer(self):
         """Initialize Kafka producer with retry logic."""
@@ -84,78 +54,7 @@ class TiktokProducer:
         except Exception as e:
             self.logger.error(f"❌ Failed to initialize Kafka producer: {str(e)}")
             self.producer = None
-    def _enrich_post_data(self, post: Dict) -> Dict:
-        """
-        Enrich post data with additional metadata for Kafka.
-        
-        Args:
-            post (dict): Original post data
             
-        Returns:
-            dict: Enriched post data
-        """
-        # Helper function to safely get numeric values
-        def safe_int(value, default=0):
-            try:
-                return int(value) if value is not None else default
-            except (ValueError, TypeError):
-                return default
-        
-        # Helper function to safely get list length
-        def safe_list_len(value):
-            try:
-                return len(value) if value else 0
-            except (TypeError, AttributeError):
-                return 0
-        
-        # Helper function to safely get string length
-        def safe_str_len(value):
-            try:
-                return len(str(value)) if value is not None else 0
-            except (TypeError, AttributeError):
-                return 0
-        
-        enriched_post = {
-            **post,
-            # Kafka metadata
-            'kafka_metadata': {
-                'topic': self.topic,
-                'produced_at': datetime.utcnow().isoformat(),
-                'producer_timestamp': int(time.time() * 1000),
-                'message_type': 'tiktok_post_with_comments',
-                'version': '1.0'
-            },
-            # Collection metadata
-            'collection_params': {
-                    'max_posts': self.collector.max_posts,
-                    'max_comments_per_post': self.collector.max_comments_per_post,
-                    'days_back': self.collector.days_back,
-                    'from_date': getattr(self.collector, 'from_date', None)
-                }
-            
-
-        }
-        
-        # Enrich comments with additional metadata
-        if 'comments' in enriched_post and enriched_post['comments']:
-            enriched_comments = []
-            for comment in enriched_post['comments']:
-                enriched_comment = {
-                    **comment,
-                    'comment_metadata': {
-                        'parent_post_id': str(post.get('post_id', '')),
-                        'comment_engagement_score': (safe_int(comment.get('like_count', 0)) + 
-                                                   safe_int(comment.get('reply_count', 0))),
-                        'comment_length': safe_str_len(comment.get('message', '')),
-                        'has_hashtags': safe_list_len(comment.get('hashtags', [])) > 0,
-                        'has_mentions': safe_list_len(comment.get('mentions', [])) > 0
-                    }
-                }
-                enriched_comments.append(enriched_comment)
-            enriched_post['comments'] = enriched_comments
-        
-        return enriched_post
-        
     def _publish_to_kafka(self, topic: str, key: str, data: Dict) -> bool:
         """
         Publish data to Kafka topic.
@@ -188,8 +87,6 @@ class TiktokProducer:
             self.logger.error(f"❌ Unexpected error publishing to {topic}: {str(e)}")
             return False
     
-    
-    
     def publish_post_with_comments(self, post: Dict) -> bool:
         """
         Publish a post with its comments to Kafka.
@@ -200,12 +97,9 @@ class TiktokProducer:
         Returns:
             bool: True if successful
         """
-        # Enrich the post data
-        enriched_post = self._enrich_post_data(post)
-        
         post_key = f"{post.get('profile_name')}_{post.get('post_id')}"
         
-        success = self._publish_to_kafka(self.topic, post_key, enriched_post)
+        success = self._publish_to_kafka(self.topic, post_key, post)
         
         if success:
             self.published_posts += 1
@@ -217,70 +111,35 @@ class TiktokProducer:
             
         return success
     
-    def collect_and_publish(self) -> Tuple[Dict, List[str]]:
+    def publish_posts_batch(self, posts: List[Dict], brand_name: str = "", profile_name: str = "") -> Dict:
         """
-        Collect Tiktok data and publish to Kafka with backup.
+        Publish a batch of posts to Kafka.
         
+        Args:
+            posts (List[Dict]): List of posts with comments to publish
+            brand_name (str): Brand name for summary
+            profile_name (str): Profile name for summary
+            
         Returns:
-            tuple: (summary_stats, backup_files)
+            Dict: Summary statistics
         """
-        self.logger.info(f"🚀 Starting Tiktokdata collection and publishing for {self.collector.brand_name}")
+        self.logger.info(f"🚀 Starting publishing {len(posts)} posts to Kafka")
         
         # Reset counters
         self.published_posts = 0
         self.failed_posts = 0
         self.total_comments_published = 0
         
-        
         try:
-            # Collect posts one by one and publish immediately with comments
-            posts = self.collector.collect_posts()
-            
-            if not posts:
-                self.logger.warning("❌ No posts collected")
-                return self._create_summary()
-            
-            self.logger.info(f"📊 Processing {len(posts)} posts...")
-            
             for i, post in enumerate(posts, 1):
-                if i >=0:
-                    self.logger.info(f"\n--- Processing Post {i}/{len(posts)} ---")
+                self.logger.info(f"📤 Publishing post {i}/{len(posts)}")
+                self.publish_post_with_comments(post)
                 
-                    # Collect comments for this post first
-                    if post.get("permalink"):
-                        try:
-                            self.logger.info(f"🔍 Collecting comments for post {post.get('post_id')}...")
-                            comments = self.collector.collect_comments_for_post(post["permalink"])
-                            post["comments"] = comments  # Add comments to the post
-                        
-                            if comments:
-                                self.logger.info(f"✅ {len(comments)} comments collected for post {post.get('post_id')}")
-                            else:
-                                self.logger.info(f"ℹ️ No comments found for post {post.get('post_id')}")
-                            
-                        except Exception as e:
-                            self.logger.error(f"❌ Error collecting comments for post {post.get('post_id')}: {str(e)}")
-                            post["comments"] = []  # Ensure comments field exists even if empty
-                    else:
-                        self.logger.warning(f"⚠️ No permalink available for post {post.get('post_id')}")
-                        post["comments"] = []
-                
-                    # Now publish the complete post with comments
-                    post_published = self.publish_post_with_comments(post)
-                
-                
-                    # Add delay to avoid rate limiting (except for last post)
-                    if i < len(posts):
-                        self.logger.info("⏳ Waiting 10 seconds before next post...")
-                        time.sleep(10)
-        
         except Exception as e:
-            self.logger.error(f"❌ Error during collection: {str(e)}")
+            self.logger.error(f"❌ Error during publishing: {str(e)}")
         
         finally:
-            
-            
-            # Flush and close Kafka producer
+            # Flush Kafka producer
             if self.producer:
                 try:
                     self.producer.flush(timeout=30)
@@ -288,16 +147,16 @@ class TiktokProducer:
                 except Exception as e:
                     self.logger.error(f"⚠️ Error flushing Kafka producer: {str(e)}")
         
-        summary = self._create_summary()
+        summary = self._create_summary(brand_name, profile_name)
         self._print_final_summary(summary)
         
         return summary
     
-    def _create_summary(self) -> Dict:
+    def _create_summary(self, brand_name: str = "", profile_name: str = "") -> Dict:
         """Create summary statistics."""
         return {
-            'brand_name': self.collector.brand_name,
-            'profile_name': self.collector.profile_name,
+            'brand_name': brand_name,
+            'profile_name': profile_name,
             'collection_time': datetime.now().isoformat(),
             'published_posts': self.published_posts,
             'total_comments_published': self.total_comments_published,
@@ -312,7 +171,7 @@ class TiktokProducer:
     def _print_final_summary(self, summary: Dict):
         """Print final summary to console."""
         print("\n" + "="*60)
-        print("🎉 Tiktok DATA COLLECTION & PUBLISHING COMPLETED")
+        print("🎉 TIKTOK DATA PUBLISHING COMPLETED")
         print("="*60)
         print(f"📱 Brand: {summary['brand_name']}")
         print(f"📄 Page: {summary['profile_name']}")  
@@ -336,9 +195,10 @@ class TiktokProducer:
                 self.logger.error(f"⚠️ Error closing Kafka producer: {str(e)}")
 
 
-# Example usage
+# Example usage combining both modules
 def main():
-    """Example usage of TiktokProducer."""
+    """Example usage of TiktokProcessor and TiktokKafkaProducer."""
+    from tiktok_data_processor import TiktokProcessor
     
     # Kafka configuration
     kafka_config = {
@@ -347,24 +207,35 @@ def main():
         # Add other Kafka configs as needed (security, etc.)
     }
     
-    # Initialize producer
-    producer = TiktokProducer(
-        kafka_config=kafka_config,
+    # Initialize processor
+    processor = TiktokProcessor(
         apify_token="",
         brand_name="orangemaroc",
         profile_name="orangemaroc",
-        topic="tiktok-data-test" , # Single topic for posts with comments
         max_posts=2,
         max_comments_per_post=2,
         days_back=100
     )
     
+    # Initialize Kafka producer
+    producer = TiktokProducer(
+        kafka_config=kafka_config,
+        topic="tiktok-data-test"
+    )
+    
     try:
-        # Run collection and publishing
-        summary = producer.collect_and_publish()
+        # Step 1: Process and collect data
+        posts = processor.collect_posts_with_comments(topic="tiktok-data-test")
         
-        print(f"\n💾 Backup files created:")
-        
+        # Step 2: Publish to Kafka
+        if posts:
+            summary = producer.publish_posts_batch(
+                posts=posts,
+                brand_name=processor.brand_name,
+                profile_name=processor.profile_name
+            )
+        else:
+            print("❌ No posts to publish")
             
     finally:
         # Always close the producer

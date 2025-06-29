@@ -4,41 +4,24 @@ from datetime import datetime
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 import logging
-import os
 from typing import List, Dict, Tuple, Optional
-from collectors.Facebook.FacebookSearchCollector import FacebookSearchCollector
+from facebook_search_data_processor import FacebookSearchProcessor
 
 
 class FacebookSearchProducer:
     """
-    A Kafka producer that collects Facebook data using search queries and publishes it to Kafka topics.
-    Also saves data to JSON files as backup.
+    A Kafka producer that publishes processed Facebook data to Kafka topics.
     """
     
     def __init__(self, 
                  kafka_config: Dict,
-                 apify_token: str,
-                 brand_name: str,
-                 search_query: Optional[str] = None,
-                 topic: str = "facebook-search-data",
-                 max_posts: int = 2,
-                 max_comments_per_post: int = 3,
-                 post_time_range: str = "30d",
-                 backup_dir: str = "facebook_search_data_backup"):
+                 topic: str = "facebook-search-data"):
         """
-        Initialize the FacebookSearchProducer.
+        Initialize the FacebookKafkaProducer.
         
         Args:
             kafka_config (dict): Kafka configuration (bootstrap_servers, etc.)
-            apify_token (str): Apify API token
-            brand_name (str): Brand name for identification
-            search_query (str, optional): Search query for posts (e.g., '#orangemaroc', 'orangemaroc')
-            page_name (str, optional): Page name for direct page scraping (alternative to search)
             topic (str): Kafka topic for Facebook search data
-            max_posts (int): Maximum number of posts to collect
-            max_comments_per_post (int): Maximum number of comments per post
-            post_time_range (str): Time range for posts (e.g., '30d', '7d', '90d')
-            backup_dir (str): Directory to save backup JSON files
         """
         self.kafka_config = kafka_config
         self.topic = topic
@@ -47,22 +30,9 @@ class FacebookSearchProducer:
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
         
-        # Initialize Facebook search collector
-        self.collector = FacebookSearchCollector(
-            apify_token=apify_token,
-            brand_name=brand_name,
-            search_query=search_query,
-            max_posts=max_posts,
-            max_comments_per_post=max_comments_per_post,
-            post_time_range=post_time_range
-        )
-        
         # Initialize Kafka producer
         self.producer = None
         self._init_kafka_producer()
-        
-        # Create backup directory
-        os.makedirs(backup_dir, exist_ok=True)
         
         # Initialize counters
         self.published_posts = 0
@@ -86,78 +56,6 @@ class FacebookSearchProducer:
             self.logger.error(f"❌ Failed to initialize Kafka producer: {str(e)}")
             self.producer = None
             
-    def _enrich_post_data(self, post: Dict) -> Dict:
-        """
-        Enrich post data with additional metadata for Kafka.
-        
-        Args:
-            post (dict): Original post data
-            
-        Returns:
-            dict: Enriched post data
-        """
-        # Helper function to safely get numeric values
-        def safe_int(value, default=0):
-            try:
-                return int(value) if value is not None else default
-            except (ValueError, TypeError):
-                return default
-        
-        # Helper function to safely get list length
-        def safe_list_len(value):
-            try:
-                return len(value) if value else 0
-            except (TypeError, AttributeError):
-                return 0
-        
-        # Helper function to safely get string length
-        def safe_str_len(value):
-            try:
-                return len(str(value)) if value is not None else 0
-            except (TypeError, AttributeError):
-                return 0
-        
-        enriched_post = {
-            **post,
-            # Kafka metadata
-            'kafka_metadata': {
-                'topic': self.topic,
-                'produced_at': datetime.utcnow().isoformat(),
-                'producer_timestamp': int(time.time() * 1000),
-                'message_type': 'facebook_search_post_with_comments',
-                'version': '1.0'
-            },
-            # Collection metadata
-            
-            'collection_params': {
-                    'search_query': self.collector.search_query,
-                    'max_posts': self.collector.max_posts,
-                    'max_comments_per_post': self.collector.max_comments_per_post,
-                    'post_time_range': self.collector.post_time_range
-                
-            }
-        }
-        
-        # Enrich comments with additional metadata
-        if 'comments' in enriched_post and enriched_post['comments']:
-            enriched_comments = []
-            for comment in enriched_post['comments']:
-                enriched_comment = {
-                    **comment,
-                    'comment_metadata': {
-                        'parent_post_id': str(post.get('post_id', '')),
-                        'comment_engagement_score': (safe_int(comment.get('like_count', 0)) + 
-                                                   safe_int(comment.get('reply_count', 0))),
-                        'comment_length': safe_str_len(comment.get('message', '')),
-                        'has_hashtags': safe_list_len(comment.get('hashtags', [])) > 0,
-                        'has_mentions': safe_list_len(comment.get('mentions', [])) > 0
-                    }
-                }
-                enriched_comments.append(enriched_comment)
-            enriched_post['comments'] = enriched_comments
-        
-        return enriched_post
-        
     def _publish_to_kafka(self, topic: str, key: str, data: Dict) -> bool:
         """
         Publish data to Kafka topic.
@@ -190,8 +88,6 @@ class FacebookSearchProducer:
             self.logger.error(f"❌ Unexpected error publishing to {topic}: {str(e)}")
             return False
     
-   
-    
     def publish_post_with_comments(self, post: Dict) -> bool:
         """
         Publish a post with its comments to Kafka.
@@ -202,12 +98,9 @@ class FacebookSearchProducer:
         Returns:
             bool: True if successful
         """
-        # Enrich the post data
-        enriched_post = self._enrich_post_data(post)
-        
         post_key = f"{post.get('brand_name')}_{post.get('post_id')}"
         
-        success = self._publish_to_kafka(self.topic, post_key, enriched_post)
+        success = self._publish_to_kafka(self.topic, post_key, post)
         
         if success:
             self.published_posts += 1
@@ -219,52 +112,40 @@ class FacebookSearchProducer:
             
         return success
     
-    def collect_and_publish(self) -> Tuple[Dict, List[str]]:
+    def publish_posts_batch(self, posts: List[Dict]) -> Dict:
         """
-        Collect Facebook search data and publish to Kafka with backup.
+        Publish a batch of posts to Kafka.
         
+        Args:
+            posts (List[Dict]): List of processed posts
+            
         Returns:
-            tuple: (summary_stats, backup_files)
+            dict: Publishing summary statistics
         """
-        search_info = f"query: '{self.collector.search_query}'" if self.collector.search_query else f"page: '{self.collector.page_name}'"
-        self.logger.info(f"🚀 Starting Facebook search data collection and publishing for {self.collector.brand_name} ({search_info})")
+        self.logger.info(f"🚀 Starting to publish {len(posts)} posts to Kafka topic: {self.topic}")
         
         # Reset counters
         self.published_posts = 0
         self.failed_posts = 0
         self.total_comments_published = 0
         
-       
-        
         try:
-            # Collect all data using the FacebookSearchCollector
-            posts = self.collector.collect_all_data()
-            
-            if not posts:
-                self.logger.warning("❌ No posts collected")
-                return self._create_summary()
-            
-            self.logger.info(f"📊 Processing {len(posts)} posts...")
-            
             for i, post in enumerate(posts, 1):
-                self.logger.info(f"\n--- Processing Post {i}/{len(posts)} ---")
+                self.logger.info(f"\n--- Publishing Post {i}/{len(posts)} ---")
                 
-                # Publish the post with comments (comments are already included by FacebookSearchCollector)
-                post_published = self.publish_post_with_comments(post)
-               
+                # Publish the post with comments
+                self.publish_post_with_comments(post)
                 
                 # Add delay to avoid overwhelming Kafka (except for last post)
                 if i < len(posts):
                     self.logger.info("⏳ Waiting 2 seconds before next post...")
                     time.sleep(2)
                     
-        
         except Exception as e:
-            self.logger.error(f"❌ Error during collection: {str(e)}")
+            self.logger.error(f"❌ Error during publishing: {str(e)}")
         
         finally:
-            
-            # Flush and close Kafka producer
+            # Flush Kafka producer
             if self.producer:
                 try:
                     self.producer.flush(timeout=30)
@@ -272,19 +153,35 @@ class FacebookSearchProducer:
                 except Exception as e:
                     self.logger.error(f"⚠️ Error flushing Kafka producer: {str(e)}")
         
-        summary = self._create_summary()
-        self._print_final_summary(summary)
+        summary = self._create_publishing_summary()
+        self._print_publishing_summary(summary)
         
         return summary
     
-    def _create_summary(self) -> Dict:
-        """Create summary statistics."""
+    def process_and_publish(self, 
+                           processor: FacebookSearchProcessor) -> Tuple[Dict, Dict]:
+        """
+        Process Facebook data and publish to Kafka in one operation.
+        
+        Args:
+            processor (FacebookSearchProcessor): Configured processor instance
+            
+        Returns:
+            tuple: (processing_summary, publishing_summary)
+        """
+        # Process all posts
+        processed_posts, processing_summary = processor.collect_and_process_all(self.topic)
+        
+        # Publish processed posts
+        publishing_summary = self.publish_posts_batch(processed_posts)
+        
+        return processing_summary, publishing_summary
+    
+    def _create_publishing_summary(self) -> Dict:
+        """Create publishing summary statistics."""
         return {
-            'brand_name': self.collector.brand_name,
-            'search_query': self.collector.search_query,
-            'page_name': self.collector.page_name,
-            'post_time_range': self.collector.post_time_range,
-            'collection_time': datetime.now().isoformat(),
+            'topic': self.topic,
+            'publishing_time': datetime.now().isoformat(),
             'published_posts': self.published_posts,
             'total_comments_published': self.total_comments_published,
             'failed_posts': self.failed_posts,
@@ -295,18 +192,13 @@ class FacebookSearchProducer:
                                        if self.published_posts > 0 else 0
         }
     
-    def _print_final_summary(self, summary: Dict):
-        """Print final summary to console."""
+    def _print_publishing_summary(self, summary: Dict):
+        """Print publishing summary to console."""
         print("\n" + "="*60)
-        print("🎉 FACEBOOK SEARCH DATA COLLECTION & PUBLISHING COMPLETED")
+        print("🎉 FACEBOOK DATA KAFKA PUBLISHING COMPLETED")
         print("="*60)
-        print(f"📱 Brand: {summary['brand_name']}")
-        if summary['search_query']:
-            print(f"🔍 Search Query: {summary['search_query']}")
-        if summary['page_name']:
-            print(f"📄 Page: {summary['page_name']}")
-        print(f"⏰ Time Range: {summary['post_time_range']}")
-        print(f"⏰ Completed at: {summary['collection_time']}")
+        print(f"📡 Topic: {summary['topic']}")
+        print(f"⏰ Published at: {summary['publishing_time']}")
         print("\n📊 PUBLISHING STATISTICS:")
         print(f"   ✅ Posts published: {summary['published_posts']}")
         print(f"   💬 Total comments published: {summary['total_comments_published']}")
@@ -328,7 +220,7 @@ class FacebookSearchProducer:
 
 # Example usage
 def main():
-    """Example usage of FacebookSearchProducer."""
+    """Example usage of FacebookKafkaProducer with FacebookSearchProcessor."""
     
     # Kafka configuration
     kafka_config = {
@@ -337,30 +229,34 @@ def main():
         # Add other Kafka configs as needed (security, etc.)
     }
     
-    
-    # Example :  Search by #brand name
-    producer_search= FacebookSearchProducer(
-        kafka_config=kafka_config,
+    # Initialize processor
+    processor = FacebookSearchProcessor(
         apify_token="",
         brand_name="orangemaroc",
         search_query="#orangemaroc",
-        topic="facebook-search-data-test",
         max_posts=2,
         max_comments_per_post=2,
         post_time_range="30d"
     )
     
+    # Initialize Kafka producer
+    kafka_producer = FacebookProducer(
+        kafka_config=kafka_config,
+        topic="facebook-search-data-test"
+    )
+    
     try:
-        # Run collection and publishing for hashtag search
-        print("=== HASHTAG SEARCH COLLECTION ===")
-        summary1 = producer_search.collect_and_publish()
+        # Method 1: Process and publish in one operation
+        print("=== PROCESS AND PUBLISH ===")
+        processing_summary, publishing_summary = kafka_producer.process_and_publish(processor)
         
+        # Method 2: Process separately then publish
+        # processed_posts, processing_summary = processor.collect_and_process_all("facebook-search-data-test")
+        # publishing_summary = kafka_producer.publish_posts_batch(processed_posts)
         
-        
-            
     finally:
-        # Always close the producers
-        producer_search.close()
+        # Always close the producer
+        kafka_producer.close()
 
 
 if __name__ == "__main__":

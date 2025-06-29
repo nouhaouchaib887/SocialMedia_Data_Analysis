@@ -8,8 +8,8 @@ from typing import Dict, Any, Optional
 from kafka import KafkaConsumer
 import motor.motor_asyncio
 from motor.motor_asyncio import AsyncIOMotorClient
-from PostCommentRepository import PostCommentRepository
-from IntelligentAnalysis.ContentAnalyzer import ContentAnalyzer
+from post_comment_repository import PostCommentRepository
+from intelligentAnalysis.content_analyzer import ContentAnalyzer
 import yaml
 from pathlib import Path
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
